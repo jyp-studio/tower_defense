@@ -53,7 +53,6 @@ class TowerDeveloper:
         subject.register(self)
 
     def update(self, user_request: str, model):
-        """(Bonus.1) upgrade tower"""
         if user_request == "upgrade" and model.selected_tower.level < 5:
             if model.money >= model.selected_tower.get_cost():
                 model.money -= model.selected_tower.get_cost()
@@ -66,14 +65,15 @@ class TowerDeveloper:
 class TowerFactory:
     def __init__(self, subject):
         subject.register(self)
-        self.tower_name = ["pcr", "rapid test", "alcohol"]
+        self.tower_name = ["moon_tower", "red_fire_tower", "blue_fire_tower", "obelisk_tower"]
 
     def update(self, user_request: str, model):
         """add new tower"""
         for name in self.tower_name:
             if user_request == name:
                 x, y = model.selected_plot.rect.center
-                tower_dict = {"pcr": Tower.PCR(x, y), "rapid test": Tower.RapidTest(x, y), "alcohol": Tower.Alcohol(x, y)}
+                tower_dict = {"moon_tower": Tower.moon_tower(x, y), "red_fire_tower": Tower.red_fire_tower(x, y),
+                              "blue_fire_tower": Tower.blue_fire_tower(x, y), "obelisk_tower":Tower.obelisk_tower(x, y)}
                 new_tower = tower_dict[user_request]
                 if model.money > new_tower.get_cost():
                     model.money -= new_tower.get_cost()

@@ -5,16 +5,18 @@ from settings import PATH, BASE
 from color_settings import *
 
 pygame.init()
-ENEMY_IMAGE = pygame.image.load(os.path.join("images", "enemy.png"))
+GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (40, 50))
+ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "monster.png")), (40, 50))
+IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "sell.png")), (40, 50))
 
 
 class Enemy:
-    def __init__(self):
+    def __init__(self, image):
         self.path = PATH
         self.path_index = 0
         self.move_count = 0
-        self.stride = 1
-        self.image = pygame.transform.scale(ENEMY_IMAGE, (40, 50))
+        self.stride = 5
+        self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = self.path[self.path_index]
         self.path_index = 0
@@ -42,6 +44,24 @@ class Enemy:
             self.path_index += 1
             self.rect.center = self.path[self.path_index]
 
+    @classmethod
+    def goblin_enemy(cls):
+        goblin_enemy = cls(GOBLIN_IMAGE)
+        goblin_enemy.stride = 10
+        goblin_enemy.max_health = 5
+
+    @classmethod
+    def orc_enemy(cls):
+        orc_enemy = cls(ORC_IMAGE)
+        orc_enemy.stride = 3
+        orc_enemy.max_health = 10
+
+    @classmethod
+    def immortal_enemy(cls):
+        immortal_enemy = cls(IMMORTAL_IMAGE)
+        immortal_enemy.stride = 1
+        immortal_enemy.max_health = 500
+
 
 class EnemyGroup:
     def __init__(self):
@@ -49,6 +69,7 @@ class EnemyGroup:
         self.campaign_max_count = 60   # (unit: frame)
         self.__reserved_members = []
         self.__expedition = []
+        self.wave_counter = 0
 
     def advance(self, model):
         """Bonus.2"""
@@ -58,7 +79,7 @@ class EnemyGroup:
             en.move()
             if en.health <= 0:
                 self.retreat(en)
-                model.money += 15
+                model.money += 500
             # delete the object when it reach the base
             if BASE.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
@@ -75,7 +96,16 @@ class EnemyGroup:
     def add(self, num):
         """Generate the enemies for next wave"""
         if self.is_empty():
-            self.__reserved_members = [Enemy() for _ in range(num)]
+            if self.wave_counter % 3 == 0:
+                self.__reserved_members = [Enemy(GOBLIN_IMAGE) for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 3 == 1:
+                self.__reserved_members = [Enemy(ORC_IMAGE) for _ in range(num)]
+                self.wave_counter += 1
+            else:
+                self.__reserved_members = [Enemy(IMMORTAL_IMAGE) for _ in range(num)]
+                self.wave_counter = 0
+
 
     def get(self):
         """Get the enemy list"""

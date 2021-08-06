@@ -11,7 +11,7 @@ class GameModel:
     def __init__(self):
         # data
         self.bg_image = pygame.transform.scale(BACKGROUND_IMAGE, (WIN_WIDTH, WIN_HEIGHT))
-        self.__towers = [Tower.Alcohol(250, 380), Tower.RapidTest(180, 300)]
+        self.__towers = [Tower.moon_tower(250, 380), Tower.obelisk_tower(180, 300)]
         self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()
@@ -30,7 +30,7 @@ class GameModel:
         self.music = Music(self.subject)
         #
         self.wave = 0
-        self.money = 500
+        self.money = 500000
         self.max_hp = 10
         self.hp = self.max_hp
         self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.flac"))
