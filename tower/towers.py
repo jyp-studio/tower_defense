@@ -1,4 +1,4 @@
-from tower.attack_strategy import AOE, SingleAttack, Snipe
+from tower.attack_strategy import *
 import os
 import pygame
 
@@ -32,35 +32,47 @@ class Tower:
         self.rect.center = (x, y)  # center of the tower
         self.level = 0  # level of the tower
         self._range = [100, 110, 120, 130, 140, 150]  # tower attack range
-        self._damage = [2.0, 2.1, 2.2, 2.3, 2.4, 2.5]   # tower damage
+        self._damage = [10, 20, 30, 40, 50, 60]   # tower damage
         self.cd_count = 0  # used in self.is_cool_down()
         self.cd_max_count = 60  # used in self.is_cool_down()
         self.attack_strategy = attack_strategy  # chose an attack strategy (AOE, single attack ....)
         self.value = [100, 140, 200, 300, 380, 460]
 
     @classmethod
-    def RapidTest(cls, x, y):
-        rapid_test = cls(x, y, SingleAttack(), RAPID_TEST_IMAGE)
-        rapid_test._range = [130, 140, 150, 160, 170, 180]
-        rapid_test._damage = [2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
-        rapid_test.value = [100, 140, 200, 280, 360, 450]
-        return rapid_test
+    # moon_tower attacks all the enemies
+    def moon_tower(cls, x, y):
+        moon_tower = cls(x, y, SingleSlowAttack(), RAPID_TEST_IMAGE)
+        moon_tower._range = [130, 140, 150, 160, 170, 180]
+        moon_tower._damage = [2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
+        moon_tower.value = [100, 140, 200, 280, 360, 450]
+        return moon_tower
 
     @classmethod
-    def Alcohol(cls, x, y):
-        alcohol = cls(x, y, AOE(), ALCOHOL_IMAGE)
-        alcohol._range = [120, 125, 130, 135, 140, 145]
-        alcohol._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
-        alcohol.value = [120, 160, 220, 320, 400, 500]
-        return alcohol
+    # red_fire_tower attacks and inflicts continuous damages on an enemy
+    def red_fire_tower(cls, x, y):
+        red_fire_tower = cls(x, y, AOE(), ALCOHOL_IMAGE)
+        red_fire_tower._range = [120, 125, 130, 135, 140, 145]
+        red_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+        red_fire_tower.value = [120, 160, 220, 320, 400, 500]
+        return red_fire_tower
 
     @classmethod
-    def PCR(cls, x, y):
-        pcr = cls(x, y, Snipe(), PCR_IMAGE)
-        pcr._range = [100, 105, 110, 115, 120, 125]  # tower attack range
-        pcr.cd_max_count = 120  # tower damage
-        pcr.value = [120, 140, 200, 280, 360, 400]
-        return pcr
+    # blue_fire_tower attacks and slows down enemies
+    def blue_fire_tower(cls, x, y):
+        blue_fire_tower = cls(x, y, AOE(), ALCOHOL_IMAGE)
+        blue_fire_tower._range = [120, 125, 130, 135, 140, 145]
+        blue_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+        blue_fire_tower.value = [120, 160, 220, 320, 400, 500]
+        return blue_fire_tower
+
+    @classmethod
+    # obelisk_tower attacks an enemy far away
+    def obelisk_tower(cls, x, y):
+        obelisk_tower = cls(x, y, SnipeAll(), PCR_IMAGE)
+        obelisk_tower._range = [100, 105, 110, 115, 120, 125]  # tower attack range
+        obelisk_tower.cd_max_count = 120  # tower damage
+        obelisk_tower.value = [120, 140, 200, 280, 360, 400]
+        return obelisk_tower
 
     def attack(self, enemy_group: list):
         # cd

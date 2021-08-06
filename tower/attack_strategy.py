@@ -36,6 +36,21 @@ class SingleAttack(AttackStrategy):
         return cd_count
 
 
+class SingleSlowAttack(AttackStrategy):
+    """attack an enemy once a time"""
+    def attack(self, enemies: list, tower, cd_count):
+        for en in enemies:
+            if in_range(en, tower):
+                en.health -= tower.damage
+                if en.stride > 4:
+                    en.stride -= 4
+                else:
+                    en.stride = 1
+                cd_count = 0
+                return cd_count
+        return cd_count
+
+
 class AOE(AttackStrategy):
     """attack all the enemy in range once a time"""
     def attack(self, enemies: list, tower, cd_count):
@@ -54,6 +69,16 @@ class Snipe(AttackStrategy):
                 en.health = 0
                 cd_count = 0
                 return cd_count
+        return cd_count
+
+
+class SnipeAll(AttackStrategy):
+    """eliminate an enemy all in once"""
+    def attack(self, enemies: list, tower, cd_count):
+        for en in enemies:
+            if in_range(en, tower):
+                en.health = 0
+                cd_count = 0
         return cd_count
 
 
