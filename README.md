@@ -1,2 +1,2 @@
 # tower_defense_pygame
-goodasd
+It is a tower defense game designed via pygame.
