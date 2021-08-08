@@ -2,13 +2,14 @@ import pygame
 from game.controller import GameControl
 from game.model import GameModel
 from game.view import GameView
-from settings import FPS,game_status
+from settings import FPS,game_status,singleton_vol_controller
 
 
 class Game:
     def run(self):
         # initialization
         pygame.init()
+        self.play_music()
         game_model = GameModel()  # core of the game (database, game logic...)
         game_view = GameView()  # render everything
         game_control = GameControl(game_model, game_view)  # deal with the game flow and user request
@@ -20,3 +21,8 @@ class Game:
             game_control.update_view()  # update the view
             pygame.display.update()
 
+    def play_music(self):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("./sound/game.mp3")
+        pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
+        pygame.mixer.music.play(-1)

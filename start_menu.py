@@ -33,7 +33,7 @@ class StartMenu:
         self.sound = pygame.mixer.Sound("./sound/sound.flac")
 
     def play_music(self):
-        pygame.mixer.music.load("./sound/menu.wav")
+        pygame.mixer.music.load("./sound/menu.mp3")
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)
