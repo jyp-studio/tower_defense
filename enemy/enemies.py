@@ -110,7 +110,6 @@ class EnemyGroup:
                 self.__reserved_members = [Enemy(IMMORTAL_IMAGE) for _ in range(num)]
                 self.wave_counter = 0
 
-
     def get(self):
         """Get the enemy list"""
         return self.__expedition

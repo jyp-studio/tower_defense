@@ -7,7 +7,7 @@ import os
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 20)
+        self.font = pygame.font.Font(os.path.join("font", "boston.ttf"), 20)
 
     def draw_bg(self):
         self.win.blit(BACKGROUND_IMAGE, (0, 0))
@@ -37,6 +37,12 @@ class GameView:
             pygame.draw.circle(surface, (255, 0, 0, transparency), tw.rect.center, tw.range)
             self.win.blit(surface, (0, 0))
 
+    def draw_moving_tower(self, selected_tower):
+        if selected_tower is not None:
+            tw = selected_tower
+            tw.rect.center = pygame.mouse.get_pos()
+            self.win.blit(tw.image, tw.rect)
+
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)
         for btn in menu.buttons:
@@ -48,33 +54,39 @@ class GameView:
             transparency = 150
             pygame.draw.rect(surface, (0, 0, 0, transparency), [162, 150, 700, 400])
             self.win.blit(surface, (0, 0))
-            font = pygame.font.Font(os.path.join("font", "4077TH.TTF"), 50)
-            font1 = pygame.font.Font(os.path.join("font", "4077TH.TTF"), 25)
+            font = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 50)
+            font1 = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 25)
             name = f"{selected_tower.name}"
-            intro = f"Introduction: {selected_tower.intro}"
-            level = f"Level: {selected_tower.level}"
-            range = f"Attack Range: {selected_tower.range}"
-            damage = f"Damage: {selected_tower.damage}"
-            cd = f"Cool Down Time: {selected_tower.cd_max_count}"
-            attack_strategy = f"Attack Strategy: {selected_tower.attack_strategy_name}"
-            sell_price = f"Sell Price: {selected_tower.price}"
+            intro = f"{selected_tower.intro}"
+            intro1 = f"{selected_tower.intro1}"
+            intro2 = f"{selected_tower.intro2}"
+            level = f"Level:  {selected_tower.level}"
+            range = f"Attack Range:  {selected_tower.range}"
+            damage = f"Damage:  {selected_tower.damage}"
+            cd = f"Cool Down Time:  {selected_tower.cd_max_count}"
+            attack_strategy = f"Attack Strategy:  {selected_tower.attack_strategy_name}"
+            sell_price = f"Sell Price:  {selected_tower.value[selected_tower.level]}"
 
             name_text = font.render(name, True, (255, 255, 255))
             self.win.blit(name_text, (180, 170))
             intro_text = font1.render(intro, True, (255, 255, 255))
             self.win.blit(intro_text, (180, 170 + 50))
+            intro1_text = font1.render(intro1, True, (255, 255, 255))
+            self.win.blit(intro1_text, (180, 170 + 75))
+            intro2_text = font1.render(intro2, True, (255, 255, 255))
+            self.win.blit(intro2_text, (180, 170 + 100))
             level_text = font1.render(level, True, (255, 255, 255))
-            self.win.blit(level_text, (180, 170 + 80))
+            self.win.blit(level_text, (180, 170 + 130))
             range_text = font1.render(range, True, (255, 255, 255))
-            self.win.blit(range_text, (180, 170 + 110))
+            self.win.blit(range_text, (180, 170 + 160))
             damage_text = font1.render(damage, True, (255, 255, 255))
-            self.win.blit(damage_text, (180, 170 + 140))
+            self.win.blit(damage_text, (180, 170 + 190))
             cd_text = font1.render(cd, True, (255, 255, 255))
-            self.win.blit(cd_text, (180, 170 + 170))
+            self.win.blit(cd_text, (180, 170 + 220))
             attack_strategy_text = font1.render(attack_strategy, True, (255, 255, 255))
-            self.win.blit(attack_strategy_text, (180, 170 + 200))
+            self.win.blit(attack_strategy_text, (180, 170 + 250))
             sell_price_text = font1.render(sell_price, True, (255, 255, 255))
-            self.win.blit(sell_price_text, (180, 170 + 230))
+            self.win.blit(sell_price_text, (180, 170 + 280))
 
     def draw_plots(self, plots):
         for pt in plots:

@@ -57,6 +57,8 @@ class GameControl:
         self.view.draw_wave(self.model.wave)
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
+        if self.model.selected_tower is not None and self.model.move_tower:
+            self.view.draw_towers(self.model.selected_tower)
 
     @property
     def quit_game(self):

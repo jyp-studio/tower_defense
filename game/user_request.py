@@ -68,17 +68,23 @@ class TowerMove:
 
     def update(self, user_request: str, model):
         if user_request == "move":
-            # get the tower's position
-            previous_x, previous_y = model.selected_tower.center
-            # object following mouse
-            model.selected_tower.center = pygame.mouse.get_pos()
-            # if mouse click the vacancy plot
+            temp = model.selected_tower.name
+            model.towers.remove(model.selected_tower)
+            model.show_moving_tower = True
+            previous_x, previous_y = model.selected_tower.rect.center
             if model.selected_plot is not None:
-                # set the tower to new position
-                model.selected_tower.center = model.selected_plot.rect.center
-            # else the tower backs to previous position
+                # build a tower to new position, remove new plot, and append previous plot
+                x, y = model.selected_plot.rect.center
+                model.plots.remove(model.selected_plot)
+                model.selected_plot = None
+            # else build a tower at previous position
             else:
-                model.selected_tower.center = previous_x, previous_y
+                x = previous_x
+                y = previous_y
+            tower_dict = {"Moon Tower": Tower.moon_tower(x, y), "Fire Totem": Tower.red_fire_tower(x, y),
+                          "Ice Totem": Tower.blue_fire_tower(x, y), "Obelisk Tower": Tower.obelisk_tower(x, y)}
+            new_tower = tower_dict[temp]
+            model.towers.append(new_tower)
             model.selected_tower = None
 
 
