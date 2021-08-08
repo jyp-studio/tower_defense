@@ -1,5 +1,6 @@
 import pygame
 import os
+from singleton import VolController,MapController
 
 # screen size
 WIN_WIDTH = 1024
@@ -23,7 +24,15 @@ PATH = [(22, 308), (52, 283), (84, 283), (110, 305), (116, 341), (115, 375), (11
 BASE = pygame.Rect(430, 90, 195, 130)
 
 # image
-BACKGROUND_IMAGE = pygame.image.load(os.path.join("images", "Map.png"))
 HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (40, 40))
 HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (40, 40))
+
+# singleton
+singleton_vol_controller=VolController()
+singleton_map_controller=MapController()
+
+# global var
+game_status={
+    "run":True,
+    "go_start_menu":False}
 

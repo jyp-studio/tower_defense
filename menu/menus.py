@@ -12,9 +12,10 @@ ALCOHOL_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("image
 
 muse_button_image = pygame.transform.scale(pygame.image.load("images/muse.png"), (80, 80))
 music_button_image = pygame.transform.scale(pygame.image.load("images/sound.png"), (80, 80))
-continue_button_image = pygame.transform.scale(pygame.image.load("images/continue.png"), (80, 80))
 pause_button_image = pygame.transform.scale(pygame.image.load("images/pause.png"), (80, 80))
 
+up_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
+down_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
@@ -56,16 +57,18 @@ class BuildMenu(Menu):
         super().__init__(x, y)
         self._buttons = [Button(ALCOHOL_BTN_IMAGE, "alcohol", self.rect.centerx, self.rect.centery - 70),
                          Button(RAPID_TEST_BTN_IMAGE, "rapid test", self.rect.centerx, self.rect.centery + 75),
-                         Button(PCR_BTN_IMAGE, "pcr", self.rect.centerx - 65, self.rect.centery + 10),
+                         Button(PCR_BTN_IMAGE, "pcr", self.rect.centerx - 65, self.rect.centery + 10)
                          ]
 
 
 class MainMenu:
     def __init__(self):
-        self._buttons = [Button(music_button_image, "music", 740, 40),
-                         Button(muse_button_image, "mute", 825, 40),
-                         Button(continue_button_image, "continue", 905, 40),
-                         Button(pause_button_image, "pause", 990, 40)]
+        self._buttons = [Button(music_button_image, "music", 815, 45),
+                         Button(muse_button_image, "mute", 895, 45),
+                         Button(pause_button_image, "pause", 980, 45),
+                         Button(up_button_image, "potion_up",40,120),
+                         Button(down_button_image, "potion_down",40,565),
+                         ]
 
     @property
     def buttons(self):

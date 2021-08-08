@@ -1,5 +1,6 @@
 import pygame
-
+from settings import game_status
+from exit_win.exit_win import ExitWin
 
 # controller
 class GameControl:
@@ -31,6 +32,8 @@ class GameControl:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.events["game quit"] = True
+                exitWin=ExitWin(self.view.win)
+                exitWin.run()
             # player press action
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_n:
@@ -43,6 +46,7 @@ class GameControl:
     def update_view(self):
         # render background
         self.view.draw_bg()
+        # self.view.draw_UI(self.model.UI)
         self.view.draw_hp(self.model.hp)
         self.view.draw_enemies(self.model.enemies)
         self.view.draw_towers(self.model.towers)
@@ -51,8 +55,11 @@ class GameControl:
         """(Q2) Controller request View to render something"""
         if self.model.menu is not None:
             self.view.draw_menu(self.model.menu)
+            self.view.draw_btn(self.model.menu.buttons)
+        self.view.draw_btn(self.model.main_menu.buttons)
         self.view.draw_money(self.model.money)
         self.view.draw_wave(self.model.wave)
+        self.view.draw_time()
 
     @property
     def quit_game(self):

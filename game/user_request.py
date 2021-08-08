@@ -1,5 +1,7 @@
 import pygame
+import os
 from tower.towers import Tower, Vacancy
+from settings import singleton_vol_controller,singleton_map_controller,game_status
 
 """This module is import in model.py"""
 
@@ -103,3 +105,78 @@ class Muse:
             pygame.mixer.music.pause()
             model.sound.play()
 
+class MinusVolume:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """minusSound"""
+        if user_request == "minusSound":
+            singleton_vol_controller.minusVol(model.sound,0.05)
+            model.sound.play()
+        elif user_request == "minusMusic":
+            singleton_vol_controller.minusVol(pygame.mixer.music,0.05)
+            model.sound.play()
+
+class AddVolume:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """addSound"""
+        if user_request == "addSound":
+            singleton_vol_controller.addVol(model.sound,0.05)
+            model.sound.play()
+        elif user_request == "addMusic":
+            singleton_vol_controller.addVol(pygame.mixer.music,0.05)
+            model.sound.play()
+
+class Back:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """back"""
+        if user_request == "back":
+            model.back_game=True
+            model.sound.play()
+
+class Pause:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """pause"""
+        if user_request == "pause":
+            model.sound.play()
+            model.opt_menu.run()
+            model.sound.set_volume(singleton_vol_controller.sound_volume)
+
+class MinusMapIndex:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """minusMapIndex"""
+        if user_request == "minusMapIndex":
+            singleton_map_controller.map_index-=1
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
+
+class AddMapIndex:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """AddMapIndex"""
+        if user_request == "addMapIndex":
+            singleton_map_controller.map_index+=1
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
+
+class GoStartMenu:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """Change var game_status["go_start_menu"] in settings.py"""
+        if user_request == "goStartMenu":
+            game_status["go_start_menu"] = True

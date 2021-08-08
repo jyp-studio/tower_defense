@@ -1,5 +1,6 @@
 import pygame
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, BACKGROUND_IMAGE
+import time
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller
 from color_settings import *
 
 
@@ -9,7 +10,7 @@ class GameView:
         self.font = pygame.font.SysFont("comicsans", 30)
 
     def draw_bg(self):
-        self.win.blit(BACKGROUND_IMAGE, (0, 0))
+        self.win.blit(singleton_map_controller.curMap, (0, 0))
 
     def draw_enemies(self, enemies):
         for en in enemies.get():
@@ -38,8 +39,6 @@ class GameView:
 
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)
-        for btn in menu.buttons:
-            self.win.blit(btn.image, btn.rect)
 
     def draw_plots(self, plots):
         for pt in plots:
@@ -47,7 +46,7 @@ class GameView:
 
     def draw_money(self, money: int):
         """ (Q2.1)render the money"""
-        text = self.font.render(f"Money: {money}", True, (255, 255, 255))
+        text = self.font.render(f"$: {money}", True, (255, 255, 255))
         self.win.blit(text, (5, 45))
 
     def draw_wave(self, wave: int):
@@ -62,7 +61,26 @@ class GameView:
             self.win.blit(HP_GRAY_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
         for i in range(lives):
             self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
+    
+    def draw_UI(self,UI):
+        self.win.blit(UI.frame,(0,0))
+    
+    def draw_btn(self,buttons):
+        for btn in buttons:
+            self.win.blit(btn.image, btn.rect)
+            # pygame.draw.rect(self.win, (128, 128, 128),btn.rect)
 
-
+    def draw_time(self):
+        now=time.localtime(time.time())
+        y=str(now.tm_year).zfill(4)
+        m=str(now.tm_mon).zfill(2)
+        d=str(now.tm_mday).zfill(2)
+        h=str(now.tm_hour).zfill(2)
+        min=str(now.tm_min).zfill(2)
+        sec=str(now.tm_sec).zfill(2)
+        text = self.font.render(f"{y}/{m}/{d}", True, (255, 255, 255))
+        self.win.blit(text, (200, 15))
+        text = self.font.render(f"{h}:{min}:{sec}", True, (255, 255, 255))
+        self.win.blit(text, (200, 45))
 
 
