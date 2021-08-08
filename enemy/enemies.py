@@ -5,9 +5,9 @@ from settings import PATH, BASE
 from color_settings import *
 
 pygame.init()
-GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (40, 50))
-ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "monster.png")), (40, 50))
-IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image1.png")), (40, 50))
+GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
+ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
+IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
 
 
 class Enemy:
@@ -22,8 +22,8 @@ class Enemy:
         self.rect.center = self.path[self.path_index]
         self.path_index = 0
         self.move_count = 0
-        self.health = 10
-        self.max_health = 10
+        self.health = 100
+        self.max_health = 100
 
     def move(self):
         x1, y1 = self.path[self.path_index]
@@ -50,21 +50,24 @@ class Enemy:
         goblin_enemy = cls(GOBLIN_IMAGE)
         goblin_enemy.name = "goblin"
         goblin_enemy.stride = 10
-        goblin_enemy.max_health = 5
+        goblin_enemy.health = 80
+        goblin_enemy.max_health = 80
 
     @classmethod
     def orc_enemy(cls):
         orc_enemy = cls(ORC_IMAGE)
         orc_enemy.name = "orc"
         orc_enemy.stride = 3
-        orc_enemy.max_health = 10
+        orc_enemy.health = 1500
+        orc_enemy.max_health = 1500
 
     @classmethod
     def immortal_enemy(cls):
         immortal_enemy = cls(IMMORTAL_IMAGE)
         immortal_enemy.name = "immortal"
         immortal_enemy.stride = 1
-        immortal_enemy.max_health = 500
+        immortal_enemy.health = 50000000
+        immortal_enemy.max_health = 50000000
 
 
 class EnemyGroup:

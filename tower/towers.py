@@ -121,8 +121,7 @@ class Tower:
         moon_tower.sprites.append(MOON_IMAGE_7)
         moon_tower.sprites.append(MOON_IMAGE_8)
         moon_tower.sprites.append(MOON_IMAGE_9)
-        moon_tower._range = [130, 140, 150, 160, 170, 180]
-        moon_tower._damage = [2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
+        moon_tower._range = [140, 160, 180, 200, 220, 250]
         moon_tower.value = [100, 140, 200, 280, 360, 450]
         return moon_tower
 
@@ -146,19 +145,19 @@ class Tower:
         red_fire_tower.sprites.append(RED_IMAGE_5)
         red_fire_tower.sprites.append(RED_IMAGE_6)
         red_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        red_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+        red_fire_tower._damage = [8, 14, 18, 22, 25, 35]
         red_fire_tower.value = [120, 160, 220, 320, 400, 500]
         return red_fire_tower
 
     @classmethod
     # blue_fire_tower attacks and slows down enemies
     def blue_fire_tower(cls, x, y):
-        blue_fire_tower = cls(x, y, AOE())
+        blue_fire_tower = cls(x, y, AOESlowAttack())
         blue_fire_tower.name = "Ice Totem"
         blue_fire_tower.intro = "Black magic wizards sacrifice hundreds of thousands of "
         blue_fire_tower.intro1 = "virus-infected mutants to summon ice totems "
         blue_fire_tower.intro2 = "in the endless abyss"
-        blue_fire_tower.attack_strategy_name = "AOE"
+        blue_fire_tower.attack_strategy_name = "AOE Slow Attack"
         blue_fire_tower.sprites = []
         blue_fire_tower.update_speed = 0.2
         blue_fire_tower.max_current_sprites = 6
@@ -170,8 +169,8 @@ class Tower:
         blue_fire_tower.sprites.append(BLUE_IMAGE_5)
         blue_fire_tower.sprites.append(BLUE_IMAGE_6)
         blue_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        blue_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
-        blue_fire_tower.value = [120, 160, 220, 320, 400, 500]
+        blue_fire_tower._damage = [10, 15, 19, 25, 30, 37]
+        blue_fire_tower.value = [150, 200, 250, 300, 400, 500]
         return blue_fire_tower
 
     @classmethod
@@ -203,7 +202,7 @@ class Tower:
 
         obelisk_tower._range = [100, 105, 110, 115, 120, 125]  # tower attack range
         obelisk_tower.cd_max_count = 120  # tower damage
-        obelisk_tower.value = [120, 140, 200, 280, 360, 400]
+        obelisk_tower.value = [1000, 2000, 3000, 4000, 5000, 6000]
         return obelisk_tower
 
     def update(self):
