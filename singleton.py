@@ -46,7 +46,6 @@ class MapController:
     
     def change_map(self):
         with open('map.txt', 'w') as f:
-            print(self.__map_index)
             f.write(str(self.__map_index))
         self.__curMap= pygame.image.load(os.path.join("images", "Map"+str(self.__map_index)+".png"))
     @property
