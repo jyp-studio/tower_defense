@@ -10,9 +10,11 @@ ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mon
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image1.png")), (40, 50))
 
 
+
 class Enemy:
     def __init__(self, image):
         self.name = ""
+
         self.path = PATH
         self.path_index = 0
         self.move_count = 0

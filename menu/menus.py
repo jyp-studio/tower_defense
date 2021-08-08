@@ -2,6 +2,7 @@ import pygame
 import os
 
 pygame.init()
+
 # menu
 BUILD_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "build_menu.png")), (200, 200))
 UPGRADE_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "upgrade_menu.png")), (180, 180))
@@ -18,9 +19,10 @@ OBELISK_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("image
 # control buttons
 muse_button_image = pygame.transform.scale(pygame.image.load("images/muse.png"), (80, 80))
 music_button_image = pygame.transform.scale(pygame.image.load("images/sound.png"), (80, 80))
-continue_button_image = pygame.transform.scale(pygame.image.load("images/continue.png"), (80, 80))
 pause_button_image = pygame.transform.scale(pygame.image.load("images/pause.png"), (80, 80))
 
+up_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
+down_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
@@ -40,6 +42,7 @@ class Button:
 class Menu:
     def __init__(self, x: int, y: int):
         self.image = UPGRADE_MENU_IMAGE
+
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self._buttons = []
@@ -72,10 +75,12 @@ class BuildMenu(Menu):
 
 class MainMenu:
     def __init__(self):
-        self._buttons = [Button(music_button_image, "music", 740, 40),
-                         Button(muse_button_image, "mute", 825, 40),
-                         Button(continue_button_image, "continue", 905, 40),
-                         Button(pause_button_image, "pause", 990, 40)]
+        self._buttons = [Button(music_button_image, "music", 815, 45),
+                         Button(muse_button_image, "mute", 895, 45),
+                         Button(pause_button_image, "pause", 980, 45),
+                         Button(up_button_image, "potion_up",40,120),
+                         Button(down_button_image, "potion_down",40,565),
+                         ]
 
     @property
     def buttons(self):

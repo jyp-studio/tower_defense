@@ -27,7 +27,11 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
+<<<<<<< HEAD
 $env:VIRTUAL_ENV="D:\tower_defense\venv"
+=======
+$env:VIRTUAL_ENV="D:\pythonProject4\venv"
+>>>>>>> revised/main
 
 if (! $env:VIRTUAL_ENV_DISABLE_PROMPT) {
     # Set the prompt to include the env name

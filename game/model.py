@@ -3,21 +3,25 @@ import os
 from tower.towers import Tower, Vacancy
 from enemy.enemies import EnemyGroup
 from menu.menus import UpgradeMenu, BuildMenu, MainMenu
-from game.user_request import RequestSubject, TowerFactory, TowerSeller, TowerDeveloper, EnemyGenerator, Muse, Music
-from settings import WIN_WIDTH, WIN_HEIGHT, BACKGROUND_IMAGE
-
+from game.user_request import RequestSubject, TowerFactory, TowerSeller, TowerDeveloper, EnemyGenerator, Muse, Music,Pause
+from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
+from game_UI.game_UI import GameUI
+from opt_menu.opt_menu import OptMenu
 
 class GameModel:
     def __init__(self):
         # data
-        self.bg_image = pygame.transform.scale(BACKGROUND_IMAGE, (WIN_WIDTH, WIN_HEIGHT))
+        self.bg_image = pygame.transform.scale(singleton_map_controller.curMap, (WIN_WIDTH, WIN_HEIGHT))
         self.__towers = [Tower.moon_tower(180, 300), Tower.obelisk_tower(500, 300),
                          Tower.blue_fire_tower(300, 400), Tower.red_fire_tower(700, 350)]
+
         self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()
         self.__plots = [Vacancy(50, 350), Vacancy(350, 280)]
+
         self.show_tower_info = False
+
         # selected item
         self.selected_plot = None
         self.selected_tower = None
@@ -30,12 +34,20 @@ class GameModel:
         self.generator = EnemyGenerator(self.subject)
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
+
+        self.pause =Pause(self.subject)
+
         #
         self.wave = 0
         self.money = 500000
         self.max_hp = 10
         self.hp = self.max_hp
         self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.flac"))
+
+        self.sound.set_volume(singleton_vol_controller.sound_volume)
+
+        self.UI=GameUI()
+        self.opt_menu=OptMenu()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -64,11 +76,13 @@ class GameModel:
             if tw.clicked(mouse_x, mouse_y):
                 self.selected_tower = tw
                 self.selected_plot = None
+                return
 
         for pt in self.__plots:
             if pt.clicked(mouse_x, mouse_y):
                 self.selected_tower = None
                 self.selected_plot = pt
+                return
 
         # if the button is clicked, get the button response.
         # and keep selecting the tower/plot.
@@ -80,6 +94,7 @@ class GameModel:
                 self.selected_tower = None
                 self.selected_plot = None
                 self.show_tower_info = False
+
         # menu btn
         for btn in self.__main_menu.buttons:
             if btn.clicked(mouse_x, mouse_y):
@@ -121,6 +136,15 @@ class GameModel:
     @property
     def plots(self):
         return self.__plots
+
+    @property
+    def main_menu(self):
+        return self.__main_menu
+    
+    @main_menu.setter
+    def main_menu(self, new_menu):
+        self.__main_menu = new_menu
+
 
 
 

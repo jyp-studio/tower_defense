@@ -89,6 +89,7 @@ class Tower:
         self.rect.center = (x, y)  # center of the tower
         self.name = ""
         self.intro = ""
+
         self.level = 0  # level of the tower
         self._range = [100, 110, 120, 130, 140, 150]  # tower attack range
         self._damage = [10, 20, 30, 40, 50, 60]   # tower damage
@@ -98,6 +99,7 @@ class Tower:
         self.attack_strategy_name = ""
         self.value = [100, 140, 200, 300, 380, 460]
         self.price = self.value[self.level]
+
 
     @classmethod
     # moon_tower attacks all the enemies
@@ -142,6 +144,7 @@ class Tower:
         red_fire_tower.sprites.append(RED_IMAGE_4)
         red_fire_tower.sprites.append(RED_IMAGE_5)
         red_fire_tower.sprites.append(RED_IMAGE_6)
+
         red_fire_tower._range = [120, 125, 130, 135, 140, 145]
         red_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
         red_fire_tower.value = [120, 160, 220, 320, 400, 500]
@@ -164,6 +167,7 @@ class Tower:
         blue_fire_tower.sprites.append(BLUE_IMAGE_4)
         blue_fire_tower.sprites.append(BLUE_IMAGE_5)
         blue_fire_tower.sprites.append(BLUE_IMAGE_6)
+
         blue_fire_tower._range = [120, 125, 130, 135, 140, 145]
         blue_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
         blue_fire_tower.value = [120, 160, 220, 320, 400, 500]

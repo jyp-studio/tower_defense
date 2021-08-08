@@ -37,7 +37,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="D:\tower_defense\venv"
+=======
+VIRTUAL_ENV="D:\pythonProject4\venv"
+>>>>>>> revised/main
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
