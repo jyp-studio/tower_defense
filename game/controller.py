@@ -2,6 +2,7 @@ import pygame
 from settings import game_status
 from exit_win.exit_win import ExitWin
 
+
 # controller
 class GameControl:
     def __init__(self, game_model, game_view):
@@ -9,7 +10,8 @@ class GameControl:
         self.view = game_view
         self.events = {"game quit": False,
                        "mouse position": [0, 0],
-                       "keyboard key": 0
+                       "keyboard key": 0,
+                       "Add money": 0
                        }
         self.request = None  # response of user input
 
@@ -29,19 +31,22 @@ class GameControl:
         # event initialization
         self.events = {"game quit": False,
                        "mouse position": None,
-                       "keyboard key": None
+                       "keyboard key": None,
+                       "Add money": None
                        }
         # update event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.events["game quit"] = True
-                exitWin=ExitWin(self.view.win)
+                exitWin = ExitWin(self.view.win)
                 exitWin.run()
 
             # player press action
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_n:
                     self.events["keyboard key"] = pygame.K_n
+                if event.key == pygame.K_TAB:
+                    self.events["Add money"] = pygame.K_TAB
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
@@ -67,9 +72,6 @@ class GameControl:
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
-        if self.model.selected_tower is not None and self.model.move_tower:
-            self.view.draw_towers(self.model.selected_tower)
-
 
     @property
     def quit_game(self):

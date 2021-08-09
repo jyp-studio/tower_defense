@@ -88,18 +88,17 @@ class Tower:
         self.rect.center = (x, y)  # center of the tower
         self.name = ""
         self.intro = ""
-
         self.intro1 = ""
         self.intro2 = ""
 
         self.level = 0  # level of the tower
-        self._range = [100, 110, 120, 130, 140, 150]  # tower attack range
-        self._damage = [10, 20, 30, 40, 50, 60]   # tower damage
+        self._range = [100, 110, 120, 130, 140, 150, 300]  # tower attack range
+        self._damage = [10, 20, 30, 40, 50, 60, 100]   # tower damage
         self.cd_count = 0  # used in self.is_cool_down()
         self.cd_max_count = 60  # used in self.is_cool_down()
         self.attack_strategy = attack_strategy  # chose an attack strategy (AOE, single attack ....)
         self.attack_strategy_name = ""
-        self.value = [100, 140, 200, 300, 380, 460]
+        self.value = [100, 140, 200, 300, 380, 460, 10000]
 
 
     @classmethod
@@ -124,8 +123,8 @@ class Tower:
         moon_tower.sprites.append(MOON_IMAGE_7)
         moon_tower.sprites.append(MOON_IMAGE_8)
         moon_tower.sprites.append(MOON_IMAGE_9)
-        moon_tower._range = [140, 160, 180, 200, 220, 250]
-        moon_tower.value = [100, 140, 200, 280, 360, 450]
+        moon_tower._range = [140, 160, 180, 200, 220, 250, 350]
+        moon_tower.value = [100, 140, 200, 280, 360, 450, 10000]
         return moon_tower
 
     @classmethod
@@ -148,9 +147,9 @@ class Tower:
         red_fire_tower.sprites.append(RED_IMAGE_5)
         red_fire_tower.sprites.append(RED_IMAGE_6)
 
-        red_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        red_fire_tower._damage = [8, 14, 18, 22, 25, 35]
-        red_fire_tower.value = [120, 160, 220, 320, 400, 500]
+        red_fire_tower._range = [120, 125, 130, 135, 140, 145, 250]
+        red_fire_tower._damage = [8, 14, 18, 22, 25, 35, 50]
+        red_fire_tower.value = [120, 160, 220, 320, 400, 500, 10000]
         return red_fire_tower
 
     @classmethod
@@ -173,20 +172,20 @@ class Tower:
         blue_fire_tower.sprites.append(BLUE_IMAGE_5)
         blue_fire_tower.sprites.append(BLUE_IMAGE_6)
 
-        blue_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        blue_fire_tower._damage = [10, 15, 19, 25, 30, 37]
-        blue_fire_tower.value = [150, 200, 250, 300, 400, 500]
+        blue_fire_tower._range = [120, 125, 130, 135, 140, 145, 280]
+        blue_fire_tower._damage = [10, 15, 19, 25, 30, 37, 60]
+        blue_fire_tower.value = [150, 200, 250, 300, 400, 500, 10000]
         return blue_fire_tower
 
     @classmethod
     # obelisk_tower attacks an enemy far away
     def obelisk_tower(cls, x, y):
-        obelisk_tower = cls(x, y, SnipeAll())
+        obelisk_tower = cls(x, y, Snipe())
         obelisk_tower.name = "Obelisk Tower"
         obelisk_tower.intro = "The obelisk from the underground of ancient Egypt "
         obelisk_tower.intro1 = "has the awesome power of annihilating the enemy with "
         obelisk_tower.intro2 = "one strike by falling terrifying lightning."
-        obelisk_tower.attack_strategy_name = "Snipe All"
+        obelisk_tower.attack_strategy_name = "Snipe"
         obelisk_tower.sprites = []
         obelisk_tower.max_current_sprites = 13
         obelisk_tower.update_speed = 0.25
@@ -205,9 +204,10 @@ class Tower:
         obelisk_tower.sprites.append(OBELISK_IMAGE_12)
         obelisk_tower.sprites.append(OBELISK_IMAGE_13)
 
-        obelisk_tower._range = [100, 105, 110, 115, 120, 125]  # tower attack range
+        obelisk_tower._range = [100, 105, 110, 115, 120, 125, 220]  # tower attack range
+        obelisk_tower._damage = [20, 40, 60, 80, 120, 160, 400]
         obelisk_tower.cd_max_count = 120  # tower damage
-        obelisk_tower.value = [1000, 2000, 3000, 4000, 5000, 6000]
+        obelisk_tower.value = [1000, 2000, 3000, 4000, 5000, 6000, 20000]
         return obelisk_tower
 
     def update(self):
@@ -227,10 +227,16 @@ class Tower:
         self.cd_count = self.attack_strategy.attack(enemy_group, self, self.cd_count)
 
     def get_upgrade_cost(self):
-        return self.value[self.level+1] - self.value[self.level]
+        return self.value[self.level+1]
+
+    def get_ultra_cost(self):
+        return self.value[6]
 
     def get_cost(self):
         return self.value[self.level]
+
+    def get_sell_price(self):
+        return self.value[self.level] / 2
 
     @property
     def range(self):
