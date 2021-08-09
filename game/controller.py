@@ -67,6 +67,8 @@ class GameControl:
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
+        if self.model.selected_tower is not None and self.model.move_tower:
+            self.view.draw_towers(self.model.selected_tower)
 
 
     @property

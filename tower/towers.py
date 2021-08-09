@@ -19,35 +19,34 @@ OBELISK_IMAGE_12 = pygame.transform.scale(pygame.image.load(os.path.join("images
 OBELISK_IMAGE_13 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image13.png")), (150, 150))
 
 # moon tower image
-MOON_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image0.png")), (200, 200))
-MOON_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image1.png")), (200, 200))
-MOON_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image2.png")), (200, 200))
-MOON_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image3.png")), (200, 200))
-MOON_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image4.png")), (200, 200))
-MOON_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image5.png")), (200, 200))
-MOON_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image6.png")), (200, 200))
-MOON_IMAGE_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image7.png")), (200, 200))
-MOON_IMAGE_8 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image8.png")), (200, 200))
-MOON_IMAGE_9 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image9.png")), (200, 200))
-MOON_IMAGE_10 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image10.png")), (200, 200))
+MOON_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image0.png")), (110, 110))
+MOON_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image1.png")), (110, 110))
+MOON_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image2.png")), (110, 110))
+MOON_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image3.png")), (110, 110))
+MOON_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image4.png")), (110, 110))
+MOON_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image5.png")), (110, 110))
+MOON_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image6.png")), (110, 110))
+MOON_IMAGE_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image7.png")), (110, 110))
+MOON_IMAGE_8 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image8.png")), (110, 110))
+MOON_IMAGE_9 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image9.png")), (110, 110))
 
 # red fire tower image
-RED_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image29.png")), (300, 300))
-RED_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image30.png")), (300, 300))
-RED_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image31.png")), (300, 300))
-RED_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image32.png")), (300, 300))
-RED_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image33.png")), (300, 300))
-RED_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image34.png")), (300, 300))
-RED_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image35.png")), (300, 300))
+RED_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image0.png")), (110, 110))
+RED_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image1.png")), (110, 110))
+RED_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image2.png")), (110, 110))
+RED_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image3.png")), (110, 110))
+RED_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image4.png")), (110, 110))
+RED_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image5.png")), (110, 110))
+RED_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image6.png")), (110, 110))
 
 # blue fire tower image
-BLUE_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image0.png")), (400, 400))
-BLUE_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image1.png")), (400, 400))
-BLUE_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image2.png")), (400, 400))
-BLUE_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image3.png")), (400, 400))
-BLUE_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image4.png")), (400, 400))
-BLUE_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image5.png")), (400, 400))
-BLUE_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image6.png")), (400, 400))
+BLUE_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image0.png")), (110, 110))
+BLUE_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image1.png")), (110, 110))
+BLUE_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image2.png")), (110, 110))
+BLUE_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image3.png")), (110, 110))
+BLUE_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image4.png")), (110, 110))
+BLUE_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image5.png")), (110, 110))
+BLUE_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image6.png")), (110, 110))
 
 # vacancy image
 PLOT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "vacant_lot.png")), (40, 40))
@@ -90,6 +89,9 @@ class Tower:
         self.name = ""
         self.intro = ""
 
+        self.intro1 = ""
+        self.intro2 = ""
+
         self.level = 0  # level of the tower
         self._range = [100, 110, 120, 130, 140, 150]  # tower attack range
         self._damage = [10, 20, 30, 40, 50, 60]   # tower damage
@@ -98,7 +100,6 @@ class Tower:
         self.attack_strategy = attack_strategy  # chose an attack strategy (AOE, single attack ....)
         self.attack_strategy_name = ""
         self.value = [100, 140, 200, 300, 380, 460]
-        self.price = self.value[self.level]
 
 
     @classmethod
@@ -106,11 +107,13 @@ class Tower:
     def moon_tower(cls, x, y):
         moon_tower = cls(x, y, SingleSlowAttack())
         moon_tower.name = "Moon Tower"
-        moon_tower.intro = "Moon Tower attacks all enemies."
+        moon_tower.intro = "The ruby that absorbs the essence of the sun and the "
+        moon_tower.intro1 = "moon is carved into the shape of the moon and installed "
+        moon_tower.intro2 = "on the tower to form an indestructible moon tower."
         moon_tower.attack_strategy_name = "Single Slow Attack"
         moon_tower.sprites = []
         moon_tower.update_speed = 0.2
-        moon_tower.max_current_sprites = 10
+        moon_tower.max_current_sprites = 9
         moon_tower.sprites.append(MOON_IMAGE_0)
         moon_tower.sprites.append(MOON_IMAGE_1)
         moon_tower.sprites.append(MOON_IMAGE_2)
@@ -121,9 +124,7 @@ class Tower:
         moon_tower.sprites.append(MOON_IMAGE_7)
         moon_tower.sprites.append(MOON_IMAGE_8)
         moon_tower.sprites.append(MOON_IMAGE_9)
-        moon_tower.sprites.append(MOON_IMAGE_10)
-        moon_tower._range = [130, 140, 150, 160, 170, 180]
-        moon_tower._damage = [2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
+        moon_tower._range = [140, 160, 180, 200, 220, 250]
         moon_tower.value = [100, 140, 200, 280, 360, 450]
         return moon_tower
 
@@ -132,7 +133,9 @@ class Tower:
     def red_fire_tower(cls, x, y):
         red_fire_tower = cls(x, y, AOE())
         red_fire_tower.name = "Fire Totem"
-        red_fire_tower.intro = "Fire Totem attacks multiple enemies."
+        red_fire_tower.intro = "The shaman with white magic devoted his heart "
+        red_fire_tower.intro1 = "to the flame totem to make it alive"
+        red_fire_tower.intro2 = "and defend the survival of mankind"
         red_fire_tower.attack_strategy_name = "AOE"
         red_fire_tower.sprites = []
         red_fire_tower.update_speed = 0.2
@@ -146,17 +149,19 @@ class Tower:
         red_fire_tower.sprites.append(RED_IMAGE_6)
 
         red_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        red_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+        red_fire_tower._damage = [8, 14, 18, 22, 25, 35]
         red_fire_tower.value = [120, 160, 220, 320, 400, 500]
         return red_fire_tower
 
     @classmethod
     # blue_fire_tower attacks and slows down enemies
     def blue_fire_tower(cls, x, y):
-        blue_fire_tower = cls(x, y, AOE())
+        blue_fire_tower = cls(x, y, AOESlowAttack())
         blue_fire_tower.name = "Ice Totem"
-        blue_fire_tower.intro = "Ice Totem attacks multiple enemies."
-        blue_fire_tower.attack_strategy_name = "AOE"
+        blue_fire_tower.intro = "Black magic wizards sacrifice hundreds of thousands of "
+        blue_fire_tower.intro1 = "virus-infected mutants to summon ice totems "
+        blue_fire_tower.intro2 = "in the endless abyss"
+        blue_fire_tower.attack_strategy_name = "AOE Slow Attack"
         blue_fire_tower.sprites = []
         blue_fire_tower.update_speed = 0.2
         blue_fire_tower.max_current_sprites = 6
@@ -169,8 +174,8 @@ class Tower:
         blue_fire_tower.sprites.append(BLUE_IMAGE_6)
 
         blue_fire_tower._range = [120, 125, 130, 135, 140, 145]
-        blue_fire_tower._damage = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
-        blue_fire_tower.value = [120, 160, 220, 320, 400, 500]
+        blue_fire_tower._damage = [10, 15, 19, 25, 30, 37]
+        blue_fire_tower.value = [150, 200, 250, 300, 400, 500]
         return blue_fire_tower
 
     @classmethod
@@ -178,7 +183,9 @@ class Tower:
     def obelisk_tower(cls, x, y):
         obelisk_tower = cls(x, y, SnipeAll())
         obelisk_tower.name = "Obelisk Tower"
-        obelisk_tower.intro = "Obelisk Tower attacks far."
+        obelisk_tower.intro = "The obelisk from the underground of ancient Egypt "
+        obelisk_tower.intro1 = "has the awesome power of annihilating the enemy with "
+        obelisk_tower.intro2 = "one strike by falling terrifying lightning."
         obelisk_tower.attack_strategy_name = "Snipe All"
         obelisk_tower.sprites = []
         obelisk_tower.max_current_sprites = 13
@@ -200,7 +207,7 @@ class Tower:
 
         obelisk_tower._range = [100, 105, 110, 115, 120, 125]  # tower attack range
         obelisk_tower.cd_max_count = 120  # tower damage
-        obelisk_tower.value = [120, 140, 200, 280, 360, 400]
+        obelisk_tower.value = [1000, 2000, 3000, 4000, 5000, 6000]
         return obelisk_tower
 
     def update(self):

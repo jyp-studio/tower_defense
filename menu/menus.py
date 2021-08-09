@@ -54,7 +54,7 @@ class Menu:
 
 class UpgradeMenu(Menu):
     def __init__(self, x, y):
-        super().__init__(x, y + 20)
+        super().__init__(x, y)
         self._buttons = [Button(PROPERTIES_BTN_IMAGE, "properties", self.rect.centerx, self.rect.centery - 50),
                          Button(UPGRADE_BTN_IMAGE, "upgrade", self.rect.centerx, self.rect.centery - 17),
                          Button(SELL_BTN_IMAGE, "sell", self.rect.centerx, self.rect.centery + 20),

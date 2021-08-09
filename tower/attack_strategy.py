@@ -71,12 +71,34 @@ class AOE(AttackStrategy):
         return cd_count
 
 
+class AOESlowAttack(AttackStrategy):
+    """attack an enemy once a time"""
+    def attack(self, enemies: list, tower, cd_count):
+        for en in enemies:
+            if en.name == "goblin":
+                previous_stride = 10
+            elif en.name == "orc":
+                previous_stride = 5
+            else:
+                previous_stride = 3
+            if in_range(en, tower):
+                en.health -= tower.damage
+                if en.stride > 4:
+                    en.stride -= 4
+                else:
+                    en.stride = 1
+                cd_count = 0
+            else:
+                en.stride = previous_stride
+        return cd_count
+
+
 class Snipe(AttackStrategy):
     """eliminate an enemy all in once"""
     def attack(self, enemies: list, tower, cd_count):
         for en in enemies:
             if in_range(en, tower):
-                en.health = 0
+                en.health -= tower.damage * 2
                 cd_count = 0
                 return cd_count
         return cd_count
@@ -87,7 +109,7 @@ class SnipeAll(AttackStrategy):
     def attack(self, enemies: list, tower, cd_count):
         for en in enemies:
             if in_range(en, tower):
-                en.health = 0
+                en.health -= tower.damage * 2
                 cd_count = 0
         return cd_count
 

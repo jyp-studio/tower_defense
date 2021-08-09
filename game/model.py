@@ -3,10 +3,13 @@ import os
 from tower.towers import Tower, Vacancy
 from enemy.enemies import EnemyGroup
 from menu.menus import UpgradeMenu, BuildMenu, MainMenu
-from game.user_request import RequestSubject, TowerFactory, TowerSeller, TowerDeveloper, EnemyGenerator, Muse, Music,Pause
+# from game.user_request import RequestSubject, TowerFactory, TowerSeller, TowerDeveloper, EnemyGenerator, Muse, Music,Pause
 from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
 from game_UI.game_UI import GameUI
 from opt_menu.opt_menu import OptMenu
+
+from game.user_request import *
+
 
 class GameModel:
     def __init__(self):
@@ -22,6 +25,8 @@ class GameModel:
 
         self.show_tower_info = False
 
+        self.move_tower = False
+
         # selected item
         self.selected_plot = None
         self.selected_tower = None
@@ -32,14 +37,20 @@ class GameModel:
         self.developer = TowerDeveloper(self.subject)
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
+
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
 
         self.pause =Pause(self.subject)
 
+
+        self.properties = TowerProperties(self.subject)
+        self.move = TowerMove(self.subject)
+        self.proper = Music(self.subject)
+
         #
         self.wave = 0
-        self.money = 500000
+        self.money = 500
         self.max_hp = 10
         self.hp = self.max_hp
         self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.mp3"))
@@ -91,10 +102,14 @@ class GameModel:
                 if btn.clicked(mouse_x, mouse_y):
                     self.sound.play()
                     self.selected_button = btn
+                    # if select the move button then close the menu
+                    if btn == "move":
+                        self.__menu = None
             if self.selected_button is None:
                 self.selected_tower = None
                 self.selected_plot = None
                 self.show_tower_info = False
+                self.move_tower = False
 
         # menu btn
         for btn in self.__main_menu.buttons:
