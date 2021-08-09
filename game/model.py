@@ -39,6 +39,7 @@ class GameModel:
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
         self.dieHandler = Die(self.subject)
+        self.potion = Potionfunction(self.subject)
 
 
         self.muse = Muse(self.subject)

@@ -1,7 +1,7 @@
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price
 from color_settings import *
 
 
@@ -10,6 +10,7 @@ class GameView:
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 20)
         self.font2 = pygame.font.SysFont("comicsans", 30)
+        self.font3 = pygame.font.SysFont("comicsans", 15)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -101,6 +102,12 @@ class GameView:
         """ (Q2.1)render the money"""
         text = self.font2.render(f"$: {money}", True, (255, 255, 255))
         self.win.blit(text, (5, 45))
+
+    def draw_potionprice(self):
+        text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
+        self.win.blit(text,(40,210))
+        text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
+        self.win.blit(text,(40,270))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""

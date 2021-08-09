@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 import os
 from settings import singleton_map_controller
 from color_settings import *
@@ -15,7 +16,8 @@ class Enemy:
     def __init__(self, image):
         self.name = ""
 
-        self.path = singleton_map_controller.curPathPage[1]
+        dir=random.randint(1,len(singleton_map_controller.curPathPage))
+        self.path = singleton_map_controller.curPathPage[dir]
         self.path_index = 0
         self.move_count = 0
         self.stride = 5
@@ -54,6 +56,7 @@ class Enemy:
         goblin_enemy.stride = 10
         goblin_enemy.health = 80
         goblin_enemy.max_health = 80
+        return goblin_enemy
 
     @classmethod
     def orc_enemy(cls):
@@ -62,6 +65,7 @@ class Enemy:
         orc_enemy.stride = 3
         orc_enemy.health = 1500
         orc_enemy.max_health = 1500
+        return orc_enemy
 
     @classmethod
     def immortal_enemy(cls):
@@ -70,6 +74,7 @@ class Enemy:
         immortal_enemy.stride = 1
         immortal_enemy.health = 50000000
         immortal_enemy.max_health = 50000000
+        return immortal_enemy
 
 
 class EnemyGroup:
@@ -106,13 +111,13 @@ class EnemyGroup:
         """Generate the enemies for next wave"""
         if self.is_empty():
             if self.wave_counter % 3 == 0:
-                self.__reserved_members = [Enemy(GOBLIN_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy.goblin_enemy() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 3 == 1:
-                self.__reserved_members = [Enemy(ORC_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy.orc_enemy() for _ in range(num)]
                 self.wave_counter += 1
             else:
-                self.__reserved_members = [Enemy(IMMORTAL_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy.immortal_enemy() for _ in range(num)]
                 self.wave_counter = 0
 
     def get(self):

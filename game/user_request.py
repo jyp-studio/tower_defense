@@ -1,7 +1,7 @@
 import pygame
 import os
 from tower.towers import Tower, Vacancy
-from settings import singleton_vol_controller,singleton_map_controller,game_status
+from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 
 """This module is import in model.py"""
 
@@ -240,3 +240,19 @@ class Die:
         """deal with event: die by call GameOver.run()"""
         if user_request == "die":
             model.GameOverMenu.run()
+
+class Potionfunction:
+    def __init__(self, subject):
+       subject.register(self)
+    
+    def update(self, user_request: str, model):
+
+        if user_request == "blood_potion":
+            if model.hp < model.max_hp and model.money >= potion_price["blood_potion"]:
+                model.hp += 1
+                model.money -= potion_price["blood_potion"]
+        if user_request == "aoe_potion":
+            if model.money >= potion_price["aoe_potion"]:
+                for en in model.enemies.get():
+                    en.health -= en.max_health/10
+                model.money -= potion_price["aoe_potion"]

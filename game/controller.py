@@ -75,6 +75,7 @@ class GameControl:
         self.view.draw_btn(self.model.main_menu.buttons)
         self.view.draw_money(self.model.money)
         self.view.draw_wave(self.model.wave)
+        self.view.draw_potionprice()
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)

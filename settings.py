@@ -26,4 +26,10 @@ singleton_map_controller=MapController(WIN_WIDTH, WIN_HEIGHT)
 game_status={
     "run":True,
     "go_start_menu":False,
-    "restart":False}
+    "restart":False
+}
+
+potion_price={
+    "blood_potion":2000,
+    "aoe_potion":2000
+}
