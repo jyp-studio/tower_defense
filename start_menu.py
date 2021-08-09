@@ -16,23 +16,20 @@ class StartMenu:
         # win
         self.menu_win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         # background
-        self.bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "start_menu.png")), (WIN_WIDTH, WIN_HEIGHT))
+        self.bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "start_menu2.png")), (WIN_WIDTH, WIN_HEIGHT))
         # button
-        self.start_btn = Buttons(349, 315, 338, 101)  # x, y, width, height
-        self.sound_btn = Buttons(725, 525, 90, 70)
-        self.mute_btn = Buttons(830, 525, 90, 70)
-        self.opt_btn=Buttons(349, 465, 338, 100)
-        self.buttons = [self.sound_btn,
-                        self.mute_btn,
-                        self.start_btn,
+        self.start_btn = Buttons(430, 365, 170, 50)  # x, y, width, height
+        self.opt_btn=Buttons(430, 435, 170, 50)
+        self.buttons = [self.start_btn,
                         self.opt_btn]
         # btn img
-        self.opt_btn_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "options.png")), (338,100))
+        # self.opt_btn_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "options.png")), (338,100))
 
         # music and sound
         self.sound = pygame.mixer.Sound("./sound/sound.mp3")
 
     def play_music(self):
+        pygame.mixer.music.stop()
         pygame.mixer.music.load("./sound/menu.mp3")
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
@@ -46,7 +43,11 @@ class StartMenu:
             game_status["go_start_menu"]= False
             clock.tick(FPS)
             self.menu_win.blit(self.bg, (0, 0))
-            self.menu_win.blit(self.opt_btn_img,self.opt_btn.rect.topleft)
+
+            surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
+            for btn in self.buttons:
+                pygame.draw.rect(surface,(255,255,255,128),btn.rect)
+            self.menu_win.blit(surface, (0, 0))
 
             x, y = pygame.mouse.get_pos()
             for event in pygame.event.get():
@@ -62,19 +63,14 @@ class StartMenu:
                         game = Game()
                         game.run()
                         singleton_map_controller.change_map()
-
-                    if self.mute_btn.clicked(x, y):
-                        self.sound.play()
-                        pygame.mixer.music.pause()
-                    if self.sound_btn.clicked(x, y):
-                        self.sound.play()
-                        pygame.mixer.music.unpause()
+                        self.play_music()
 
                     if self.opt_btn.clicked(x, y):
                         self.sound.play()
                         opt_menu=OptMenu()
                         opt_menu.run()
                         self.sound.set_volume(singleton_vol_controller.sound_volume)
+                        singleton_map_controller.change_map()
 
                     """(Q1.1) music on/off according to the button"""
                     # (hint) pygame.mixer.music.pause/unpause
@@ -82,10 +78,6 @@ class StartMenu:
             # while cursor is moving (not click)
             """(Q1.2) create button frame and draw"""
             # (hint) use a for loop to go through all the buttons, create the frame, and draw it.
-            for button in self.buttons:
-                if button.rect.collidepoint(x, y):
-                    button.create_frame(x, y)
-                    button.draw_frame(self.menu_win)
             pygame.display.update()
         pygame.quit()
 

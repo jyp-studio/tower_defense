@@ -138,3 +138,9 @@ class GameView:
         self.win.blit(text, (200, 45))
 
 
+    def draw_base(self):
+        baseRect=singleton_map_controller.curBaseRect
+        self.win.blit(pygame.transform.scale(pygame.image.load("images/base.png"), (baseRect.width, baseRect.height)),baseRect.topleft)
+        surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
+        pygame.draw.rect(surface,[255,255,255,128],baseRect)
+        self.win.blit(surface,(0,0))

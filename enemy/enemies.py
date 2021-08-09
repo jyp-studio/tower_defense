@@ -1,7 +1,7 @@
 import pygame
 import math
 import os
-from settings import PATH, BASE
+from settings import singleton_map_controller
 from color_settings import *
 
 pygame.init()
@@ -15,7 +15,7 @@ class Enemy:
     def __init__(self, image):
         self.name = ""
 
-        self.path = PATH
+        self.path = singleton_map_controller.curPathPage[1]
         self.path_index = 0
         self.move_count = 0
         self.stride = 5
@@ -90,7 +90,7 @@ class EnemyGroup:
                 self.retreat(en)
                 model.money += 500
             # delete the object when it reach the base
-            if BASE.collidepoint(en.rect.centerx, en.rect.centery):
+            if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
                 model.hp -= 1
 

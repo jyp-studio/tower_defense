@@ -50,6 +50,7 @@ class GameControl:
     def update_view(self):
         # render background
         self.view.draw_bg()
+        self.view.draw_base()
 
         self.view.draw_hp(self.model.hp)
         self.view.draw_enemies(self.model.enemies)
