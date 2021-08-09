@@ -8,11 +8,15 @@ pygame.init()
 GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
 ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
-DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (60, 60))
+DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (70, 70))
+MUMMY_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_4.png")), (70, 70))
+DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_5.png")), (70, 70))
+DEAD_DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_6.png")), (70, 70))
+GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_7.png")), (100, 100))
 
 
 class Enemy:
-    def __init__(self, image, stride: int, health: int, is_dead: bool):
+    def __init__(self, image, stride: int, health: int, is_dead: int):
         self.name = ""
         self.path = PATH
         self.path_index = 0
@@ -49,18 +53,33 @@ class Enemy:
 
     @classmethod
     def goblin_enemy(cls):
-        goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, True)
+        goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, 0)
         goblin_enemy.name = "goblin"
 
     @classmethod
     def orc_enemy(cls):
-        orc_enemy = cls(ORC_IMAGE, 3, 200, True)
+        orc_enemy = cls(ORC_IMAGE, 3, 200, 0)
         orc_enemy.name = "orc"
 
     @classmethod
     def immortal_enemy(cls):
-        immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, False)
+        immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, 1)
         immortal_enemy.name = "immortal"
+
+    @classmethod
+    def mummy_enemy(cls):
+        mummy_enemy = cls(MUMMY_IMAGE, 2, 1000, 0)
+        mummy_enemy.name = "mummy"
+
+    @classmethod
+    def dark_angel_enemy(cls):
+        dark_angel_enemy = cls(DARK_ANGEL_IMAGE, 4, 1000, 2)
+        dark_angel_enemy.name = "dark angel"
+
+    @classmethod
+    def green_monster_enemy(cls):
+        green_monster_enemy = cls(DARK_ANGEL_IMAGE, 1, 6000, 0)
+        green_monster_enemy.name = "green monster"
 
 
 class EnemyGroup:
@@ -77,13 +96,19 @@ class EnemyGroup:
         for en in self.__expedition:
             en.move()
             if en.health <= 0:
-                if en.is_dead:
+                if en.is_dead == 0:
                     self.retreat(en)
                 else:
-                    en.is_dead = True
-                    en.health = 200
-                    en.stride = 10
-                    en.image = DEAD_IMMORTAL_IMAGE
+                    if en.is_dead == 1:
+                        en.is_dead = 0
+                        en.health = 200
+                        en.stride = 10
+                        en.image = DEAD_IMMORTAL_IMAGE
+                    if en.is_dead == 2:
+                        en.is_dead = 0
+                        en.health = 2000
+                        en.stride = 1
+                        en.image = DEAD_DARK_ANGEL_IMAGE
                 model.money += 15
             # delete the object when it reach the base
             if BASE.collidepoint(en.rect.centerx, en.rect.centery):
@@ -101,14 +126,23 @@ class EnemyGroup:
     def add(self, num):
         """Generate the enemies for next wave"""
         if self.is_empty():
-            if self.wave_counter % 3 == 0:
-                self.__reserved_members = [Enemy(GOBLIN_IMAGE, 10, 50, True) for _ in range(num)]
+            if self.wave_counter % 6 == 0:
+                self.__reserved_members = [Enemy(GOBLIN_IMAGE, 10, 50, 0) for _ in range(num)]
                 self.wave_counter += 1
-            elif self.wave_counter % 3 == 1:
-                self.__reserved_members = [Enemy(ORC_IMAGE, 3, 200, True) for _ in range(num)]
+            elif self.wave_counter % 6 == 1:
+                self.__reserved_members = [Enemy(ORC_IMAGE, 3, 200, 0) for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 6 == 2:
+                self.__reserved_members = [Enemy(IMMORTAL_IMAGE, 1, 500, 1) for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 6 == 3:
+                self.__reserved_members = [Enemy(MUMMY_IMAGE, 2, 1000, 0) for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 6 == 4:
+                self.__reserved_members = [Enemy(DARK_ANGEL_IMAGE, 4, 1000, 2) for _ in range(num)]
                 self.wave_counter += 1
             else:
-                self.__reserved_members = [Enemy(IMMORTAL_IMAGE, 1, 500, False) for _ in range(num)]
+                self.__reserved_members = [Enemy(GREEN_MONSTER_IMAGE, 1, 6000, 0) for _ in range(num)]
                 self.wave_counter = 0
 
     def get(self):
