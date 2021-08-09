@@ -42,8 +42,8 @@ PATH2 = [(302, 595), (310, 588), (320, 583), (330, 578), (339, 573), (349, 568),
 BASE = pygame.Rect(430, 90, 195, 130)
 
 # image
-HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (40, 40))
-HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (40, 40))
+HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (35, 33))
+HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (35, 33))
 
 # singleton
 singleton_vol_controller=VolController()

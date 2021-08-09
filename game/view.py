@@ -4,12 +4,15 @@ import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller
 from color_settings import *
 
+start_time = time.time()
+
 
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 20)
-        self.font2 = pygame.font.SysFont("comicsans", 30)
+        self.game_time = int(time.time() - start_time)
+        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
+        self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -100,22 +103,22 @@ class GameView:
     def draw_money(self, money: int):
         """ (Q2.1)render the money"""
         text = self.font2.render(f"$: {money}", True, (255, 255, 255))
-        self.win.blit(text, (5, 45))
+        self.win.blit(text, (5, 40))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
         text = self.font2.render(f"Wave: {wave}", True, (255, 255, 255))
-        self.win.blit(text, (5, 15))
+        self.win.blit(text, (5, 10))
 
     def draw_hp(self, lives):
         # draw_lives
         hp_rect = HP_IMAGE.get_rect()
         for i in range(10):
-            self.win.blit(HP_GRAY_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
+            self.win.blit(HP_GRAY_IMAGE, (WIN_WIDTH // 2 - (hp_rect.w + 5) * (2.5 - i % 5), hp_rect.h * (i // 5) + 8))
         for i in range(lives):
-            self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
+            self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - (hp_rect.w + 5) * (2.5 - i % 5), hp_rect.h * (i // 5) + 8))
 
-    def draw_UI(self,UI):
+    def draw_UI(self, UI):
         self.win.blit(UI.frame,(0,0))
     
     def draw_btn(self,buttons):
@@ -131,9 +134,15 @@ class GameView:
         h=str(now.tm_hour).zfill(2)
         min=str(now.tm_min).zfill(2)
         sec=str(now.tm_sec).zfill(2)
-        text = self.font2.render(f"{y}/{m}/{d}", True, (255, 255, 255))
-        self.win.blit(text, (200, 15))
-        text = self.font2.render(f"{h}:{min}:{sec}", True, (255, 255, 255))
-        self.win.blit(text, (200, 45))
+        text = self.font2.render(f"{y}/{m}/{d}", True, WHITE)
+        self.win.blit(text, (220, 10))
+        text = self.font2.render(f"{h}:{min}:{sec}", True, WHITE)
+        self.win.blit(text, (220, 40))
+
+    def draw_game_time(self):
+        minute = self.game_time // 60
+        second = str(self.game_time % 60).zfill(2)
+        time_text = self.font.render(f"{minute}:{second}", True, WHITE)
+        self.win.blit(time_text, (700, 15))
 
 

@@ -10,11 +10,9 @@ ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "ene
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
 
 
-
 class Enemy:
     def __init__(self, image):
         self.name = ""
-
         self.path = PATH
         self.path_index = 0
         self.move_count = 0
@@ -52,7 +50,7 @@ class Enemy:
         goblin_enemy = cls(GOBLIN_IMAGE)
         goblin_enemy.name = "goblin"
         goblin_enemy.stride = 10
-        goblin_enemy.health = 80
+        goblin_enemy.health = 5
         goblin_enemy.max_health = 80
 
     @classmethod
@@ -68,8 +66,8 @@ class Enemy:
         immortal_enemy = cls(IMMORTAL_IMAGE)
         immortal_enemy.name = "immortal"
         immortal_enemy.stride = 1
-        immortal_enemy.health = 50000000
-        immortal_enemy.max_health = 50000000
+        immortal_enemy.health = 5000000000000
+        immortal_enemy.max_health = 5000000000000
 
 
 class EnemyGroup:
@@ -88,7 +86,7 @@ class EnemyGroup:
             en.move()
             if en.health <= 0:
                 self.retreat(en)
-                model.money += 500
+                model.money += 15
             # delete the object when it reach the base
             if BASE.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
@@ -126,6 +124,10 @@ class EnemyGroup:
     def retreat(self, enemy):
         """Remove the enemy from the expedition"""
         self.__expedition.remove(enemy)
+
+    def retreat_all(self):
+        self.__expedition = []
+        self.__reserved_members = []
 
 
 
