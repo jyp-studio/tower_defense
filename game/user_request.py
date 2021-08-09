@@ -1,5 +1,6 @@
 import pygame
 import os
+import random
 from tower.towers import Tower, Vacancy
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 
@@ -32,7 +33,7 @@ class EnemyGenerator:
         """add new enemy"""
         if user_request == "start new wave":
             if model.enemies.is_empty():
-                model.enemies.add(10)
+                model.enemies.add(10 * (model.wave + 1))
                 model.wave += 1
 
 
@@ -41,9 +42,47 @@ class AddMoney:
         subject.register(self)
 
     def update(self, user_request: str, model):
-        """add new enemy"""
+        """add money"""
         if user_request == "add money":
             model.money = 99999999999
+
+
+class KillAll:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """kill all enemies"""
+        if user_request == "kill all":
+            model.enemies.retreat_all()
+
+
+class AddTowers:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """Add obelisks tower"""
+        if user_request == "add towers":
+            for tw in model.towers:
+                x, y = tw.rect.center
+                if tw.name == "Moon Tower":
+                    model.plots.append(Vacancy(x - 18, y))
+                elif tw.name == "Obelisk Tower":
+                    model.plots.append(Vacancy(x, y + 50))
+                else:
+                    model.plots.append(Vacancy(x - 20, y + 5))
+                model.towers.remove(tw)
+            for plot in model.plots:
+                x, y = plot.rect.center
+                tower_dict = {"moon": Tower.moon_tower(x + 18, y),
+                              "red fire": Tower.red_fire_tower(x + 20, y - 5),
+                              "blue fire": Tower.blue_fire_tower(x + 20, y - 5),
+                              "obelisk": Tower.obelisk_tower(x, y - 50)}
+                ran_tower = random.choice(["moon", "red fire", "blue fire", "obelisk"])
+                new_tower = tower_dict[ran_tower]
+                model.towers.append(new_tower)
+                model.plots.remove(plot)
 
 
 class TowerSeller:
@@ -57,17 +96,13 @@ class TowerSeller:
             model.money += model.selected_tower.get_sell_price()
             ####
             if model.selected_tower.name == "Moon Tower":
-                model.towers.remove(model.selected_tower)
-                model.selected_tower = None
                 model.plots.append(Vacancy(x - 18, y))
             elif model.selected_tower.name == "Obelisk Tower":
-                model.towers.remove(model.selected_tower)
-                model.selected_tower = None
                 model.plots.append(Vacancy(x, y + 50))
             else:
                 model.plots.append(Vacancy(x - 20, y + 5))
-                model.towers.remove(model.selected_tower)
-                model.selected_tower = None
+            model.towers.remove(model.selected_tower)
+            model.selected_tower = None
 
 
 class TowerDeveloper:

@@ -4,13 +4,12 @@ import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price
 from color_settings import *
 
-
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 20)
-        self.font2 = pygame.font.SysFont("comicsans", 30)
-        self.font3 = pygame.font.SysFont("comicsans", 15)
+        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
+        self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
+        self.font3= pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 15)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -101,7 +100,7 @@ class GameView:
     def draw_money(self, money: int):
         """ (Q2.1)render the money"""
         text = self.font2.render(f"$: {money}", True, (255, 255, 255))
-        self.win.blit(text, (5, 45))
+        self.win.blit(text, (5, 40))
 
     def draw_potionprice(self):
         text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
@@ -112,17 +111,17 @@ class GameView:
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
         text = self.font2.render(f"Wave: {wave}", True, (255, 255, 255))
-        self.win.blit(text, (5, 15))
+        self.win.blit(text, (5, 10))
 
     def draw_hp(self, lives):
         # draw_lives
         hp_rect = HP_IMAGE.get_rect()
         for i in range(10):
-            self.win.blit(HP_GRAY_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
+            self.win.blit(HP_GRAY_IMAGE, (WIN_WIDTH // 2 - (hp_rect.w + 5) * (2.5 - i % 5), hp_rect.h * (i // 5) + 8))
         for i in range(lives):
-            self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - hp_rect.w * (2.5 - i % 5), hp_rect.h * (i // 5)))
+            self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - (hp_rect.w + 5) * (2.5 - i % 5), hp_rect.h * (i // 5) + 8))
 
-    def draw_UI(self,UI):
+    def draw_UI(self, UI):
         self.win.blit(UI.frame,(0,0))
     
     def draw_btn(self,buttons):
@@ -138,10 +137,10 @@ class GameView:
         h=str(now.tm_hour).zfill(2)
         min=str(now.tm_min).zfill(2)
         sec=str(now.tm_sec).zfill(2)
-        text = self.font2.render(f"{y}/{m}/{d}", True, (255, 255, 255))
-        self.win.blit(text, (200, 15))
-        text = self.font2.render(f"{h}:{min}:{sec}", True, (255, 255, 255))
-        self.win.blit(text, (200, 45))
+        text = self.font2.render(f"{y}/{m}/{d}", True, WHITE)
+        self.win.blit(text, (220, 10))
+        text = self.font2.render(f"{h}:{min}:{sec}", True, WHITE)
+        self.win.blit(text, (220, 40))
 
 
     def draw_base(self):

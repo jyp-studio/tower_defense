@@ -12,7 +12,10 @@ class GameControl:
                        "mouse position": [0, 0],
                        "keyboard key": 0,
                        "Add money": 0,
-                       "die":False
+                       "die":False,
+                       "Kill all": 0,
+                       "Add towers": 0,
+                       "pause_esc": 0
                        }
         self.request = None  # response of user input
 
@@ -34,7 +37,10 @@ class GameControl:
                        "mouse position": None,
                        "keyboard key": None,
                        "Add money": None,
-                       "die":False
+                       "die":False,
+                       "Kill all": None,
+                       "Add towers": None,
+                       "pause_esc": None
                        }
         # update event
         for event in pygame.event.get():
@@ -49,6 +55,12 @@ class GameControl:
                     self.events["keyboard key"] = pygame.K_n
                 if event.key == pygame.K_TAB:
                     self.events["Add money"] = pygame.K_TAB
+                if event.key == pygame.K_k:
+                    self.events["Kill all"] = pygame.K_k
+                if event.key == pygame.K_t:
+                    self.events["Add towers"] = pygame.K_t
+                if event.key == pygame.K_ESCAPE:
+                    self.events["pause_esc"] = pygame.K_ESCAPE
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()

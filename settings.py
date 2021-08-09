@@ -15,8 +15,8 @@ GREEN = (0, 255, 0)
 PURPLE = (147, 0, 147)
 
 # image
-HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (40, 40))
-HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (40, 40))
+HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (35, 33))
+HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (35, 33))
 
 # singleton
 singleton_vol_controller=VolController()

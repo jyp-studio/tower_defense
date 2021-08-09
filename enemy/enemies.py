@@ -9,25 +9,27 @@ pygame.init()
 GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
 ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
-
+DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (60, 60))
 
 
 class Enemy:
-    def __init__(self, image):
+    def __init__(self, image, stride: int, health: int, is_dead: bool):
         self.name = ""
 
         dir=random.randint(1,len(singleton_map_controller.curPathPage))
         self.path = singleton_map_controller.curPathPage[dir]
+
         self.path_index = 0
         self.move_count = 0
-        self.stride = 5
+        self.stride = stride
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = self.path[self.path_index]
         self.path_index = 0
         self.move_count = 0
-        self.health = 100
-        self.max_health = 100
+        self.health = health
+        self.max_health = health
+        self.is_dead = is_dead
 
     def move(self):
         x1, y1 = self.path[self.path_index]
@@ -51,30 +53,33 @@ class Enemy:
 
     @classmethod
     def goblin_enemy(cls):
-        goblin_enemy = cls(GOBLIN_IMAGE)
+        goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, True)
         goblin_enemy.name = "goblin"
         goblin_enemy.stride = 10
         goblin_enemy.health = 80
         goblin_enemy.max_health = 80
         return goblin_enemy
 
+
     @classmethod
     def orc_enemy(cls):
-        orc_enemy = cls(ORC_IMAGE)
+        orc_enemy = cls(ORC_IMAGE, 3, 200, True)
         orc_enemy.name = "orc"
         orc_enemy.stride = 3
         orc_enemy.health = 1500
         orc_enemy.max_health = 1500
         return orc_enemy
 
+
     @classmethod
     def immortal_enemy(cls):
-        immortal_enemy = cls(IMMORTAL_IMAGE)
+        immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, False)
         immortal_enemy.name = "immortal"
         immortal_enemy.stride = 1
         immortal_enemy.health = 50000000
         immortal_enemy.max_health = 50000000
         return immortal_enemy
+
 
 
 class EnemyGroup:
@@ -86,14 +91,19 @@ class EnemyGroup:
         self.wave_counter = 0
 
     def advance(self, model):
-        """Bonus.2"""
         # use model.hp and model.money to access the hp and money information
         self.campaign()
         for en in self.__expedition:
             en.move()
             if en.health <= 0:
-                self.retreat(en)
-                model.money += 500
+                if en.is_dead:
+                    self.retreat(en)
+                else:
+                    en.is_dead = True
+                    en.health = 200
+                    en.stride = 10
+                    en.image = DEAD_IMMORTAL_IMAGE
+                model.money += 15
             # delete the object when it reach the base
             if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
@@ -131,6 +141,10 @@ class EnemyGroup:
     def retreat(self, enemy):
         """Remove the enemy from the expedition"""
         self.__expedition.remove(enemy)
+
+    def retreat_all(self):
+        self.__expedition = []
+        self.__reserved_members = []
 
 
 

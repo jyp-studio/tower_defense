@@ -24,8 +24,6 @@ class GameModel:
 
         self.show_tower_info = False
 
-        self.move_tower = False
-
         # selected item
         self.selected_plot = None
         self.selected_tower = None
@@ -36,6 +34,8 @@ class GameModel:
         self.developer = TowerDeveloper(self.subject)
         self.evolution = TowerEvolution(self.subject)
         self.add_money = AddMoney(self.subject)
+        self.add_towers = AddTowers(self.subject)
+        self.kill_all = KillAll(self.subject)
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
         self.dieHandler = Die(self.subject)
@@ -76,6 +76,12 @@ class GameModel:
             return "start new wave"
         if events["Add money"] is not None:
             return "add money"
+        if events["Kill all"] is not None:
+            return "kill all"
+        if events["Add towers"] is not None:
+            return "add towers"
+        if events["pause_esc"] is not None:
+            return "pause"
         # mouse event
         if events["mouse position"] is not None:
             x, y = events["mouse position"]
@@ -116,7 +122,6 @@ class GameModel:
                 self.selected_tower = None
                 self.selected_plot = None
                 self.show_tower_info = False
-                self.move_tower = False
 
         # menu btn
         for btn in self.__main_menu.buttons:
