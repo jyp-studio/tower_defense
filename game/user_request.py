@@ -3,7 +3,6 @@ import os
 from tower.towers import Tower, Vacancy
 from settings import singleton_vol_controller,singleton_map_controller,game_status
 
-
 """This module is import in model.py"""
 
 """
@@ -233,3 +232,11 @@ class GoStartMenu:
             model.sound.play()
             game_status["go_start_menu"] = True
 
+class Die:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """deal with event: die by call GameOver.run()"""
+        if user_request == "die":
+            model.GameOverMenu.run()

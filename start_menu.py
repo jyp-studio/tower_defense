@@ -58,11 +58,20 @@ class StartMenu:
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # check if hit start btn
-                    if self.start_btn.clicked(x, y):
+                    if self.start_btn.clicked(x, y):       
                         self.sound.play()
-                        game = Game()
-                        game.run()
+
+                        for i in range(0,2):
+                            i=1
+                            game = Game()
+                            game.run()
+                            if game_status["restart"]:
+                                game_status["restart"]= False
+                                i=0
+
                         singleton_map_controller.change_map()
+
+
                         self.play_music()
 
                     if self.opt_btn.clicked(x, y):

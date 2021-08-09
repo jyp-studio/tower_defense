@@ -35,7 +35,7 @@ PATH_DICT={
 }
 # base
 BASE = pygame.Rect(485, 115, 160,170)
-BASE2=pygame.Rect(790, 170, 160,170)
+BASE2=pygame.Rect(850, 100, 160,170)
 BASE_RECT_DICT={
     1:BASE,
     2:BASE2

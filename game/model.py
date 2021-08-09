@@ -6,7 +6,7 @@ from menu.menus import UpgradeMenu, BuildMenu, MainMenu
 from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
 from game_UI.game_UI import GameUI
 from opt_menu.opt_menu import OptMenu
-
+from game_over.game_over import GameOver
 from game.user_request import *
 
 
@@ -38,6 +38,8 @@ class GameModel:
         self.add_money = AddMoney(self.subject)
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
+        self.dieHandler = Die(self.subject)
+
 
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
@@ -58,6 +60,7 @@ class GameModel:
 
         self.UI = GameUI()
         self.opt_menu = OptMenu()
+        self.GameOverMenu = GameOver()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -79,6 +82,8 @@ class GameModel:
             if self.selected_button is not None:
                 return self.selected_button.response
             return "nothing"
+        if events["die"]:
+            return "die"
         return "nothing"
 
     def select(self, mouse_x: int, mouse_y: int) -> None:

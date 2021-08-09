@@ -25,4 +25,5 @@ singleton_map_controller=MapController(WIN_WIDTH, WIN_HEIGHT)
 # global var
 game_status={
     "run":True,
-    "go_start_menu":False}
+    "go_start_menu":False,
+    "restart":False}

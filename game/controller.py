@@ -11,7 +11,8 @@ class GameControl:
         self.events = {"game quit": False,
                        "mouse position": [0, 0],
                        "keyboard key": 0,
-                       "Add money": 0
+                       "Add money": 0,
+                       "die":False
                        }
         self.request = None  # response of user input
 
@@ -32,7 +33,8 @@ class GameControl:
         self.events = {"game quit": False,
                        "mouse position": None,
                        "keyboard key": None,
-                       "Add money": None
+                       "Add money": None,
+                       "die":False
                        }
         # update event
         for event in pygame.event.get():
@@ -51,6 +53,9 @@ class GameControl:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 self.events["mouse position"] = [x, y]
+        
+        if self.model.hp<=0:
+            self.events["die"]=True
 
     def update_view(self):
         # render background
