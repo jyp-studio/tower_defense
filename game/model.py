@@ -76,6 +76,8 @@ class GameModel:
             return "kill all"
         if events["Add towers"] is not None:
             return "add towers"
+        if events["pause_esc"] is not None:
+            return "pause"
         # mouse event
         if events["mouse position"] is not None:
             x, y = events["mouse position"]

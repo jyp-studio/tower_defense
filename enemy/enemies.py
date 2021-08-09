@@ -8,22 +8,24 @@ pygame.init()
 GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
 ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
+DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (60, 60))
 
 
 class Enemy:
-    def __init__(self, image):
+    def __init__(self, image, stride: int, health: int, is_dead: bool):
         self.name = ""
         self.path = PATH
         self.path_index = 0
         self.move_count = 0
-        self.stride = 5
+        self.stride = stride
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = self.path[self.path_index]
         self.path_index = 0
         self.move_count = 0
-        self.health = 100
-        self.max_health = 100
+        self.health = health
+        self.max_health = health
+        self.is_dead = is_dead
 
     def move(self):
         x1, y1 = self.path[self.path_index]
@@ -47,27 +49,18 @@ class Enemy:
 
     @classmethod
     def goblin_enemy(cls):
-        goblin_enemy = cls(GOBLIN_IMAGE)
+        goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, True)
         goblin_enemy.name = "goblin"
-        goblin_enemy.stride = 10
-        goblin_enemy.health = 5
-        goblin_enemy.max_health = 80
 
     @classmethod
     def orc_enemy(cls):
-        orc_enemy = cls(ORC_IMAGE)
+        orc_enemy = cls(ORC_IMAGE, 3, 200, True)
         orc_enemy.name = "orc"
-        orc_enemy.stride = 3
-        orc_enemy.health = 1500
-        orc_enemy.max_health = 1500
 
     @classmethod
     def immortal_enemy(cls):
-        immortal_enemy = cls(IMMORTAL_IMAGE)
+        immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, False)
         immortal_enemy.name = "immortal"
-        immortal_enemy.stride = 1
-        immortal_enemy.health = 5000000000000
-        immortal_enemy.max_health = 5000000000000
 
 
 class EnemyGroup:
@@ -79,13 +72,18 @@ class EnemyGroup:
         self.wave_counter = 0
 
     def advance(self, model):
-        """Bonus.2"""
         # use model.hp and model.money to access the hp and money information
         self.campaign()
         for en in self.__expedition:
             en.move()
             if en.health <= 0:
-                self.retreat(en)
+                if en.is_dead:
+                    self.retreat(en)
+                else:
+                    en.is_dead = True
+                    en.health = 200
+                    en.stride = 10
+                    en.image = DEAD_IMMORTAL_IMAGE
                 model.money += 15
             # delete the object when it reach the base
             if BASE.collidepoint(en.rect.centerx, en.rect.centery):
@@ -104,13 +102,13 @@ class EnemyGroup:
         """Generate the enemies for next wave"""
         if self.is_empty():
             if self.wave_counter % 3 == 0:
-                self.__reserved_members = [Enemy(GOBLIN_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy(GOBLIN_IMAGE, 10, 50, True) for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 3 == 1:
-                self.__reserved_members = [Enemy(ORC_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy(ORC_IMAGE, 3, 200, True) for _ in range(num)]
                 self.wave_counter += 1
             else:
-                self.__reserved_members = [Enemy(IMMORTAL_IMAGE) for _ in range(num)]
+                self.__reserved_members = [Enemy(IMMORTAL_IMAGE, 1, 500, False) for _ in range(num)]
                 self.wave_counter = 0
 
     def get(self):

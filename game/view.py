@@ -4,13 +4,9 @@ import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller
 from color_settings import *
 
-start_time = time.time()
-
-
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.game_time = int(time.time() - start_time)
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
         self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
 
@@ -138,11 +134,5 @@ class GameView:
         self.win.blit(text, (220, 10))
         text = self.font2.render(f"{h}:{min}:{sec}", True, WHITE)
         self.win.blit(text, (220, 40))
-
-    def draw_game_time(self):
-        minute = self.game_time // 60
-        second = str(self.game_time % 60).zfill(2)
-        time_text = self.font.render(f"{minute}:{second}", True, WHITE)
-        self.win.blit(time_text, (700, 15))
 
 
