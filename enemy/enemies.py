@@ -1,7 +1,7 @@
 import pygame
 import math
 import os
-from settings import PATH1 as PATH, BASE
+from settings import PATH, BASE
 from color_settings import *
 
 pygame.init()
