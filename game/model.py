@@ -42,7 +42,7 @@ class GameModel:
         self.money = 500000
         self.max_hp = 10
         self.hp = self.max_hp
-        self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.flac"))
+        self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.mp3"))
 
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
@@ -74,21 +74,22 @@ class GameModel:
         # if the item is clicked, select the item
         for tw in self.__towers:
             if tw.clicked(mouse_x, mouse_y):
+                self.sound.play()
                 self.selected_tower = tw
                 self.selected_plot = None
-                return
 
         for pt in self.__plots:
             if pt.clicked(mouse_x, mouse_y):
+                self.sound.play()
                 self.selected_tower = None
                 self.selected_plot = pt
-                return
 
         # if the button is clicked, get the button response.
         # and keep selecting the tower/plot.
         if self.__menu is not None:
             for btn in self.__menu.buttons:
                 if btn.clicked(mouse_x, mouse_y):
+                    self.sound.play()
                     self.selected_button = btn
             if self.selected_button is None:
                 self.selected_tower = None

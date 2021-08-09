@@ -192,6 +192,7 @@ class MinusMapIndex:
     def update(self, user_request: str, model):
         """minusMapIndex"""
         if user_request == "minusMapIndex":
+            model.sound.play()
             singleton_map_controller.map_index-=1
             model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
@@ -202,6 +203,7 @@ class AddMapIndex:
     def update(self, user_request: str, model):
         """AddMapIndex"""
         if user_request == "addMapIndex":
+            model.sound.play()
             singleton_map_controller.map_index+=1
             model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
@@ -212,5 +214,6 @@ class GoStartMenu:
     def update(self, user_request: str, model):
         """Change var game_status["go_start_menu"] in settings.py"""
         if user_request == "goStartMenu":
+            model.sound.play()
             game_status["go_start_menu"] = True
 

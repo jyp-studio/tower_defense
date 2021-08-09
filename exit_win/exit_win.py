@@ -1,6 +1,6 @@
 import pygame
 import os
-from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status
+from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller
 
 class ExitWin:
     def __init__(self,win):
@@ -13,6 +13,10 @@ class ExitWin:
 
         self.buttons = [self.yes_btn,
                         self.no_btn]
+
+        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound.set_volume(singleton_vol_controller.sound_volume)
+
     def draw(self):
         self.bg_win.blit(self.menu_img, (380,210))
 
@@ -34,13 +38,16 @@ class ExitWin:
             for event in pygame.event.get():
                 # quit
                 if event.type == pygame.QUIT:
+                    self.sound.play()
                     game_status["run"] = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if self.yes_btn.collidepoint(x, y):
+                        self.sound.play()
                         game_status["run"]=False
                         is_menu_exit=True
                     if self.no_btn.collidepoint(x, y):
+                        self.sound.play()
                         game_status["run"]=True
                         is_menu_exit=True
             pygame.display.update()

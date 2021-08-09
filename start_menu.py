@@ -30,7 +30,7 @@ class StartMenu:
         self.opt_btn_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "options.png")), (338,100))
 
         # music and sound
-        self.sound = pygame.mixer.Sound("./sound/sound.flac")
+        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
 
     def play_music(self):
         pygame.mixer.music.load("./sound/menu.mp3")
@@ -40,7 +40,7 @@ class StartMenu:
 
     def menu_run(self):
         clock = pygame.time.Clock()
-        pygame.display.set_caption("Covid-19 Defense Game")
+        pygame.display.set_caption("Arrivederci")
         self.play_music()
         while game_status["run"] :
             game_status["go_start_menu"]= False
@@ -64,11 +64,14 @@ class StartMenu:
                         singleton_map_controller.change_map()
 
                     if self.mute_btn.clicked(x, y):
+                        self.sound.play()
                         pygame.mixer.music.pause()
                     if self.sound_btn.clicked(x, y):
+                        self.sound.play()
                         pygame.mixer.music.unpause()
 
                     if self.opt_btn.clicked(x, y):
+                        self.sound.play()
                         opt_menu=OptMenu()
                         opt_menu.run()
                         self.sound.set_volume(singleton_vol_controller.sound_volume)

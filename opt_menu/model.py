@@ -9,7 +9,7 @@ class OptMenuModel:
         self.back_game=False
         self.back_start_menu=False
 
-        self.sound = pygame.mixer.Sound("./sound/sound.flac")
+        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
         self.minus_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "minus.png")), (50, 50))
@@ -48,9 +48,6 @@ class OptMenuModel:
         self.minusMapIndex = MinusMapIndex(self.subject)
         self.addMapIndex = AddMapIndex(self.subject)
         self.goStartMenu = GoStartMenu(self.subject)
-
-        self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.flac"))
-        self.sound.set_volume(singleton_vol_controller.sound_volume)
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
