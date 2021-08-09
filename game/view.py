@@ -5,17 +5,14 @@ from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_m
 from color_settings import *
 
 
-
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 20)
         self.font2 = pygame.font.SysFont("comicsans", 30)
 
-
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
-
 
     def draw_enemies(self, enemies):
         for en in enemies.get():
@@ -39,15 +36,14 @@ class GameView:
             # create a special surface that is able to render semi-transparent image
             surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
             transparency = 120
-            pygame.draw.circle(surface, (255, 0, 0, transparency), tw.rect.center, tw.range)
-
+            x, y = tw.rect.center
+            if selected_tower.name == "Moon Tower":
+                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 21, y), tw.range)
+            elif selected_tower.name == "Obelisk Tower":
+                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 3, y + 40), tw.range)
+            else:
+                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 19, y), tw.range)
             self.win.blit(surface, (0, 0))
-
-    def draw_moving_tower(self, selected_tower):
-        if selected_tower is not None:
-            tw = selected_tower
-            tw.rect.center = pygame.mouse.get_pos()
-            self.win.blit(tw.image, tw.rect)
 
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)
@@ -66,7 +62,10 @@ class GameView:
             intro = f"{selected_tower.intro}"
             intro1 = f"{selected_tower.intro1}"
             intro2 = f"{selected_tower.intro2}"
-            level = f"Level:  {selected_tower.level}"
+            if selected_tower.level == 6:
+                level = f"Level:  Max"
+            else:
+                level = f"Level:  {selected_tower.level}"
             range = f"Attack Range:  {selected_tower.range}"
             damage = f"Damage:  {selected_tower.damage}"
             cd = f"Cool Down Time:  {selected_tower.cd_max_count}"

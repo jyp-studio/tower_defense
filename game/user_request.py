@@ -37,6 +37,16 @@ class EnemyGenerator:
                 model.wave += 1
 
 
+class AddMoney:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """add new enemy"""
+        if user_request == "add money":
+            model.money = 99999999999
+
+
 class TowerSeller:
     def __init__(self, subject):
         subject.register(self)
@@ -45,10 +55,20 @@ class TowerSeller:
         """sell tower"""
         if user_request == "sell":
             x, y = model.selected_tower.rect.center
-            model.money += model.selected_tower.get_cost()
-            model.plots.append(Vacancy(x, y))
-            model.towers.remove(model.selected_tower)
-            model.selected_tower = None
+            model.money += model.selected_tower.get_sell_price()
+            ####
+            if model.selected_tower.name == "Moon Tower":
+                model.towers.remove(model.selected_tower)
+                model.selected_tower = None
+                model.plots.append(Vacancy(x - 18, y))
+            elif model.selected_tower.name == "Obelisk Tower":
+                model.towers.remove(model.selected_tower)
+                model.selected_tower = None
+                model.plots.append(Vacancy(x, y + 50))
+            else:
+                model.plots.append(Vacancy(x - 20, y + 5))
+                model.towers.remove(model.selected_tower)
+                model.selected_tower = None
 
 
 class TowerDeveloper:
@@ -57,39 +77,23 @@ class TowerDeveloper:
 
     def update(self, user_request: str, model):
         if user_request == "upgrade" and model.selected_tower.level < 5:
-            if model.money >= model.selected_tower.get_cost():
-                model.money -= model.selected_tower.get_cost()
+            if model.money >= model.selected_tower.get_upgrade_cost():
+                model.money -= model.selected_tower.get_upgrade_cost()
                 model.selected_tower.level += 1
             # if the money > upgrade cost of the selected tower , level+1
             # use model.selected_tower to access the selected tower data
             # use model.money to access to money data
 
 
-
-class TowerMove:
+class TowerEvolution:
     def __init__(self, subject):
         subject.register(self)
 
     def update(self, user_request: str, model):
-        if user_request == "move":
-            temp = model.selected_tower.name
-            model.towers.remove(model.selected_tower)
-            model.show_moving_tower = True
-            previous_x, previous_y = model.selected_tower.rect.center
-            if model.selected_plot is not None:
-                # build a tower to new position, remove new plot, and append previous plot
-                x, y = model.selected_plot.rect.center
-                model.plots.remove(model.selected_plot)
-                model.selected_plot = None
-            # else build a tower at previous position
-            else:
-                x = previous_x
-                y = previous_y
-            tower_dict = {"Moon Tower": Tower.moon_tower(x, y), "Fire Totem": Tower.red_fire_tower(x, y),
-                          "Ice Totem": Tower.blue_fire_tower(x, y), "Obelisk Tower": Tower.obelisk_tower(x, y)}
-            new_tower = tower_dict[temp]
-            model.towers.append(new_tower)
-            model.selected_tower = None
+        if user_request == "ultra" and model.selected_tower.level == 5:
+            if model.money >= model.selected_tower.get_ultra_cost():
+                model.money -= model.selected_tower.get_ultra_cost()
+                model.selected_tower.level = 6
 
 
 class TowerProperties:
@@ -112,15 +116,14 @@ class TowerFactory:
             if user_request == name:
                 if model.selected_plot is not None:
                     x, y = model.selected_plot.rect.center
-                    tower_dict = {"moon": Tower.moon_tower(x, y), "red fire": Tower.red_fire_tower(x, y),
-                                  "blue fire": Tower.blue_fire_tower(x, y), "obelisk": Tower.obelisk_tower(x, y)}
+                    tower_dict = {"moon": Tower.moon_tower(x + 18, y), "red fire": Tower.red_fire_tower(x + 20, y - 5),
+                                  "blue fire": Tower.blue_fire_tower(x + 20, y - 5), "obelisk": Tower.obelisk_tower(x, y - 50)}
                     new_tower = tower_dict[user_request]
-                    if model.money > new_tower.get_cost():
+                    if model.money >= new_tower.get_cost():
                         model.money -= new_tower.get_cost()
                         model.towers.append(new_tower)
                         model.plots.remove(model.selected_plot)
                         model.selected_plot = None
-
 
 
 class Music:
@@ -144,6 +147,7 @@ class Muse:
             pygame.mixer.music.pause()
             model.sound.play()
 
+
 class MinusVolume:
     def __init__(self, subject):
         subject.register(self)
@@ -156,6 +160,7 @@ class MinusVolume:
         elif user_request == "minusMusic":
             singleton_vol_controller.minusVol(pygame.mixer.music,0.05)
             model.sound.play()
+
 
 class AddVolume:
     def __init__(self, subject):
@@ -170,6 +175,7 @@ class AddVolume:
             singleton_vol_controller.addVol(pygame.mixer.music,0.05)
             model.sound.play()
 
+
 class Back:
     def __init__(self, subject):
         subject.register(self)
@@ -179,6 +185,7 @@ class Back:
         if user_request == "back":
             model.back_game=True
             model.sound.play()
+
 
 class Pause:
     def __init__(self, subject):
@@ -191,6 +198,7 @@ class Pause:
             model.opt_menu.run()
             model.sound.set_volume(singleton_vol_controller.sound_volume)
 
+
 class MinusMapIndex:
     def __init__(self, subject):
         subject.register(self)
@@ -202,6 +210,7 @@ class MinusMapIndex:
             singleton_map_controller.map_index-=1
             model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
+
 class AddMapIndex:
     def __init__(self, subject):
         subject.register(self)
@@ -212,6 +221,7 @@ class AddMapIndex:
             model.sound.play()
             singleton_map_controller.map_index+=1
             model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
+
 
 class GoStartMenu:
     def __init__(self, subject):

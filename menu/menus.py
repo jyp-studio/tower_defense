@@ -10,7 +10,7 @@ UPGRADE_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("imag
 UPGRADE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "upgrade_button.png")), (110, 22))
 SELL_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "sell_button.png")), (110, 22))
 PROPERTIES_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "properties_button.png")), (110, 22))
-MOVE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "move_button.png")), (110, 22))
+ULTRA_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "ultra_button.png")), (132, 45))
 # buttons in build menu
 MOON_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_build.png")), (50, 50))
 RED_FIRE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_build.png")), (50, 50))
@@ -44,7 +44,7 @@ class Menu:
         self.image = UPGRADE_MENU_IMAGE
 
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.center = (x - 18, y + 10)
         self._buttons = []
 
     @property
@@ -58,13 +58,13 @@ class UpgradeMenu(Menu):
         self._buttons = [Button(PROPERTIES_BTN_IMAGE, "properties", self.rect.centerx, self.rect.centery - 50),
                          Button(UPGRADE_BTN_IMAGE, "upgrade", self.rect.centerx, self.rect.centery - 17),
                          Button(SELL_BTN_IMAGE, "sell", self.rect.centerx, self.rect.centery + 20),
-                         Button(MOVE_BTN_IMAGE, "move", self.rect.centerx, self.rect.centery + 55)
+                         Button(ULTRA_BTN_IMAGE, "ultra", self.rect.centerx + 2, self.rect.centery + 54)
                          ]
 
 
 class BuildMenu(Menu):
     def __init__(self, x, y):
-        super().__init__(x - 10, y - 10)
+        super().__init__(x + 7, y - 17)
         self.image = BUILD_MENU_IMAGE
         self._buttons = [Button(MOON_BTN_IMAGE, "moon", self.rect.centerx + 11, self.rect.centery - 61),
                          Button(RED_FIRE_BTN_IMAGE, "red fire", self.rect.centerx + 10, self.rect.centery + 80),

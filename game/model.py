@@ -3,7 +3,6 @@ import os
 from tower.towers import Tower, Vacancy
 from enemy.enemies import EnemyGroup
 from menu.menus import UpgradeMenu, BuildMenu, MainMenu
-# from game.user_request import RequestSubject, TowerFactory, TowerSeller, TowerDeveloper, EnemyGenerator, Muse, Music,Pause
 from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
 from game_UI.game_UI import GameUI
 from opt_menu.opt_menu import OptMenu
@@ -15,13 +14,13 @@ class GameModel:
     def __init__(self):
         # data
         self.bg_image = pygame.transform.scale(singleton_map_controller.curMap, (WIN_WIDTH, WIN_HEIGHT))
-        self.__towers = [Tower.moon_tower(180, 300), Tower.obelisk_tower(500, 300),
-                         Tower.blue_fire_tower(300, 400), Tower.red_fire_tower(700, 350)]
+        self.__towers = []
 
         self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()
-        self.__plots = [Vacancy(50, 350), Vacancy(350, 280)]
+        self.__plots = [Vacancy(150, 250), Vacancy(290, 420), Vacancy(400, 310),
+                        Vacancy(450, 500), Vacancy(650, 420), Vacancy(900, 370)]
 
         self.show_tower_info = False
 
@@ -35,30 +34,30 @@ class GameModel:
         self.subject = RequestSubject(self)
         self.seller = TowerSeller(self.subject)
         self.developer = TowerDeveloper(self.subject)
+        self.evolution = TowerEvolution(self.subject)
+        self.add_money = AddMoney(self.subject)
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
 
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
 
-        self.pause =Pause(self.subject)
-
+        self.pause = Pause(self.subject)
 
         self.properties = TowerProperties(self.subject)
-        self.move = TowerMove(self.subject)
         self.proper = Music(self.subject)
 
         #
         self.wave = 0
-        self.money = 500
+        self.money = 1000
         self.max_hp = 10
         self.hp = self.max_hp
         self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.mp3"))
 
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
-        self.UI=GameUI()
-        self.opt_menu=OptMenu()
+        self.UI = GameUI()
+        self.opt_menu = OptMenu()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -71,6 +70,8 @@ class GameModel:
         # key event
         if events["keyboard key"] is not None:
             return "start new wave"
+        if events["Add money"] is not None:
+            return "add money"
         # mouse event
         if events["mouse position"] is not None:
             x, y = events["mouse position"]
