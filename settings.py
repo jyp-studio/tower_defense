@@ -23,13 +23,13 @@ singleton_vol_controller=VolController()
 singleton_map_controller=MapController(WIN_WIDTH, WIN_HEIGHT)
 
 # global var
-game_status={
+game_status:dict={
     "run":True,
     "go_start_menu":False,
     "restart":False
 }
 
-potion_price={
+potion_price:dict={
     "blood_potion":2000,
     "aoe_potion":2000
 }

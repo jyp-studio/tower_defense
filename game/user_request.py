@@ -1,3 +1,4 @@
+from __future__ import annotations
 import pygame
 import os
 import random
@@ -20,13 +21,13 @@ class RequestSubject:
     def register(self, observer):
         self.__observers.append(observer)
 
-    def notify(self, user_request):
+    def notify(self, user_request:str):
         for o in self.__observers:
             o.update(user_request, self.model)
 
 
 class EnemyGenerator:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -38,7 +39,7 @@ class EnemyGenerator:
 
 
 class AddMoney:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -48,7 +49,7 @@ class AddMoney:
 
 
 class KillAll:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -58,7 +59,7 @@ class KillAll:
 
 
 class AddTowers:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -86,7 +87,7 @@ class AddTowers:
 
 
 class TowerSeller:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -106,7 +107,7 @@ class TowerSeller:
 
 
 class TowerDeveloper:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -120,7 +121,7 @@ class TowerDeveloper:
 
 
 class TowerEvolution:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -131,7 +132,7 @@ class TowerEvolution:
 
 
 class TowerProperties:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -140,7 +141,7 @@ class TowerProperties:
 
 
 class TowerFactory:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
         self.tower_name = ["moon", "red fire", "blue fire", "obelisk"]
 
@@ -161,7 +162,7 @@ class TowerFactory:
 
 
 class Music:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -172,7 +173,7 @@ class Music:
 
 
 class Muse:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -183,7 +184,7 @@ class Muse:
 
 
 class MinusVolume:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -197,7 +198,7 @@ class MinusVolume:
 
 
 class AddVolume:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -211,7 +212,7 @@ class AddVolume:
 
 
 class Back:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -222,7 +223,7 @@ class Back:
 
 
 class Pause:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -234,7 +235,7 @@ class Pause:
 
 
 class MinusMapIndex:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -246,7 +247,7 @@ class MinusMapIndex:
 
 
 class AddMapIndex:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -258,7 +259,7 @@ class AddMapIndex:
 
 
 class GoStartMenu:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -268,7 +269,7 @@ class GoStartMenu:
             game_status["go_start_menu"] = True
 
 class Die:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -277,7 +278,7 @@ class Die:
             model.GameOverMenu.run()
 
 class Potionfunction:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
        subject.register(self)
     
     def update(self, user_request: str, model):

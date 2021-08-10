@@ -66,7 +66,7 @@ PATH5 = [(136, 448), (148, 448), (163, 449), (177, 449), (191, 449), (202, 449),
         (740, 249), (755, 249), (769, 250), (783, 250), (799, 250), (811, 251), (825, 251), (838, 250), (851, 250), (862, 250),
         (873, 249), (885, 245), (896, 241), (912, 238), (925, 237)]
 
-PATH_DICT={
+PATH_DICT:dict={
     1:{
         1:PATH1_1,
         2:PATH1_2
@@ -91,7 +91,7 @@ BASE2=pygame.Rect(850, 100, 160,170)
 BASE3 = pygame.Rect(855, 5, 160, 170)
 BASE4 = pygame.Rect(890, 106, 160, 170)
 BASE5 = pygame.Rect(770, 95, 160, 170)
-BASE_RECT_DICT={
+BASE_RECT_DICT:dict={
     1:BASE,
     2:BASE2,
     3:BASE3,
@@ -105,7 +105,7 @@ class VolController:
     sound_volume = 0.2
 
     @classmethod
-    def minusVol(cls,voice,vol):
+    def minusVol(cls,voice:pygame.mixer.Sound or pygame.mixer.music,vol:float):
         res=voice.get_volume()-vol
         if(0.0<=res<=1.0):
             voice.set_volume(res)
@@ -120,7 +120,7 @@ class VolController:
             cls.music_volume=voice.get_volume()
 
     @classmethod
-    def addVol(cls,voice,vol):
+    def addVol(cls,voice:pygame.mixer.Sound or pygame.mixer.music,vol:float):
         res=voice.get_volume()+vol
         if(0.0<=res<=1.0):
             voice.set_volume(res)
@@ -136,7 +136,7 @@ class VolController:
     
 class MapController:
     __max_map_index=5
-    def __init__(self,WIN_WIDTH, WIN_HEIGHT):
+    def __init__(self,WIN_WIDTH:int, WIN_HEIGHT:int):
         self.__WIN_WIDTH=WIN_WIDTH
         self.__WIN_HEIGHT=WIN_HEIGHT
 
@@ -158,22 +158,22 @@ class MapController:
         self.__curPathPage=PATH_DICT[self.__map_index]
         self.__curBaseRect=BASE_RECT_DICT[self.__map_index]
     @property
-    def map_index(self):
+    def map_index(self)->int:
         return self.__map_index
     
     @map_index.setter
-    def map_index(self, value):
+    def map_index(self, value:int):
         self.__map_index=value if 1<=value<=self.__max_map_index else self.__map_index
         # self.curMap= pygame.image.load(os.path.join("images", "Map"+self.__map_index+".png"))
 
     @property
-    def curMap(self):
+    def curMap(self)->pygame.Surface:
         return self.__curMap
     
     @property
-    def curBaseRect(self):
+    def curBaseRect(self)->pygame.Rect:
         return self.__curBaseRect
     
     @property
-    def curPathPage(self):
+    def curPathPage(self)->dict:
         return self.__curPathPage

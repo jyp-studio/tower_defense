@@ -1,3 +1,8 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from game.model import GameModel
+    from game.view import GameView
 import pygame
 from settings import game_status
 from exit_win.exit_win import ExitWin
@@ -5,7 +10,7 @@ from exit_win.exit_win import ExitWin
 
 # controller
 class GameControl:
-    def __init__(self, game_model, game_view):
+    def __init__(self, game_model:GameModel, game_view:GameView):
         self.model = game_model
         self.view = game_view
         self.events = {"game quit": False,
@@ -93,7 +98,7 @@ class GameControl:
             self.view.draw_properties(self.model.selected_tower)
 
     @property
-    def quit_game(self):
+    def quit_game(self)->bool:
         return self.events["game quit"]
 
 

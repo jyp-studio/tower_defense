@@ -1,3 +1,7 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from menu.menus import Menu
 import pygame
 import os
 from tower.towers import Tower, Vacancy
@@ -146,31 +150,31 @@ class GameModel:
         self.__enemies.advance(self)
 
     @property
-    def enemies(self):
+    def enemies(self)->list:
         return self.__enemies
 
     @property
-    def towers(self):
+    def towers(self)->list:
         return self.__towers
 
     @property
-    def menu(self):
+    def menu(self)->Menu:
         return self.__menu
 
     @menu.setter
-    def menu(self, new_menu):
+    def menu(self, new_menu:Menu):
         self.__menu = new_menu
 
     @property
-    def plots(self):
+    def plots(self)->list:
         return self.__plots
 
     @property
-    def main_menu(self):
+    def main_menu(self)->MainMenu:
         return self.__main_menu
     
     @main_menu.setter
-    def main_menu(self, new_menu):
+    def main_menu(self, new_menu:Menu):
         self.__main_menu = new_menu
 
 

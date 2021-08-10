@@ -1,3 +1,7 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from game.model import GameModel
 import pygame
 import math
 import random
@@ -17,7 +21,7 @@ GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("ima
 
 
 class Enemy:
-    def __init__(self, image, stride: int, health: int, is_dead: bool):
+    def __init__(self, image:pygame.Surface, stride: int, health: int, is_dead: int):
         self.name = ""
 
         dir=random.randint(1,len(singleton_map_controller.curPathPage))
@@ -56,7 +60,7 @@ class Enemy:
             self.rect.center = self.path[self.path_index]
 
     @classmethod
-    def goblin_enemy(cls):
+    def goblin_enemy(cls)->Enemy:
         goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, True)
         goblin_enemy.name = "goblin"
         goblin_enemy.stride = 10
@@ -66,7 +70,7 @@ class Enemy:
 
 
     @classmethod
-    def orc_enemy(cls):
+    def orc_enemy(cls)->Enemy:
         orc_enemy = cls(ORC_IMAGE, 3, 200, True)
         orc_enemy.name = "orc"
         orc_enemy.stride = 3
@@ -76,7 +80,7 @@ class Enemy:
 
 
     @classmethod
-    def immortal_enemy(cls):
+    def immortal_enemy(cls)->Enemy:
         immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, False)
         immortal_enemy.name = "immortal"
         immortal_enemy.stride = 1
@@ -85,7 +89,22 @@ class Enemy:
         return immortal_enemy
 
 
+    @classmethod
+    def mummy_enemy(cls):
+        mummy_enemy = cls(MUMMY_IMAGE, 2, 1000, 0)
+        mummy_enemy.name = "mummy"
 
+    @classmethod
+    def dark_angel_enemy(cls):
+        dark_angel_enemy = cls(DARK_ANGEL_IMAGE, 4, 1000, 2)
+        dark_angel_enemy.name = "dark angel"
+
+    @classmethod
+    def green_monster_enemy(cls):
+        green_monster_enemy = cls(DARK_ANGEL_IMAGE, 1, 6000, 0)
+        green_monster_enemy.name = "green monster"
+
+      
 class EnemyGroup:
     def __init__(self):
         self.campaign_count = 0
@@ -94,19 +113,27 @@ class EnemyGroup:
         self.__expedition = []
         self.wave_counter = 0
 
-    def advance(self, model):
+    def advance(self, model:GameModel):
         # use model.hp and model.money to access the hp and money information
         self.campaign()
         for en in self.__expedition:
             en.move()
             if en.health <= 0:
-                if en.is_dead:
+                if en.is_dead==0:
                     self.retreat(en)
                 else:
-                    en.is_dead = True
-                    en.health = 200
-                    en.stride = 10
-                    en.image = DEAD_IMMORTAL_IMAGE
+                    if en.is_dead == 1:
+                        en.is_dead = 0
+                        en.health = 200
+                        en.max_health = 200
+                        en.stride = 10
+                        en.image = DEAD_IMMORTAL_IMAGE
+                    if en.is_dead == 2:
+                        en.is_dead = 0
+                        en.health = 2000
+                        en.max_health = 200
+                        en.stride = 1
+                        en.image = DEAD_DARK_ANGEL_IMAGE
                 model.money += 15
             # delete the object when it reach the base
             if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
@@ -121,7 +148,7 @@ class EnemyGroup:
         else:
             self.campaign_count += 1
 
-    def add(self, num):
+    def add(self, num:int):
         """Generate the enemies for next wave"""
         if self.is_empty():
             if self.wave_counter % 6 == 0:
@@ -142,15 +169,15 @@ class EnemyGroup:
             else:
                 self.__reserved_members = [Enemy(GREEN_MONSTER_IMAGE, 1, 6000, 0) for _ in range(num)]
 
-    def get(self):
+    def get(self)->list:
         """Get the enemy list"""
         return self.__expedition
 
-    def is_empty(self):
+    def is_empty(self)->bool:
         """Return whether the enemy is empty (so that we can move on to next wave)"""
         return False if self.__reserved_members or self.__expedition else True
 
-    def retreat(self, enemy):
+    def retreat(self, enemy:Enemy):
         """Remove the enemy from the expedition"""
         self.__expedition.remove(enemy)
 
