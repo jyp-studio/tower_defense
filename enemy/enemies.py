@@ -113,7 +113,7 @@ class GreenMonsterEnemy(Enemy):
         self.name = "green monster"
         self.image = GREEN_MONSTER_IMAGE
         self.stride = 0.5
-        self.health = 600000
+        self.health = 500000
         self.max_health = 500000
         self.is_dead = 0
 
