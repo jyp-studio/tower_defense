@@ -1,7 +1,13 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from enemy.enemies import EnemyGroup
+    from tower.towers import Tower
+    from game_UI.game_UI import GameUI
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price
 from color_settings import *
 
 class GameView:
@@ -9,11 +15,12 @@ class GameView:
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
         self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
+        self.font3= pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 15)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
 
-    def draw_enemies(self, enemies):
+    def draw_enemies(self, enemies:EnemyGroup):
         for en in enemies.get():
             self.win.blit(en.image, en.rect)
             # draw health bar
@@ -23,12 +30,12 @@ class GameView:
             pygame.draw.rect(self.win, RED, [en.rect.x, en.rect.y - 10, max_bar_width, bar_height])
             pygame.draw.rect(self.win, GREEN, [en.rect.x, en.rect.y - 10, bar_width, bar_height])
 
-    def draw_towers(self, towers):
+    def draw_towers(self, towers:list):
         # draw tower
         for tw in towers:
             self.win.blit(tw.image, tw.rect)
 
-    def draw_range(self, selected_tower):
+    def draw_range(self, selected_tower:Tower):
         # draw tower range
         if selected_tower is not None:
             tw = selected_tower
@@ -49,7 +56,7 @@ class GameView:
         for btn in menu.buttons:
             self.win.blit(btn.image, btn.rect)
 
-    def draw_properties(self, selected_tower):
+    def draw_properties(self, selected_tower:Tower):
         if selected_tower is not None:
             surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
             transparency = 150
@@ -92,7 +99,7 @@ class GameView:
             sell_price_text = font1.render(sell_price, True, (255, 255, 255))
             self.win.blit(sell_price_text, (180, 170 + 280))
 
-    def draw_plots(self, plots):
+    def draw_plots(self, plots:list):
         for pt in plots:
             self.win.blit(pt.image, pt.rect)
 
@@ -101,12 +108,18 @@ class GameView:
         text = self.font2.render(f"$: {money}", True, (255, 255, 255))
         self.win.blit(text, (5, 40))
 
+    def draw_potionprice(self):
+        text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
+        self.win.blit(text,(40,210))
+        text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
+        self.win.blit(text,(40,270))
+
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
         text = self.font2.render(f"Wave: {wave}", True, (255, 255, 255))
         self.win.blit(text, (5, 10))
 
-    def draw_hp(self, lives):
+    def draw_hp(self, lives:int):
         # draw_lives
         hp_rect = HP_IMAGE.get_rect()
         for i in range(10):
@@ -114,10 +127,10 @@ class GameView:
         for i in range(lives):
             self.win.blit(HP_IMAGE, (WIN_WIDTH // 2 - (hp_rect.w + 5) * (2.5 - i % 5), hp_rect.h * (i // 5) + 8))
 
-    def draw_UI(self, UI):
+    def draw_UI(self, UI:GameUI):
         self.win.blit(UI.frame,(0,0))
     
-    def draw_btn(self,buttons):
+    def draw_btn(self,buttons:list):
         for btn in buttons:
             self.win.blit(btn.image, btn.rect)
             # pygame.draw.rect(self.win, (128, 128, 128),btn.rect)
@@ -136,3 +149,9 @@ class GameView:
         self.win.blit(text, (220, 40))
 
 
+    def draw_base(self):
+        baseRect=singleton_map_controller.curBaseRect
+        self.win.blit(pygame.transform.scale(pygame.image.load("images/base.png"), (baseRect.width, baseRect.height)),baseRect.topleft)
+        surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
+        pygame.draw.rect(surface,[255,255,255,128],baseRect)
+        self.win.blit(surface,(0,0))

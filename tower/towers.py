@@ -1,3 +1,4 @@
+from __future__ import annotations
 from tower.attack_strategy import *
 import os
 import pygame
@@ -53,7 +54,7 @@ PLOT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "va
 
 
 class Vacancy:
-    def __init__(self, x, y):
+    def __init__(self, x:int, y: int):
         self.image = PLOT_IMAGE
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -70,7 +71,7 @@ class Vacancy:
 # tower (product)
 class Tower:
     """ super class of towers """
-    def __init__(self, x: int, y: int, attack_strategy):
+    def __init__(self, x: int, y: int, attack_strategy:AttackStrategy):
         """
         self.sprites: list for animation
         self.current_sprites: counter for each image
@@ -103,7 +104,7 @@ class Tower:
 
     @classmethod
     # moon_tower attacks all the enemies
-    def moon_tower(cls, x, y):
+    def moon_tower(cls, x: int, y: int)->Tower:
         moon_tower = cls(x, y, SingleSlowAttack())
         moon_tower.name = "Moon Tower"
         moon_tower.intro = "The ruby that absorbs the essence of the sun and the "
@@ -129,7 +130,7 @@ class Tower:
 
     @classmethod
     # red_fire_tower attacks and inflicts continuous damages on an enemy
-    def red_fire_tower(cls, x, y):
+    def red_fire_tower(cls, x: int, y: int)->Tower:
         red_fire_tower = cls(x, y, AOE())
         red_fire_tower.name = "Fire Totem"
         red_fire_tower.intro = "The shaman with white magic devoted his heart "
@@ -154,7 +155,7 @@ class Tower:
 
     @classmethod
     # blue_fire_tower attacks and slows down enemies
-    def blue_fire_tower(cls, x, y):
+    def blue_fire_tower(cls, x: int, y: int)->Tower:
         blue_fire_tower = cls(x, y, AOESlowAttack())
         blue_fire_tower.name = "Ice Totem"
         blue_fire_tower.intro = "Black magic wizards sacrifice hundreds of thousands of "
@@ -179,7 +180,7 @@ class Tower:
 
     @classmethod
     # obelisk_tower attacks an enemy far away
-    def obelisk_tower(cls, x, y):
+    def obelisk_tower(cls, x: int, y: int)->Tower:
         obelisk_tower = cls(x, y, Snipe())
         obelisk_tower.name = "Obelisk Tower"
         obelisk_tower.intro = "The obelisk from the underground of ancient Egypt "
@@ -226,24 +227,24 @@ class Tower:
         # You can add other ways of attack just by expanding the "attack_strategy.py"
         self.cd_count = self.attack_strategy.attack(enemy_group, self, self.cd_count)
 
-    def get_upgrade_cost(self):
+    def get_upgrade_cost(self) -> int:
         return self.value[self.level+1]
 
-    def get_ultra_cost(self):
+    def get_ultra_cost(self) -> int:
         return self.value[6]
 
-    def get_cost(self):
+    def get_cost(self) -> int:
         return self.value[self.level]
 
-    def get_sell_price(self):
-        return self.value[self.level] / 2
+    def get_sell_price(self) -> int:
+        return int(self.value[self.level] / 2)
 
     @property
-    def range(self):
+    def range(self) -> int:
         return self._range[self.level]
 
     @property
-    def damage(self):
+    def damage(self) -> int:
         return self._damage[self.level]
 
     def clicked(self, x: int, y: int) -> bool:

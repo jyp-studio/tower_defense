@@ -3,7 +3,7 @@ import os
 from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller
 
 class ExitWin:
-    def __init__(self,win):
+    def __init__(self,win:pygame.Surface):
         self.bg_win = win
         
         self.menu_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_menu.png")), (350,250))

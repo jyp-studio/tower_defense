@@ -1,3 +1,8 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from game.model import GameModel
+    from game.view import GameView
 import pygame
 from settings import game_status
 from exit_win.exit_win import ExitWin
@@ -5,13 +10,14 @@ from exit_win.exit_win import ExitWin
 
 # controller
 class GameControl:
-    def __init__(self, game_model, game_view):
+    def __init__(self, game_model:GameModel, game_view:GameView):
         self.model = game_model
         self.view = game_view
         self.events = {"game quit": False,
                        "mouse position": [0, 0],
                        "keyboard key": 0,
                        "Add money": 0,
+                       "die":False,
                        "Kill all": 0,
                        "Add towers": 0,
                        "pause_esc": 0,
@@ -37,6 +43,7 @@ class GameControl:
                        "mouse position": None,
                        "keyboard key": None,
                        "Add money": None,
+                       "die":False,
                        "Kill all": None,
                        "Add towers": None,
                        "pause_esc": None,
@@ -67,10 +74,14 @@ class GameControl:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 self.events["mouse position"] = [x, y]
+        
+        if self.model.hp<=0:
+            self.events["die"]=True
 
     def update_view(self):
         # render background
         self.view.draw_bg()
+        self.view.draw_base()
 
         self.view.draw_hp(self.model.hp)
         self.view.draw_enemies(self.model.enemies)
@@ -85,12 +96,13 @@ class GameControl:
         self.view.draw_btn(self.model.main_menu.buttons)
         self.view.draw_money(self.model.money)
         self.view.draw_wave(self.model.wave)
+        self.view.draw_potionprice()
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
 
     @property
-    def quit_game(self):
+    def quit_game(self)->bool:
         return self.events["game quit"]
 
 

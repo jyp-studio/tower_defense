@@ -1,9 +1,14 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from opt_menu.model import OptMenuModel
+    from opt_menu.view import OptMenuView
 import pygame
 from settings import game_status
 from exit_win.exit_win import ExitWin
 
 class OptMenuController:
-    def __init__(self, menu_model, menu_view):
+    def __init__(self, menu_model:OptMenuModel, menu_view:OptMenuView):
         self.model = menu_model
         self.view = menu_view
         self.events = {"game quit": False,
@@ -44,9 +49,9 @@ class OptMenuController:
         self.view.draw_map_preview(self.model.map_preview_img)
     
     @property
-    def quit_game(self):
+    def quit_game(self)->dict:
         return self.events["game quit"]
     
     @property
-    def back_game(self):
+    def back_game(self)->bool:
         return self.model.back_game

@@ -24,6 +24,9 @@ pause_button_image = pygame.transform.scale(pygame.image.load("images/pause.png"
 up_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 down_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 
+BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blood_potion.png")), (60,60))
+AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "aoe_potion.png")), (60,60))
+
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
         self.image = image
@@ -31,11 +34,11 @@ class Button:
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
-    def clicked(self, x, y):
+    def clicked(self, x:int, y:int)-> bool:
         return True if self.rect.collidepoint(x, y) else False
 
     @property
-    def response(self):
+    def response(self)->str:
         return self.name
 
 
@@ -48,12 +51,12 @@ class Menu:
         self._buttons = []
 
     @property
-    def buttons(self):
+    def buttons(self)->list:
         return self._buttons
 
 
 class UpgradeMenu(Menu):
-    def __init__(self, x, y):
+    def __init__(self, x:int, y:int):
         super().__init__(x, y)
         self._buttons = [Button(PROPERTIES_BTN_IMAGE, "properties", self.rect.centerx, self.rect.centery - 50),
                          Button(UPGRADE_BTN_IMAGE, "upgrade", self.rect.centerx, self.rect.centery - 17),
@@ -63,7 +66,7 @@ class UpgradeMenu(Menu):
 
 
 class BuildMenu(Menu):
-    def __init__(self, x, y):
+    def __init__(self, x:int, y:int):
         super().__init__(x + 7, y - 17)
         self.image = BUILD_MENU_IMAGE
         self._buttons = [Button(MOON_BTN_IMAGE, "moon", self.rect.centerx + 11, self.rect.centery - 61),
@@ -80,10 +83,12 @@ class MainMenu:
                          Button(pause_button_image, "pause", 980, 45),
                          Button(up_button_image, "potion_up",40,120),
                          Button(down_button_image, "potion_down",40,565),
+                         Button(BLOOD_POTION_IMAGE,'blood_potion',39,190),
+                         Button(AOE_POTION_IMAGE,'aoe_potion',39,250)
                          ]
 
     @property
-    def buttons(self):
+    def buttons(self)->list:
         return self._buttons
 
 

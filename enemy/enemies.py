@@ -1,7 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from game.model import GameModel
 import pygame
 import math
+import random
 import os
-from settings import PATH, BASE
+from settings import singleton_map_controller
 from color_settings import *
 
 pygame.init()
@@ -18,7 +23,8 @@ GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("ima
 class Enemy:
     def __init__(self):
         self.name = ""
-        self.path = PATH
+        dir = random.randint(1,len(singleton_map_controller.curPathPage))
+        self.path = singleton_map_controller.curPathPage[dir]
         self.path_index = 0
         self.move_count = 0
         self.stride = 3
@@ -107,11 +113,11 @@ class GreenMonsterEnemy(Enemy):
         self.name = "green monster"
         self.image = GREEN_MONSTER_IMAGE
         self.stride = 0.5
-        self.health = 60000000
-        self.max_health = 60000000
+        self.health = 600000
+        self.max_health = 500000
         self.is_dead = 0
 
-
+      
 class EnemyGroup:
     def __init__(self):
         self.campaign_count = 0
@@ -120,7 +126,7 @@ class EnemyGroup:
         self.__expedition = []
         self.wave_counter = 0
 
-    def advance(self, model):
+    def advance(self, model:GameModel):
         # use model.hp and model.money to access the hp and money information
         self.campaign()
         for en in self.__expedition:
@@ -128,6 +134,7 @@ class EnemyGroup:
             if en.health <= 0:
                 if en.is_dead == 0:
                     self.retreat(en)
+                    model.money += 15
                 else:
                     if en.is_dead == 1:
                         en.image = DEAD_IMMORTAL_IMAGE
@@ -141,9 +148,8 @@ class EnemyGroup:
                         en.max_health = 2000
                         en.stride = 0.5
                         en.is_dead = 0
-                model.money += 15
             # delete the object when it reach the base
-            if BASE.collidepoint(en.rect.centerx, en.rect.centery):
+            if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
                 model.hp -= 1
 
@@ -155,7 +161,7 @@ class EnemyGroup:
         else:
             self.campaign_count += 1
 
-    def add(self, num):
+    def add(self, num:int):
         """Generate the enemies for next wave"""
         if self.is_empty():
             if self.wave_counter % 6 == 0:
@@ -177,15 +183,15 @@ class EnemyGroup:
                 self.__reserved_members = [GreenMonsterEnemy() for _ in range(num)]
                 self.wave_counter = 0
 
-    def get(self):
+    def get(self) -> list:
         """Get the enemy list"""
         return self.__expedition
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """Return whether the enemy is empty (so that we can move on to next wave)"""
         return False if self.__reserved_members or self.__expedition else True
 
-    def retreat(self, enemy):
+    def retreat(self, enemy: Enemy):
         """Remove the enemy from the expedition"""
         self.__expedition.remove(enemy)
 

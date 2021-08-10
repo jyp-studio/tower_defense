@@ -11,7 +11,7 @@ class OptMenuView:
     def draw_bg(self):
         self.win.fill(BROWN)
     
-    def draw_btn(self,buttonList):
+    def draw_btn(self,buttonList:list):
         for btn in buttonList:
             self.win.blit(btn.image, btn.rect)
 
@@ -27,5 +27,5 @@ class OptMenuView:
         text = self.font.render(f"Music volume: {volume}%", True, (255, 255, 255))
         self.win.blit(text, (455,395))
 
-    def draw_map_preview(self, map_img):
+    def draw_map_preview(self, map_img:pygame.Surface):
         self.win.blit(map_img, (262,5))

@@ -1,9 +1,9 @@
+from __future__ import annotations
 import pygame
 import os
 import random
 from tower.towers import Tower, Vacancy
-from settings import singleton_vol_controller,singleton_map_controller,game_status
-
+from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 
 """This module is import in model.py"""
 
@@ -21,13 +21,13 @@ class RequestSubject:
     def register(self, observer):
         self.__observers.append(observer)
 
-    def notify(self, user_request):
+    def notify(self, user_request:str):
         for o in self.__observers:
             o.update(user_request, self.model)
 
 
 class EnemyGenerator:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -49,12 +49,12 @@ class HealthUp:
 
     def update(self, user_request: str, model):
         """add new enemy"""
-        if user_request == "health up":
+        if user_request == "health up" and model.hp < 10:
             model.hp += 1
 
 
 class AddMoney:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -64,7 +64,7 @@ class AddMoney:
 
 
 class KillAll:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -74,7 +74,7 @@ class KillAll:
 
 
 class AddTowers:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -102,7 +102,7 @@ class AddTowers:
 
 
 class TowerSeller:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -122,7 +122,7 @@ class TowerSeller:
 
 
 class TowerDeveloper:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -136,7 +136,7 @@ class TowerDeveloper:
 
 
 class TowerEvolution:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -147,7 +147,7 @@ class TowerEvolution:
 
 
 class TowerProperties:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -156,7 +156,7 @@ class TowerProperties:
 
 
 class TowerFactory:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
         self.tower_name = ["moon", "red fire", "blue fire", "obelisk"]
 
@@ -177,7 +177,7 @@ class TowerFactory:
 
 
 class Music:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -188,7 +188,7 @@ class Music:
 
 
 class Muse:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -199,7 +199,7 @@ class Muse:
 
 
 class MinusVolume:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -213,7 +213,7 @@ class MinusVolume:
 
 
 class AddVolume:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -227,7 +227,7 @@ class AddVolume:
 
 
 class Back:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -238,7 +238,7 @@ class Back:
 
 
 class Pause:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -250,7 +250,7 @@ class Pause:
 
 
 class MinusMapIndex:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -262,7 +262,7 @@ class MinusMapIndex:
 
 
 class AddMapIndex:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -274,7 +274,7 @@ class AddMapIndex:
 
 
 class GoStartMenu:
-    def __init__(self, subject):
+    def __init__(self, subject:RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -283,3 +283,27 @@ class GoStartMenu:
             model.sound.play()
             game_status["go_start_menu"] = True
 
+class Die:
+    def __init__(self, subject:RequestSubject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """deal with event: die by call GameOver.run()"""
+        if user_request == "die":
+            model.GameOverMenu.run()
+
+class Potionfunction:
+    def __init__(self, subject:RequestSubject):
+       subject.register(self)
+    
+    def update(self, user_request: str, model):
+
+        if user_request == "blood_potion":
+            if model.hp < model.max_hp and model.money >= potion_price["blood_potion"]:
+                model.hp += 1
+                model.money -= potion_price["blood_potion"]
+        if user_request == "aoe_potion":
+            if model.money >= potion_price["aoe_potion"]:
+                for en in model.enemies.get():
+                    en.health -= en.max_health/10
+                model.money -= potion_price["aoe_potion"]

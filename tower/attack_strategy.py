@@ -1,8 +1,13 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from enemy.enemies import Enemy
+    from tower.towers import Tower
 import math
 from abc import ABC, abstractmethod
 
 
-def in_range(enemy, tower):
+def in_range(enemy:Enemy, tower:Tower)->bool:
     x1, y1 = enemy.rect.center
     x2, y2 = tower.rect.center
     distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -27,7 +32,7 @@ class AttackStrategy(ABC):
 
 class SingleAttack(AttackStrategy):
     """attack an enemy once a time"""
-    def attack(self, enemies: list, tower, cd_count):
+    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
         for en in enemies:
             if in_range(en, tower):
                 en.health -= tower.damage
@@ -38,7 +43,7 @@ class SingleAttack(AttackStrategy):
 
 class SingleSlowAttack(AttackStrategy):
     """attack an enemy once a time"""
-    def attack(self, enemies: list, tower, cd_count):
+    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
         for en in enemies:
             if en.name == "goblin":
                 previous_stride = 10
@@ -63,7 +68,7 @@ class SingleSlowAttack(AttackStrategy):
 
 class AOE(AttackStrategy):
     """attack all the enemy in range once a time"""
-    def attack(self, enemies: list, tower, cd_count):
+    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
         for en in enemies:
             if in_range(en, tower):
                 en.health -= tower.damage
@@ -73,7 +78,7 @@ class AOE(AttackStrategy):
 
 class AOESlowAttack(AttackStrategy):
     """attack an enemy once a time"""
-    def attack(self, enemies: list, tower, cd_count):
+    def attack(self, enemies: list, tower, cd_count)->int:
         for en in enemies:
             if en.name == "goblin":
                 previous_stride = 10
@@ -95,23 +100,20 @@ class AOESlowAttack(AttackStrategy):
 
 class Snipe(AttackStrategy):
     """eliminate an enemy all in once"""
-    def attack(self, enemies: list, tower, cd_count):
-        for en in enemies:
-            if in_range(en, tower):
-                en.health -= tower.damage * 2
-                cd_count = 0
-                return cd_count
-        return cd_count
-
-
-class SnipeAll(AttackStrategy):
-    """eliminate an enemy all in once"""
-    def attack(self, enemies: list, tower, cd_count):
-        for en in enemies:
-            if in_range(en, tower):
-                en.health -= tower.damage * 2
-                cd_count = 0
-        return cd_count
+    def attack(self, enemies: list, tower, cd_count) -> int:
+        if tower.level == 6:
+            for en in enemies:
+                if in_range(en, tower):
+                    en.health -= tower.damage * 5
+                    cd_count = 0
+            return cd_count
+        else:
+            for en in enemies:
+                if in_range(en, tower):
+                    en.health -= tower.damage * 5
+                    cd_count = 0
+                    return cd_count
+            return cd_count
 
 
 

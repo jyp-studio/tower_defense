@@ -1,3 +1,7 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from menu.menus import Menu
 import pygame
 import os
 from tower.towers import Tower, Vacancy
@@ -6,7 +10,7 @@ from menu.menus import UpgradeMenu, BuildMenu, MainMenu
 from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
 from game_UI.game_UI import GameUI
 from opt_menu.opt_menu import OptMenu
-
+from game_over.game_over import GameOver
 from game.user_request import *
 
 
@@ -39,6 +43,9 @@ class GameModel:
         self.kill_all = KillAll(self.subject)
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
+        self.dieHandler = Die(self.subject)
+        self.potion = Potionfunction(self.subject)
+
 
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
@@ -59,6 +66,7 @@ class GameModel:
 
         self.UI = GameUI()
         self.opt_menu = OptMenu()
+        self.GameOverMenu = GameOver()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -88,6 +96,8 @@ class GameModel:
             if self.selected_button is not None:
                 return self.selected_button.response
             return "nothing"
+        if events["die"]:
+            return "die"
         return "nothing"
 
     def select(self, mouse_x: int, mouse_y: int) -> None:
@@ -143,31 +153,31 @@ class GameModel:
         self.__enemies.advance(self)
 
     @property
-    def enemies(self):
+    def enemies(self)->list:
         return self.__enemies
 
     @property
-    def towers(self):
+    def towers(self)->list:
         return self.__towers
 
     @property
-    def menu(self):
+    def menu(self)->Menu:
         return self.__menu
 
     @menu.setter
-    def menu(self, new_menu):
+    def menu(self, new_menu:Menu):
         self.__menu = new_menu
 
     @property
-    def plots(self):
+    def plots(self)->list:
         return self.__plots
 
     @property
-    def main_menu(self):
+    def main_menu(self)->MainMenu:
         return self.__main_menu
     
     @main_menu.setter
-    def main_menu(self, new_menu):
+    def main_menu(self, new_menu:Menu):
         self.__main_menu = new_menu
 
 
