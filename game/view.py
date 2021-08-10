@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
 from color_settings import *
 
 class GameView:
@@ -153,5 +153,5 @@ class GameView:
         baseRect=singleton_map_controller.curBaseRect
         self.win.blit(pygame.transform.scale(pygame.image.load("images/base.png"), (baseRect.width, baseRect.height)),baseRect.topleft)
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
-        pygame.draw.rect(surface,[255,255,255,128],baseRect)
+        pygame.draw.rect(surface,[255,255,255,test_transparency],baseRect)
         self.win.blit(surface,(0,0))

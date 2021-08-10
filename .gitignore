@@ -1,8 +1,5 @@
 .idea/
 __pycache__/
-enemy/__pycache__/
+*/__pycache__/
 font/
-game/__pycache__/
-menu/__pycache__/
-tower/__pycache__/
 venv/
