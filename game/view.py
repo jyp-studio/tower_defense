@@ -111,9 +111,9 @@ class GameView:
 
     def draw_potionprice(self):
         text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,200))
+        self.win.blit(text,(15,200))
         text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,260))
+        self.win.blit(text,(15,260))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
