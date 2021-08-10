@@ -33,3 +33,6 @@ potion_price:dict={
     "blood_potion":2000,
     "aoe_potion":2000
 }
+
+# test transparency
+test_transparency=0

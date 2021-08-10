@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
 from color_settings import *
 
 class GameView:
@@ -15,7 +15,7 @@ class GameView:
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
         self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
-        self.font3= pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 15)
+        self.font3= pygame.font.Font(os.path.join("font", "comicz.ttf"), 15)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -29,6 +29,7 @@ class GameView:
             bar_height = 5
             pygame.draw.rect(self.win, RED, [en.rect.x, en.rect.y - 10, max_bar_width, bar_height])
             pygame.draw.rect(self.win, GREEN, [en.rect.x, en.rect.y - 10, bar_width, bar_height])
+            
 
     def draw_towers(self, towers:list):
         # draw tower
@@ -110,9 +111,9 @@ class GameView:
 
     def draw_potionprice(self):
         text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,210))
+        self.win.blit(text,(15,200))
         text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,270))
+        self.win.blit(text,(15,260))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
@@ -153,5 +154,5 @@ class GameView:
         baseRect=singleton_map_controller.curBaseRect
         self.win.blit(pygame.transform.scale(pygame.image.load("images/base.png"), (baseRect.width, baseRect.height)),baseRect.topleft)
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
-        pygame.draw.rect(surface,[255,255,255,128],baseRect)
+        pygame.draw.rect(surface,[255,255,255,test_transparency],baseRect)
         self.win.blit(surface,(0,0))

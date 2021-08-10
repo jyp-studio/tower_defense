@@ -23,8 +23,9 @@ class GameModel:
         self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()
-        self.__plots = [Vacancy(150, 250), Vacancy(290, 420), Vacancy(400, 310),
-                        Vacancy(450, 500), Vacancy(650, 420), Vacancy(900, 370)]
+        self.__plots = []
+        for pt in singleton_map_controller.curVacancyList:
+            self.__plots.append(Vacancy(pt[0],pt[1]))
 
         self.show_tower_info = False
 

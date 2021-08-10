@@ -3,7 +3,7 @@ import os
 import math
 from game.game import Game
 from color_settings import *
-from settings import WIN_WIDTH, WIN_HEIGHT, FPS,singleton_vol_controller, singleton_map_controller,game_status
+from settings import WIN_WIDTH, WIN_HEIGHT, FPS,singleton_vol_controller, singleton_map_controller,game_status,test_transparency
 from opt_menu.opt_menu import OptMenu
 from exit_win.exit_win import ExitWin
 
@@ -16,10 +16,10 @@ class StartMenu:
         # win
         self.menu_win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         # background
-        self.bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "start_menu2.png")), (WIN_WIDTH, WIN_HEIGHT))
+        self.bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "start_menu3.png")), (WIN_WIDTH, WIN_HEIGHT))
         # button
-        self.start_btn = Buttons(430, 365, 170, 50)  # x, y, width, height
-        self.opt_btn=Buttons(430, 435, 170, 50)
+        self.start_btn = Buttons(430, 355, 170, 50)  # x, y, width, height
+        self.opt_btn=Buttons(430, 425, 170, 50)
         self.buttons = [self.start_btn,
                         self.opt_btn]
         # btn img
@@ -46,7 +46,7 @@ class StartMenu:
 
             surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
             for btn in self.buttons:
-                pygame.draw.rect(surface,(255,255,255,128),btn.rect)
+                pygame.draw.rect(surface,(255,255,255,test_transparency),btn.rect)
             self.menu_win.blit(surface, (0, 0))
 
             x, y = pygame.mouse.get_pos()

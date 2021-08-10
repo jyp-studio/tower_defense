@@ -99,6 +99,19 @@ BASE_RECT_DICT:dict={
     5:BASE5
 }
 
+VacancyPoints1=[(150, 250),(290, 420),(400, 310),(450, 500),(650, 420),(900, 370)]
+VacancyPoints2=[(320, 444), (526, 441), (432, 303), (788, 354), (669, 253), (159, 244)]
+VacancyPoints3=[(262, 403), (405, 520), (384, 314), (554, 320), (724, 328), (852, 399), (817, 245)]
+VacancyPoints4=[(230, 184), (331, 364), (446, 454), (491, 248), (625, 384), (756, 300), (640, 201), (759, 498)]
+VacancyPoints5=[(326, 352), (323, 511), (591, 469), (554, 337), (514, 212), (776, 300)]
+
+VACANCY_DICT:dict={
+    1:VacancyPoints1,
+    2:VacancyPoints2,
+    3:VacancyPoints3,
+    4:VacancyPoints4,
+    5:VacancyPoints5
+}
 
 class VolController:
     music_volume = 0.2
@@ -151,12 +164,15 @@ class MapController:
 
         self.__curBaseRect=BASE_RECT_DICT[self.__map_index]
 
+        self.__curVacancyList=VACANCY_DICT[self.__map_index]
+
     def change_map(self):
         with open('map.txt', 'w') as f:
             f.write(str(self.__map_index))
         self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
         self.__curPathPage=PATH_DICT[self.__map_index]
         self.__curBaseRect=BASE_RECT_DICT[self.__map_index]
+        self.__curVacancyList=VACANCY_DICT[self.__map_index]
     @property
     def map_index(self)->int:
         return self.__map_index
@@ -177,3 +193,7 @@ class MapController:
     @property
     def curPathPage(self)->dict:
         return self.__curPathPage
+    
+    @property
+    def curVacancyList(self)->list:
+        return self.__curVacancyList

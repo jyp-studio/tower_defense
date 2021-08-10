@@ -304,8 +304,10 @@ class Potionfunction:
             if model.hp < model.max_hp and model.money >= potion_price["blood_potion"]:
                 model.hp += 1
                 model.money -= potion_price["blood_potion"]
+                model.sound.play()
         if user_request == "aoe_potion":
             if model.money >= potion_price["aoe_potion"]:
                 for en in model.enemies.get():
                     en.health -= en.max_health/10
                 model.money -= potion_price["aoe_potion"]
+                model.sound.play()
