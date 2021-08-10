@@ -1,12 +1,13 @@
 import pygame
 import math
+import os
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE,singleton_vol_controller
 from color_settings import *
 
 class OptMenuView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.SysFont("comicsans", 30)
+        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 30)
 
     def draw_bg(self):
         self.win.fill(BROWN)
