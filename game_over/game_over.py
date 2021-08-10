@@ -23,7 +23,7 @@ class GameOver:
         self.win.blit(surface, (0, 0))
 
     def play_music(self):
-        pygame.mixer.music.stop()
+        pygame.mixer.music.fadeout(int(1*1000)) 
         pygame.mixer.music.load("./sound/gameover.mp3")
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
