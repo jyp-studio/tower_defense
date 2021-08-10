@@ -15,7 +15,7 @@ class GameView:
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
         self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
-        self.font3= pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 15)
+        self.font3= pygame.font.Font(os.path.join("font", "comicz.ttf"), 15)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -111,9 +111,9 @@ class GameView:
 
     def draw_potionprice(self):
         text = self.font3.render(f"${potion_price['blood_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,210))
+        self.win.blit(text,(40,200))
         text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
-        self.win.blit(text,(40,270))
+        self.win.blit(text,(40,260))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""
