@@ -35,4 +35,4 @@ potion_price:dict={
 }
 
 # test transparency
-test_transparency=128
+test_transparency=0
