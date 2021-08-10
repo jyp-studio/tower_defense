@@ -100,23 +100,20 @@ class AOESlowAttack(AttackStrategy):
 
 class Snipe(AttackStrategy):
     """eliminate an enemy all in once"""
-    def attack(self, enemies: list, tower, cd_count)->int:
-        for en in enemies:
-            if in_range(en, tower):
-                en.health -= tower.damage * 2
-                cd_count = 0
-                return cd_count
-        return cd_count
-
-
-class SnipeAll(AttackStrategy):
-    """eliminate an enemy all in once"""
-    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
-        for en in enemies:
-            if in_range(en, tower):
-                en.health -= tower.damage * 2
-                cd_count = 0
-        return cd_count
+    def attack(self, enemies: list, tower, cd_count) -> int:
+        if tower.level == 6:
+            for en in enemies:
+                if in_range(en, tower):
+                    en.health -= tower.damage * 5
+                    cd_count = 0
+            return cd_count
+        else:
+            for en in enemies:
+                if in_range(en, tower):
+                    en.health -= tower.damage * 5
+                    cd_count = 0
+                    return cd_count
+            return cd_count
 
 
 

@@ -227,24 +227,24 @@ class Tower:
         # You can add other ways of attack just by expanding the "attack_strategy.py"
         self.cd_count = self.attack_strategy.attack(enemy_group, self, self.cd_count)
 
-    def get_upgrade_cost(self)->int:
+    def get_upgrade_cost(self) -> int:
         return self.value[self.level+1]
 
-    def get_ultra_cost(self)->int:
+    def get_ultra_cost(self) -> int:
         return self.value[6]
 
-    def get_cost(self)->int:
+    def get_cost(self) -> int:
         return self.value[self.level]
 
-    def get_sell_price(self)->int:
-        return self.value[self.level] / 2
+    def get_sell_price(self) -> int:
+        return int(self.value[self.level] / 2)
 
     @property
-    def range(self)->list:
+    def range(self) -> int:
         return self._range[self.level]
 
     @property
-    def damage(self)->list:
+    def damage(self) -> int:
         return self._damage[self.level]
 
     def clicked(self, x: int, y: int) -> bool:

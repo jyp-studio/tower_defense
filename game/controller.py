@@ -20,7 +20,8 @@ class GameControl:
                        "die":False,
                        "Kill all": 0,
                        "Add towers": 0,
-                       "pause_esc": 0
+                       "pause_esc": 0,
+                       "health up": 0
                        }
         self.request = None  # response of user input
 
@@ -45,7 +46,8 @@ class GameControl:
                        "die":False,
                        "Kill all": None,
                        "Add towers": None,
-                       "pause_esc": None
+                       "pause_esc": None,
+                       "health up": None
                        }
         # update event
         for event in pygame.event.get():
@@ -64,6 +66,8 @@ class GameControl:
                     self.events["Kill all"] = pygame.K_k
                 if event.key == pygame.K_t:
                     self.events["Add towers"] = pygame.K_t
+                if event.key == pygame.K_h:
+                    self.events["health up"] = pygame.K_h
                 if event.key == pygame.K_ESCAPE:
                     self.events["pause_esc"] = pygame.K_ESCAPE
             # player click action

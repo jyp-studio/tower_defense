@@ -13,31 +13,28 @@ pygame.init()
 GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
 ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
 IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
-DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (60, 60))
+DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (70, 70))
 MUMMY_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_4.png")), (70, 70))
 DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_5.png")), (70, 70))
 DEAD_DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_6.png")), (70, 70))
-GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_7.png")), (100, 100))
+GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_7.png")), (150, 150))
 
 
 class Enemy:
-    def __init__(self, image:pygame.Surface, stride: int, health: int, is_dead: int):
+    def __init__(self):
         self.name = ""
-
-        dir=random.randint(1,len(singleton_map_controller.curPathPage))
+        dir = random.randint(1,len(singleton_map_controller.curPathPage))
         self.path = singleton_map_controller.curPathPage[dir]
-
         self.path_index = 0
         self.move_count = 0
-        self.stride = stride
-        self.image = image
+        self.stride = 3
+        self.image = GOBLIN_IMAGE
         self.rect = self.image.get_rect()
         self.rect.center = self.path[self.path_index]
         self.path_index = 0
-        self.move_count = 0
-        self.health = health
-        self.max_health = health
-        self.is_dead = is_dead
+        self.health = 50
+        self.max_health = 50
+        self.is_dead = 0
 
     def move(self):
         x1, y1 = self.path[self.path_index]
@@ -59,50 +56,66 @@ class Enemy:
             self.path_index += 1
             self.rect.center = self.path[self.path_index]
 
-    @classmethod
-    def goblin_enemy(cls)->Enemy:
-        goblin_enemy = cls(GOBLIN_IMAGE, 10, 50, True)
-        goblin_enemy.name = "goblin"
-        goblin_enemy.stride = 10
-        goblin_enemy.health = 80
-        goblin_enemy.max_health = 80
-        return goblin_enemy
+
+class GoblinEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "goblin"
+        self.stride = 10
 
 
-    @classmethod
-    def orc_enemy(cls)->Enemy:
-        orc_enemy = cls(ORC_IMAGE, 3, 200, True)
-        orc_enemy.name = "orc"
-        orc_enemy.stride = 3
-        orc_enemy.health = 1500
-        orc_enemy.max_health = 1500
-        return orc_enemy
+class OrcEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "orc"
+        self.image = ORC_IMAGE
+        self.stride = 3
+        self.health = 200
+        self.max_health = 200
 
 
-    @classmethod
-    def immortal_enemy(cls)->Enemy:
-        immortal_enemy = cls(IMMORTAL_IMAGE, 1, 500, False)
-        immortal_enemy.name = "immortal"
-        immortal_enemy.stride = 1
-        immortal_enemy.health = 50000000
-        immortal_enemy.max_health = 50000000
-        return immortal_enemy
+class ImmortalEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "immortal"
+        self.image = IMMORTAL_IMAGE
+        self.stride = 0.5
+        self.health = 500
+        self.max_health = 500
+        self.is_dead = 1
 
 
-    @classmethod
-    def mummy_enemy(cls):
-        mummy_enemy = cls(MUMMY_IMAGE, 2, 1000, 0)
-        mummy_enemy.name = "mummy"
+class MummyEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "mummy"
+        self.image = MUMMY_IMAGE
+        self.stride = 2
+        self.health = 1000
+        self.max_health = 1000
+        self.is_dead = 0
 
-    @classmethod
-    def dark_angel_enemy(cls):
-        dark_angel_enemy = cls(DARK_ANGEL_IMAGE, 4, 1000, 2)
-        dark_angel_enemy.name = "dark angel"
 
-    @classmethod
-    def green_monster_enemy(cls):
-        green_monster_enemy = cls(DARK_ANGEL_IMAGE, 1, 6000, 0)
-        green_monster_enemy.name = "green monster"
+class DarkAngelEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "dark angel"
+        self.image = DARK_ANGEL_IMAGE
+        self.stride = 4
+        self.health = 1000
+        self.max_health = 1000
+        self.is_dead = 2
+
+
+class GreenMonsterEnemy(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.name = "green monster"
+        self.image = GREEN_MONSTER_IMAGE
+        self.stride = 0.5
+        self.health = 600000
+        self.max_health = 500000
+        self.is_dead = 0
 
       
 class EnemyGroup:
@@ -119,22 +132,22 @@ class EnemyGroup:
         for en in self.__expedition:
             en.move()
             if en.health <= 0:
-                if en.is_dead==0:
+                if en.is_dead == 0:
                     self.retreat(en)
+                    model.money += 15
                 else:
                     if en.is_dead == 1:
-                        en.is_dead = 0
-                        en.health = 200
-                        en.max_health = 200
-                        en.stride = 10
                         en.image = DEAD_IMMORTAL_IMAGE
-                    if en.is_dead == 2:
+                        en.health = 100
+                        en.max_health = 100
+                        en.stride = 20
                         en.is_dead = 0
-                        en.health = 2000
-                        en.max_health = 200
-                        en.stride = 1
+                    if en.is_dead == 2:
                         en.image = DEAD_DARK_ANGEL_IMAGE
-                model.money += 15
+                        en.health = 2000
+                        en.max_health = 2000
+                        en.stride = 0.5
+                        en.is_dead = 0
             # delete the object when it reach the base
             if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
@@ -152,32 +165,33 @@ class EnemyGroup:
         """Generate the enemies for next wave"""
         if self.is_empty():
             if self.wave_counter % 6 == 0:
-                self.__reserved_members = [Enemy(GOBLIN_IMAGE, 10, 50, 0) for _ in range(num)]
+                self.__reserved_members = [GoblinEnemy() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 6 == 1:
-                self.__reserved_members = [Enemy(ORC_IMAGE, 3, 200, 0) for _ in range(num)]
+                self.__reserved_members = [OrcEnemy() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 6 == 2:
-                self.__reserved_members = [Enemy(IMMORTAL_IMAGE, 1, 500, 1) for _ in range(num)]
+                self.__reserved_members = [ImmortalEnemy() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 6 == 3:
-                self.__reserved_members = [Enemy(MUMMY_IMAGE, 2, 1000, 0) for _ in range(num)]
+                self.__reserved_members = [MummyEnemy() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 6 == 4:
-                self.__reserved_members = [Enemy(DARK_ANGEL_IMAGE, 4, 1000, 2) for _ in range(num)]
+                self.__reserved_members = [DarkAngelEnemy() for _ in range(num)]
                 self.wave_counter += 1
             else:
-                self.__reserved_members = [Enemy(GREEN_MONSTER_IMAGE, 1, 6000, 0) for _ in range(num)]
+                self.__reserved_members = [GreenMonsterEnemy() for _ in range(num)]
+                self.wave_counter = 0
 
-    def get(self)->list:
+    def get(self) -> list:
         """Get the enemy list"""
         return self.__expedition
 
-    def is_empty(self)->bool:
+    def is_empty(self) -> bool:
         """Return whether the enemy is empty (so that we can move on to next wave)"""
         return False if self.__reserved_members or self.__expedition else True
 
-    def retreat(self, enemy:Enemy):
+    def retreat(self, enemy: Enemy):
         """Remove the enemy from the expedition"""
         self.__expedition.remove(enemy)
 

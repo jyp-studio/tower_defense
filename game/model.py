@@ -39,6 +39,7 @@ class GameModel:
         self.developer = TowerDeveloper(self.subject)
         self.evolution = TowerEvolution(self.subject)
         self.add_money = AddMoney(self.subject)
+        self.health_up = HealthUp(self.subject)
         self.add_towers = AddTowers(self.subject)
         self.kill_all = KillAll(self.subject)
         self.factory = TowerFactory(self.subject)
@@ -85,6 +86,8 @@ class GameModel:
             return "kill all"
         if events["Add towers"] is not None:
             return "add towers"
+        if events["health up"] is not None:
+            return "health up"
         if events["pause_esc"] is not None:
             return "pause"
         # mouse event
