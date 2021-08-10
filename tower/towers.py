@@ -1,56 +1,8 @@
 from __future__ import annotations
 from tower.attack_strategy import *
+from gif import *
 import os
 import pygame
-
-# obelisk image
-OBELISK_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image0.png")), (150, 150))
-OBELISK_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image1.png")), (150, 150))
-OBELISK_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image2.png")), (150, 150))
-OBELISK_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image3.png")), (150, 150))
-OBELISK_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image4.png")), (150, 150))
-OBELISK_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image5.png")), (150, 150))
-OBELISK_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image6.png")), (150, 150))
-OBELISK_IMAGE_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image7.png")), (150, 150))
-OBELISK_IMAGE_8 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image8.png")), (150, 150))
-OBELISK_IMAGE_9 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image9.png")), (150, 150))
-OBELISK_IMAGE_10 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image10.png")), (150, 150))
-OBELISK_IMAGE_11 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image11.png")), (150, 150))
-OBELISK_IMAGE_12 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image12.png")), (150, 150))
-OBELISK_IMAGE_13 = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_image13.png")), (150, 150))
-
-# moon tower image
-MOON_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image0.png")), (110, 110))
-MOON_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image1.png")), (110, 110))
-MOON_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image2.png")), (110, 110))
-MOON_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image3.png")), (110, 110))
-MOON_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image4.png")), (110, 110))
-MOON_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image5.png")), (110, 110))
-MOON_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image6.png")), (110, 110))
-MOON_IMAGE_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image7.png")), (110, 110))
-MOON_IMAGE_8 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image8.png")), (110, 110))
-MOON_IMAGE_9 = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_image9.png")), (110, 110))
-
-# red fire tower image
-RED_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image0.png")), (110, 110))
-RED_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image1.png")), (110, 110))
-RED_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image2.png")), (110, 110))
-RED_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image3.png")), (110, 110))
-RED_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image4.png")), (110, 110))
-RED_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image5.png")), (110, 110))
-RED_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_image6.png")), (110, 110))
-
-# blue fire tower image
-BLUE_IMAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image0.png")), (110, 110))
-BLUE_IMAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image1.png")), (110, 110))
-BLUE_IMAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image2.png")), (110, 110))
-BLUE_IMAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image3.png")), (110, 110))
-BLUE_IMAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image4.png")), (110, 110))
-BLUE_IMAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image5.png")), (110, 110))
-BLUE_IMAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_image6.png")), (110, 110))
-
-# vacancy image
-PLOT_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "vacant_lot.png")), (40, 40))
 
 
 class Vacancy:
