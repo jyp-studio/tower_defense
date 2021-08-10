@@ -34,8 +34,23 @@ class EnemyGenerator:
         """add new enemy"""
         if user_request == "start new wave":
             if model.enemies.is_empty():
-                model.enemies.add(10 * (model.wave + 1))
+                if 0 <= model.wave % 6 < 3:
+                    model.enemies.add(10 * (model.wave + 1))
+                elif 3 <= model.wave % 6 < 5:
+                    model.enemies.add(5)
+                else:
+                    model.enemies.add(1)
                 model.wave += 1
+
+
+class HealthUp:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """add new enemy"""
+        if user_request == "health up":
+            model.hp += 1
 
 
 class AddMoney:
