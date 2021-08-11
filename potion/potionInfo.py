@@ -1,10 +1,19 @@
 import pygame
+import math
+
+numofwords=26   #number of words in a line
+def str_divide(sentense):   #divide a string into lots of lines
+    lines=[]
+    for i in range(0,math.ceil(len(sentense)/numofwords)):
+        tail=min((i+1)*numofwords,len(sentense))
+        lines.append(sentense[i*numofwords:tail])
+    return lines
 
 blood_pot_info="Recover 1 HP and pay $2000"
-aoe_pot_info="Attack all enemy by their 10% HP and pay $2000"
+aoe_pot_info  ="Attack all enemy by their 10% HP and pay $2000"
 POTION_INFO_DICT={
-    "blood_potion":blood_pot_info,
-    "aoe_potion":aoe_pot_info
+    "blood_potion":str_divide(blood_pot_info),
+    "aoe_potion":str_divide(aoe_pot_info)
 }
 
 class PotionInfo:

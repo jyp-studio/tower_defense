@@ -158,12 +158,17 @@ class GameView:
         self.win.blit(surface,(0,0))
     
     def draw_potion_property(self,potion_info):
-        text = self.font3.render(f"{potion_info.info}", True, WHITE)
-        potion_info.rect.width=text.get_width() #217,317
+        
+        potion_info.rect.width=217 #217,317
 
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
         pygame.draw.rect(surface,[0,0,0,128],potion_info.rect)
         
-        surface.blit(text,potion_info.rect.topleft)
+        i=0
+        for line in potion_info.info:
+            text = self.font3.render(line, True, WHITE)
+            x,y=potion_info.rect.topleft
+            surface.blit(text,(x,y+i*20))
+            i+=1
 
         self.win.blit(surface,(0,0))

@@ -1,4 +1,7 @@
 from __future__ import annotations
+import pygame
+import os
+import random
 from tower.blue import *
 from tower.red import *
 from tower.moon import *
