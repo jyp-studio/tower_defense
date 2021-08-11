@@ -91,6 +91,7 @@ class AddTowers:
                 else:
                     model.plots.append(Vacancy(x - 20, y + 5))
                 model.towers.remove(tw)
+
             for plot in model.plots:
                 x, y = plot.rect.center
                 tower_dict = {"moon": Tower.moon_tower(x + 18, y),
@@ -100,8 +101,7 @@ class AddTowers:
                 ran_tower = random.choice(["moon", "red fire", "blue fire", "obelisk"])
                 new_tower = tower_dict[ran_tower]
                 model.towers.append(new_tower)
-                model.plots.remove(plot)
-
+            model.plots.clear()
 
 class TowerSeller:
     def __init__(self, subject:RequestSubject):

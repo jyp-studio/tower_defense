@@ -23,13 +23,13 @@ class OptMenuView:
         volume = math.ceil(singleton_vol_controller.sound_volume*100)
         volume = math.ceil(volume/5)*5
         text = self.font.render(f"Sound volume: {volume}%", True, (255, 255, 255))
-        self.win.blit(text, (455,320))
+        self.win.blit(text, (455,375))
 
     def draw_music_volume(self):
         volume = math.ceil(singleton_vol_controller.music_volume*100)
         volume = math.ceil(volume/5)*5
         text = self.font.render(f"Music volume: {volume}%", True, (255, 255, 255))
-        self.win.blit(text, (455,395))
+        self.win.blit(text, (455,450))
 
     def draw_map_preview(self, map_img:pygame.Surface):
-        self.win.blit(map_img, (262,5))
+        self.win.blit(map_img, (262,40))
