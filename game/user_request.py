@@ -4,6 +4,7 @@ import os
 import random
 from tower.towers import Tower, Vacancy
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
+from potion.potionInfo import PotionInfo
 
 """This module is import in model.py"""
 
@@ -311,3 +312,21 @@ class Potionfunction:
                     en.health -= en.max_health/10
                 model.money -= potion_price["aoe_potion"]
                 model.sound.play()
+
+class MousePosTracker:
+    def __init__(self, subject:RequestSubject):
+       subject.register(self)
+    
+    def update(self, user_request: str, model):
+        if user_request == "nothing":
+            x,y=pygame.mouse.get_pos()
+
+            btn_list=model.main_menu.buttons
+            potion_set={"blood_potion","aoe_potion"}
+            for btn in btn_list:
+                if btn.name in potion_set:  #this btn is a potion button
+                    if btn.clicked(x,y):
+                        model.selected_potion_info=PotionInfo(btn)
+                        break
+                    else:
+                        model.selected_potion_info=None
