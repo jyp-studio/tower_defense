@@ -36,8 +36,6 @@ class GameControl:
         for tw in self.model.towers:
             tw.update()
         for en in self.model.enemies.get():
-            if en.direction is not True:
-                pygame.transform.flip(en.image, True, False)
             en.update()
 
     def receive_user_input(self):

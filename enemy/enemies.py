@@ -43,7 +43,7 @@ class Enemy:
         max_count = int(distance / self.stride)
         # direction
         direction = x2 - x1
-        if direction < 0:
+        if direction < 0 and self.right_direction:
             self.right_direction = False
         else:
             self.right_direction = True
@@ -66,7 +66,12 @@ class Enemy:
         self.current_sprites += self.update_speed
         if self.current_sprites >= self.max_current_sprites:
             self.current_sprites = 0
-        self.image = self.sprites[int(self.current_sprites)]
+        # flip images
+        if not self.right_direction:
+            flip_image = pygame.transform.flip(self.sprites[int(self.current_sprites)], True, False)
+            self.image = flip_image
+        else:
+            self.image = self.sprites[int(self.current_sprites)]
 
     def direction(self):
         return self.right_direction
@@ -312,6 +317,7 @@ class EnemyGroup:
             en.move()
             if en.health <= 0:
                 if en.is_dead == 0:
+                    self.__expedition.append(EnemySKULL1())
                     self.retreat(en)
                     model.money += 15
                 else:
