@@ -10,7 +10,7 @@ MENU_VIEW = pygame.transform.scale(pygame.image.load(os.path.join("images", "men
 class OptMenuView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.Font(os.path.join("font", "comicz.ttf"), 30)
+        self.font = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 30)
 
     def draw_bg(self):
         self.win.blit(MENU_VIEW, (0, 0))
