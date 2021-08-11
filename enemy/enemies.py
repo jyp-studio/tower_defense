@@ -43,7 +43,7 @@ class Enemy:
         max_count = int(distance / self.stride)
         # direction
         direction = x2 - x1
-        if direction < 0 and self.right_direction:
+        if direction < 0:
             self.right_direction = False
         else:
             self.right_direction = True
