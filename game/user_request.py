@@ -1,8 +1,8 @@
 from __future__ import annotations
-import pygame
-import os
-import random
-from tower.towers import Tower, Vacancy
+from tower.blue import *
+from tower.red import *
+from tower.moon import *
+from tower.obelisk import *
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 
 """This module is import in model.py"""
@@ -94,14 +94,15 @@ class AddTowers:
 
             for plot in model.plots:
                 x, y = plot.rect.center
-                tower_dict = {"moon": Tower.moon_tower(x + 18, y),
-                              "red fire": Tower.red_fire_tower(x + 20, y - 5),
-                              "blue fire": Tower.blue_fire_tower(x + 20, y - 5),
-                              "obelisk": Tower.obelisk_tower(x, y - 50)}
+                tower_dict = {"moon": MoonTower(x + 18, y),
+                              "red fire": RedFireTower(x + 20, y - 5),
+                              "blue fire": BlueFireTower(x + 20, y - 5),
+                              "obelisk": ObeliskTower(x, y - 50)}
                 ran_tower = random.choice(["moon", "red fire", "blue fire", "obelisk"])
                 new_tower = tower_dict[ran_tower]
                 model.towers.append(new_tower)
             model.plots.clear()
+
 
 class TowerSeller:
     def __init__(self, subject:RequestSubject):
@@ -168,8 +169,10 @@ class TowerFactory:
             if user_request == name:
                 if model.selected_plot is not None:
                     x, y = model.selected_plot.rect.center
-                    tower_dict = {"moon": Tower.moon_tower(x + 18, y), "red fire": Tower.red_fire_tower(x + 20, y - 5),
-                                  "blue fire": Tower.blue_fire_tower(x + 20, y - 5), "obelisk": Tower.obelisk_tower(x, y - 50)}
+                    tower_dict = {"moon": MoonTower(x + 18, y),
+                                  "red fire": RedFireTower(x + 20, y - 5),
+                                  "blue fire": BlueFireTower(x + 20, y - 5),
+                                  "obelisk": ObeliskTower(x, y - 50)}
                     new_tower = tower_dict[user_request]
                     if model.money >= new_tower.get_cost():
                         model.money -= new_tower.get_cost()

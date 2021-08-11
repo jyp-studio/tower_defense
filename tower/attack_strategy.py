@@ -54,10 +54,10 @@ class SingleSlowAttack(AttackStrategy):
 
             if in_range(en, tower):
                 en.health -= tower.damage
-                if en.stride > 4:
-                    en.stride -= 4
+                if en.stride > 2:
+                    en.stride -= 2
                 else:
-                    en.stride = 1
+                    en.stride = 0.5
                 cd_count = 0
                 return cd_count
             else:
@@ -88,10 +88,10 @@ class AOESlowAttack(AttackStrategy):
                 previous_stride = 3
             if in_range(en, tower):
                 en.health -= tower.damage
-                if en.stride > 4:
-                    en.stride -= 4
+                if en.stride > 2:
+                    en.stride -= 2
                 else:
-                    en.stride = 1
+                    en.stride = 0.5
                 cd_count = 0
             else:
                 en.stride = previous_stride
