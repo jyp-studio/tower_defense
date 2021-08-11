@@ -8,8 +8,8 @@ class ExitWin:
         
         self.menu_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_menu.png")), (350,250))
 
-        self.yes_btn = pygame.Rect(430, 350, 100, 50)
-        self.no_btn = pygame.Rect(580, 350, 100, 50)
+        self.yes_btn = pygame.Rect(375, 315, 100, 50)
+        self.no_btn = pygame.Rect(525, 315, 100, 50)
 
         self.buttons = [self.yes_btn,
                         self.no_btn]
@@ -18,7 +18,7 @@ class ExitWin:
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
     def draw(self):
-        self.bg_win.blit(self.menu_img, (380,210))
+        self.bg_win.blit(self.menu_img, (325,175))
 
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
         transparency = 50

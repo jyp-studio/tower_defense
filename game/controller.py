@@ -35,6 +35,8 @@ class GameControl:
 
         for tw in self.model.towers:
             tw.update()
+        for en in self.model.enemies.get():
+            en.update()
 
     def receive_user_input(self):
         """receive user input from the events"""

@@ -47,7 +47,6 @@ class GameModel:
         self.dieHandler = Die(self.subject)
         self.potion = Potionfunction(self.subject)
 
-
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
 
@@ -154,11 +153,11 @@ class GameModel:
         self.__enemies.advance(self)
 
     @property
-    def enemies(self)->list:
+    def enemies(self) -> EnemyGroup:
         return self.__enemies
 
     @property
-    def towers(self)->list:
+    def towers(self) -> list:
         return self.__towers
 
     @property

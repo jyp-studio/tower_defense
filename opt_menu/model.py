@@ -21,14 +21,17 @@ class OptMenuModel:
 
         self.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
-        self.minusSoundVol_btn=Button(self.minus_img,"minusSound",349, 330)  # image, name: str, x: int, y: int
-        self.addSoundVol_btn=Button(self.add_img,"addSound",399, 330)  
-        self.minusMusicVol_btn=Button(self.minus_img,"minusMusic",349, 405)  
-        self.addMusicVol_btn=Button(self.add_img,"addMusic",399, 405)
-        self.back_btn=Button(self.back_img,"back",300, 465)
-        self.menu_btn=Button(self.menu_img,"goStartMenu",700,465)
-        self.left_btn=Button(self.left_img,"minusMapIndex",200,150)
-        self.right_btn=Button(self.right_img,"addMapIndex",825,150)
+        self.minusSoundVol_btn=Button(self.minus_img,"minusSound",349, 355)  # image, name: str, x: int, y: int
+        self.addSoundVol_btn=Button(self.add_img,"addSound",399, 355)  
+
+        self.minusMusicVol_btn=Button(self.minus_img,"minusMusic",349, 430)  
+        self.addMusicVol_btn=Button(self.add_img,"addMusic",399, 430)
+
+        self.back_btn=Button(self.back_img,"back",300, 500)
+        self.menu_btn=Button(self.menu_img,"goStartMenu",700,500)
+
+        self.left_btn=Button(self.left_img,"minusMapIndex",200,160)
+        self.right_btn=Button(self.right_img,"addMapIndex",825,160)
 
         self.buttons = [self.minusSoundVol_btn,
                         self.addSoundVol_btn,

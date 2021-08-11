@@ -7,40 +7,46 @@ import math
 import random
 import os
 from settings import singleton_map_controller
+from gif import *
 from color_settings import *
 
 pygame.init()
-GOBLIN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_2.png")), (80, 80))
-ORC_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_1.png")), (80, 80))
-IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy.png")), (60, 60))
-DEAD_IMMORTAL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_3.png")), (70, 70))
-MUMMY_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_4.png")), (70, 70))
-DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_5.png")), (70, 70))
-DEAD_DARK_ANGEL_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_6.png")), (70, 70))
-GREEN_MONSTER_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "enemy_7.png")), (150, 150))
 
 
 class Enemy:
-    def __init__(self):
+    def __init__(self, image):
         self.name = ""
-        dir = random.randint(1,len(singleton_map_controller.curPathPage))
+        dir = random.randint(1, len(singleton_map_controller.curPathPage))
         self.path = singleton_map_controller.curPathPage[dir]
         self.path_index = 0
         self.move_count = 0
         self.stride = 3
-        self.image = GOBLIN_IMAGE
-        self.rect = self.image.get_rect()
-        self.rect.center = self.path[self.path_index]
-        self.path_index = 0
         self.health = 50
         self.max_health = 50
         self.is_dead = 0
+
+        self.sprites = []
+        self.current_sprites = 0
+        self.max_current_sprites = 10
+        self.update_speed = 1
+        self.sprites.append(image)
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = self.path[self.path_index]
+        self.path_index = 0
+        self.right_direction = True
 
     def move(self):
         x1, y1 = self.path[self.path_index]
         x2, y2 = self.path[self.path_index + 1]
         distance = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
         max_count = int(distance / self.stride)
+        # direction
+        direction = x2 - x1
+        if direction < 0 and self.right_direction:
+            self.right_direction = False
+        else:
+            self.right_direction = True
         # compute the unit vector
         unit_vector_x = (x2 - x1) / distance
         unit_vector_y = (y2 - y1) / distance
@@ -56,65 +62,243 @@ class Enemy:
             self.path_index += 1
             self.rect.center = self.path[self.path_index]
 
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        # flip images
+        if not self.right_direction:
+            flip_image = pygame.transform.flip(self.sprites[int(self.current_sprites)], True, False)
+            self.image = flip_image
+        else:
+            self.image = self.sprites[int(self.current_sprites)]
 
-class GoblinEnemy(Enemy):
+    def direction(self):
+        return self.right_direction
+
+
+class EnemyFly(Enemy):
     def __init__(self):
-        super().__init__()
-        self.name = "goblin"
-        self.stride = 10
+        super().__init__(FLY_0)
+        self.name = "fly"
+        self.max_current_sprites = 3
+        self.update_speed = 0.5
+        self.sprites.append(FLY_1)
+        self.sprites.append(FLY_2)
+        self.sprites.append(FLY_3)
+
+        self.stride = 6
+        self.health = 20
+        self.max_health = 20
+        self.is_dead = 0
+        self.right_direction = False
 
 
-class OrcEnemy(Enemy):
+class EnemyOrc1(Enemy):
     def __init__(self):
-        super().__init__()
+        super().__init__(ORC1_0)
         self.name = "orc"
-        self.image = ORC_IMAGE
+        self.max_current_sprites = 6
+        self.update_speed = 0.25
+        self.sprites.append(ORC1_1)
+        self.sprites.append(ORC1_2)
+        self.sprites.append(ORC1_3)
+        self.sprites.append(ORC1_4)
+        self.sprites.append(ORC1_5)
+        self.sprites.append(ORC1_6)
+
         self.stride = 3
-        self.health = 200
-        self.max_health = 200
+        self.health = 70
+        self.max_health = 70
+        self.is_dead = 0
 
 
-class ImmortalEnemy(Enemy):
+class EnemyOrc2(Enemy):
     def __init__(self):
-        super().__init__()
-        self.name = "immortal"
-        self.image = IMMORTAL_IMAGE
-        self.stride = 0.5
+        super().__init__(ORC2_0)
+        self.name = "orc"
+        self.max_current_sprites = 6
+        self.update_speed = 0.25
+        self.sprites.append(ORC2_1)
+        self.sprites.append(ORC2_2)
+        self.sprites.append(ORC2_3)
+        self.sprites.append(ORC2_4)
+        self.sprites.append(ORC2_5)
+        self.sprites.append(ORC2_6)
+
+        self.stride = 5
+        self.health = 150
+        self.max_health = 150
+        self.is_dead = 0
+
+
+class EnemyOrc3(Enemy):
+    def __init__(self):
+        super().__init__(ORC3_0)
+        self.name = "orc"
+        self.max_current_sprites = 6
+        self.update_speed = 0.25
+        self.sprites.append(ORC3_1)
+        self.sprites.append(ORC3_2)
+        self.sprites.append(ORC3_3)
+        self.sprites.append(ORC3_4)
+        self.sprites.append(ORC3_5)
+        self.sprites.append(ORC3_6)
+
+        self.stride = 2
+        self.health = 400
+        self.max_health = 400
+        self.is_dead = 0
+
+
+class EnemyBat(Enemy):
+    def __init__(self):
+        super().__init__(BAT_0)
+        self.name = "bat"
+        self.max_current_sprites = 3
+        self.update_speed = 0.25
+        self.sprites.append(BAT_1)
+        self.sprites.append(BAT_2)
+        self.sprites.append(BAT_3)
+
+        self.stride = 7
+        self.health = 100
+        self.max_health = 100
+        self.is_dead = 0
+
+
+class EnemySKULL1(Enemy):
+    def __init__(self):
+        super().__init__(YELLOW_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(YELLOW_SKULL_1)
+        self.sprites.append(YELLOW_SKULL_2)
+        self.sprites.append(YELLOW_SKULL_3)
+        self.sprites.append(YELLOW_SKULL_4)
+        self.sprites.append(YELLOW_SKULL_5)
+        self.sprites.append(YELLOW_SKULL_6)
+        self.sprites.append(YELLOW_SKULL_7)
+
+        self.stride = 1
+        self.health = 500
+        self.max_health = 500
+        self.is_dead = 5
+
+
+class EnemySKULL2(Enemy):
+    def __init__(self):
+        super().__init__(GREEN_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(GREEN_SKULL_0)
+        self.sprites.append(GREEN_SKULL_1)
+        self.sprites.append(GREEN_SKULL_2)
+        self.sprites.append(GREEN_SKULL_3)
+        self.sprites.append(GREEN_SKULL_4)
+        self.sprites.append(GREEN_SKULL_5)
+        self.sprites.append(GREEN_SKULL_6)
+        self.sprites.append(GREEN_SKULL_7)
+
+        self.stride = 1
+        self.health = 500
+        self.max_health = 500
+        self.is_dead = 4
+
+
+class EnemySKULL3(Enemy):
+    def __init__(self):
+        super().__init__(BLUE_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(BLUE_SKULL_1)
+        self.sprites.append(BLUE_SKULL_2)
+        self.sprites.append(BLUE_SKULL_3)
+        self.sprites.append(BLUE_SKULL_4)
+        self.sprites.append(BLUE_SKULL_5)
+        self.sprites.append(BLUE_SKULL_6)
+        self.sprites.append(BLUE_SKULL_7)
+
+        self.stride = 1
+        self.health = 500
+        self.max_health = 500
+        self.is_dead = 3
+
+
+class EnemySKULL4(Enemy):
+    def __init__(self):
+        super().__init__(PURPLE_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(PURPLE_SKULL_1)
+        self.sprites.append(PURPLE_SKULL_2)
+        self.sprites.append(PURPLE_SKULL_3)
+        self.sprites.append(PURPLE_SKULL_4)
+        self.sprites.append(PURPLE_SKULL_5)
+        self.sprites.append(PURPLE_SKULL_6)
+        self.sprites.append(PURPLE_SKULL_7)
+
+        self.stride = 1
+        self.health = 500
+        self.max_health = 500
+        self.is_dead = 2
+
+
+class EnemySKULL5(Enemy):
+    def __init__(self):
+        super().__init__(RED_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(RED_SKULL_1)
+        self.sprites.append(RED_SKULL_2)
+        self.sprites.append(RED_SKULL_3)
+        self.sprites.append(RED_SKULL_4)
+        self.sprites.append(RED_SKULL_5)
+        self.sprites.append(RED_SKULL_6)
+        self.sprites.append(RED_SKULL_7)
+
+        self.stride = 1
         self.health = 500
         self.max_health = 500
         self.is_dead = 1
 
 
-class MummyEnemy(Enemy):
+class EnemySKULL6(Enemy):
     def __init__(self):
-        super().__init__()
-        self.name = "mummy"
-        self.image = MUMMY_IMAGE
-        self.stride = 2
+        super().__init__(YELLOW_SKULL_0)
+        self.name = "skull"
+        self.max_current_sprites = 7
+        self.update_speed = 0.5
+        self.sprites.append(GREEN_SKULL_1)
+        self.sprites.append(BLUE_SKULL_2)
+        self.sprites.append(PURPLE_SKULL_3)
+        self.sprites.append(RED_SKULL_4)
+        self.sprites.append(YELLOW_SKULL_5)
+        self.sprites.append(GREEN_SKULL_6)
+        self.sprites.append(BLUE_SKULL_7)
+
+        self.stride = 1
         self.health = 1000
         self.max_health = 1000
         self.is_dead = 0
 
 
-class DarkAngelEnemy(Enemy):
+class EnemyROCK(Enemy):
     def __init__(self):
-        super().__init__()
-        self.name = "dark angel"
-        self.image = DARK_ANGEL_IMAGE
-        self.stride = 4
-        self.health = 1000
-        self.max_health = 1000
-        self.is_dead = 2
+        super().__init__(ROCK_0)
+        self.name = "boss"
+        self.max_current_sprites = 2
+        self.update_speed = 0.25
+        self.sprites.append(ROCK_1)
 
-
-class GreenMonsterEnemy(Enemy):
-    def __init__(self):
-        super().__init__()
-        self.name = "green monster"
-        self.image = GREEN_MONSTER_IMAGE
-        self.stride = 0.5
-        self.health = 500000
-        self.max_health = 500000
+        self.stride = 0.1
+        self.health = 99999
+        self.max_health = 99999
         self.is_dead = 0
 
       
@@ -133,21 +317,76 @@ class EnemyGroup:
             en.move()
             if en.health <= 0:
                 if en.is_dead == 0:
+                    self.__expedition.append(EnemySKULL1())
                     self.retreat(en)
                     model.money += 15
                 else:
-                    if en.is_dead == 1:
-                        en.image = DEAD_IMMORTAL_IMAGE
-                        en.health = 100
-                        en.max_health = 100
-                        en.stride = 20
+                    if en.is_dead == 5:
+                        en.is_dead = 4
+                        en.sprites.clear()
+                        en.sprites.append(GREEN_SKULL_0)
+                        en.sprites.append(GREEN_SKULL_1)
+                        en.sprites.append(GREEN_SKULL_2)
+                        en.sprites.append(GREEN_SKULL_3)
+                        en.sprites.append(GREEN_SKULL_4)
+                        en.sprites.append(GREEN_SKULL_5)
+                        en.sprites.append(GREEN_SKULL_6)
+                        en.sprites.append(GREEN_SKULL_7)
+                        en.health = 500
+                        en.max_health = 500
+                    elif en.is_dead == 4:
+                        en.is_dead = 3
+                        en.sprites.clear()
+                        en.sprites.append(BLUE_SKULL_0)
+                        en.sprites.append(BLUE_SKULL_1)
+                        en.sprites.append(BLUE_SKULL_2)
+                        en.sprites.append(BLUE_SKULL_3)
+                        en.sprites.append(BLUE_SKULL_4)
+                        en.sprites.append(BLUE_SKULL_5)
+                        en.sprites.append(BLUE_SKULL_6)
+                        en.sprites.append(BLUE_SKULL_7)
+                        en.health = 500
+                        en.max_health = 500
+                    elif en.is_dead == 3:
+                        en.is_dead = 2
+                        en.sprites.clear()
+                        en.sprites.append(PURPLE_SKULL_0)
+                        en.sprites.append(PURPLE_SKULL_1)
+                        en.sprites.append(PURPLE_SKULL_2)
+                        en.sprites.append(PURPLE_SKULL_3)
+                        en.sprites.append(PURPLE_SKULL_4)
+                        en.sprites.append(PURPLE_SKULL_5)
+                        en.sprites.append(PURPLE_SKULL_6)
+                        en.sprites.append(PURPLE_SKULL_7)
+                        en.health = 500
+                        en.max_health = 500
+                    elif en.is_dead == 2:
+                        en.is_dead = 1
+                        en.sprites.clear()
+                        en.sprites.append(RED_SKULL_0)
+                        en.sprites.append(RED_SKULL_1)
+                        en.sprites.append(RED_SKULL_2)
+                        en.sprites.append(RED_SKULL_3)
+                        en.sprites.append(RED_SKULL_4)
+                        en.sprites.append(RED_SKULL_5)
+                        en.sprites.append(RED_SKULL_6)
+                        en.sprites.append(RED_SKULL_7)
+                        en.health = 500
+                        en.max_health = 500
+                    else:
                         en.is_dead = 0
-                    if en.is_dead == 2:
-                        en.image = DEAD_DARK_ANGEL_IMAGE
+                        en.sprites.clear()
+                        en.sprites.append(PURPLE_SKULL_0)
+                        en.sprites.append(RED_SKULL_1)
+                        en.sprites.append(YELLOW_SKULL_2)
+                        en.sprites.append(GREEN_SKULL_3)
+                        en.sprites.append(BLUE_SKULL_4)
+                        en.sprites.append(PURPLE_SKULL_5)
+                        en.sprites.append(RED_SKULL_6)
+                        en.sprites.append(YELLOW_SKULL_7)
                         en.health = 2000
                         en.max_health = 2000
-                        en.stride = 0.5
-                        en.is_dead = 0
+
             # delete the object when it reach the base
             if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
@@ -164,23 +403,26 @@ class EnemyGroup:
     def add(self, num:int):
         """Generate the enemies for next wave"""
         if self.is_empty():
-            if self.wave_counter % 6 == 0:
-                self.__reserved_members = [GoblinEnemy() for _ in range(num)]
+            if self.wave_counter % 7 == 0:
+                self.__reserved_members = [EnemyFly() for _ in range(num)]
                 self.wave_counter += 1
-            elif self.wave_counter % 6 == 1:
-                self.__reserved_members = [OrcEnemy() for _ in range(num)]
+            elif self.wave_counter % 7 == 1:
+                self.__reserved_members = [EnemyOrc1() for _ in range(num)]
                 self.wave_counter += 1
-            elif self.wave_counter % 6 == 2:
-                self.__reserved_members = [ImmortalEnemy() for _ in range(num)]
+            elif self.wave_counter % 7 == 2:
+                self.__reserved_members = [EnemyOrc2() for _ in range(num)]
                 self.wave_counter += 1
-            elif self.wave_counter % 6 == 3:
-                self.__reserved_members = [MummyEnemy() for _ in range(num)]
+            elif self.wave_counter % 7 == 3:
+                self.__reserved_members = [EnemyOrc3() for _ in range(num)]
                 self.wave_counter += 1
-            elif self.wave_counter % 6 == 4:
-                self.__reserved_members = [DarkAngelEnemy() for _ in range(num)]
+            elif self.wave_counter % 7 == 4:
+                self.__reserved_members = [EnemyBat() for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 7 == 5:
+                self.__reserved_members = [EnemySKULL1() for _ in range(num)]
                 self.wave_counter += 1
             else:
-                self.__reserved_members = [GreenMonsterEnemy() for _ in range(num)]
+                self.__reserved_members = [EnemyROCK() for _ in range(num)]
                 self.wave_counter = 0
 
     def get(self) -> list:
