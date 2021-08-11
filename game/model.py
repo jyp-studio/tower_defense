@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 import pygame
 import os
 from tower.towers import Tower, Vacancy
-from enemy.enemies import EnemyGroup
+from enemy.enemy_group import EnemyGroup
 from menu.menus import UpgradeMenu, BuildMenu, MainMenu
 from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_map_controller
 from game_UI.game_UI import GameUI
@@ -25,7 +25,7 @@ class GameModel:
         self.__main_menu = MainMenu()
         self.__plots = []
         for pt in singleton_map_controller.curVacancyList:
-            self.__plots.append(Vacancy(pt[0],pt[1]))
+            self.__plots.append(Vacancy(pt[0], pt[1]))
 
         self.show_tower_info = False
 
