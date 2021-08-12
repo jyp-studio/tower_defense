@@ -58,7 +58,7 @@ class ObeliskTower(Tower):
 
         self._range = [120, 140, 150, 160, 170, 180, 280]  # tower attack range
         self._damage = [20, 40, 60, 80, 120, 160, 400] # tower damage
-        self.cd_max_count = 20
+        self.cd_max_count = 120
         self.value = [1000, 2000, 3000, 4000, 5000, 6000, 20000]
 
     def throw(self, x: int, y: int):

@@ -67,7 +67,7 @@ class Tower:
         # cd
         if self.cd_count < self.cd_max_count:
             self.cd_count += 1
-            return
+        
         # syntax: attack_strategy().attack(tower, enemy_group, cd_count)
         # It's something like you hire a "Strategist" to decide how to attack the enemy
         # You can add other ways of attack just by expanding the "attack_strategy.py"

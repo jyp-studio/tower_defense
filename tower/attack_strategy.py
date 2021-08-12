@@ -35,6 +35,9 @@ class AttackStrategy(ABC):
 class SingleAttack(AttackStrategy):
     """attack an enemy once a time"""
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+        if cd_count < tower.cd_max_count:
+            return cd_count
+
         for en in enemies:
             if in_range(en, tower):
                 en.health -= tower.damage
@@ -46,6 +49,9 @@ class SingleAttack(AttackStrategy):
 class SingleSlowAttack(AttackStrategy):
     """attack an enemy once a time"""
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+        if cd_count < tower.cd_max_count:
+            return cd_count
+
         for en in enemies:
             if en.name == "goblin":
                 previous_stride = 10
@@ -71,6 +77,9 @@ class SingleSlowAttack(AttackStrategy):
 class AOE(AttackStrategy):
     """attack all the enemy in range once a time"""
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+        if cd_count < tower.cd_max_count:
+            return cd_count
+
         for en in enemies:
             if in_range(en, tower):
                 en.health -= tower.damage
@@ -81,6 +90,9 @@ class AOE(AttackStrategy):
 class AOESlowAttack(AttackStrategy):
     """attack an enemy once a time"""
     def attack(self, enemies: list, tower, cd_count)->int:
+        if cd_count < tower.cd_max_count:
+            return cd_count
+
         for en in enemies:
             attack_counter = 0
             if in_range(en, tower):
@@ -89,18 +101,37 @@ class AOESlowAttack(AttackStrategy):
                 attack_counter += 1
             else:
                 en.stride *= 1.25 ** attack_counter
+        cd_count=0
         return cd_count
 
 
 class Snipe(AttackStrategy):
     """eliminate an enemy all in once"""
     def attack(self, enemies: list, tower, cd_count) -> int:
+        
+        attack_animate_time=9
+
+        exist_enemy=False
+        if cd_count < tower.cd_max_count:
+            if cd_count-1 == tower.cd_max_count-attack_animate_time:
+                
+                #確認有無敵人在圈內
+                for en in enemies:
+                    if in_range(en, tower):
+                        x, y = en.rect.center
+                        tower.throw(x, y - 100)
+                        exist_enemy=True
+                        break
+
+                if not exist_enemy:
+                    cd_count= tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始打雷的時候
+        
+            return cd_count
+
         for en in enemies:
             if in_range(en, tower):
-                x, y = en.rect.center
-                tower.throw(x, y - 100)
                 en.health -= tower.damage * 5
-                cd_count = 0
+                cd_count=0
                 break
         return cd_count
 
