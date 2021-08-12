@@ -3,12 +3,14 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from enemy.enemies import EnemyGroup
     from tower.towers import Tower
+    from tower.obelisk import Lightning
     from game_UI.game_UI import GameUI
 import pygame
 import os
 import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
 from color_settings import *
+
 
 class GameView:
     def __init__(self):
@@ -20,7 +22,7 @@ class GameView:
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
 
-    def draw_enemies(self, enemies:EnemyGroup):
+    def draw_enemies(self, enemies: EnemyGroup):
         for en in enemies.get():
             self.win.blit(en.image, en.rect)
             # draw health bar
@@ -29,9 +31,8 @@ class GameView:
             bar_height = 5
             pygame.draw.rect(self.win, RED, [en.rect.x, en.rect.y - 10, max_bar_width, bar_height])
             pygame.draw.rect(self.win, GREEN, [en.rect.x, en.rect.y - 10, bar_width, bar_height])
-            
 
-    def draw_towers(self, towers:list):
+    def draw_towers(self, towers: list):
         # draw tower
         for tw in towers:
             self.win.blit(tw.image, tw.rect)
@@ -51,6 +52,13 @@ class GameView:
             else:
                 pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 19, y), tw.range)
             self.win.blit(surface, (0, 0))
+
+    def draw_lightning(self, towers):
+        for light in towers.particle_list:
+            self.win.blit(light.image, light.rect)
+            light.update()
+            if light.current_sprites > light.max_current_sprites - 1:
+                towers.particle_list.remove(light)
 
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)

@@ -17,7 +17,7 @@ class GameControl:
                        "mouse position": [0, 0],
                        "keyboard key": 0,
                        "Add money": 0,
-                       "die":False,
+                       "die": False,
                        "Kill all": 0,
                        "Add towers": 0,
                        "pause_esc": 0,
@@ -77,8 +77,8 @@ class GameControl:
                 x, y = pygame.mouse.get_pos()
                 self.events["mouse position"] = [x, y]
         
-        if self.model.hp<=0:
-            self.events["die"]=True
+        if self.model.hp <= 0:
+            self.events["die"] = True
 
     def update_view(self):
         # render background
@@ -102,6 +102,8 @@ class GameControl:
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
+        for tw in self.model.towers:
+            self.view.draw_lightning(tw)
 
     @property
     def quit_game(self)->bool:

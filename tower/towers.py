@@ -49,9 +49,13 @@ class Tower:
         self._damage = [10, 20, 30, 40, 50, 60, 100]   # tower damage
         self.cd_count = 0  # used in self.is_cool_down()
         self.cd_max_count = 60  # used in self.is_cool_down()
+        self.animate_count = 0
         self.attack_strategy = attack_strategy  # chose an attack strategy (AOE, single attack ....)
         self.attack_strategy_name = ""
         self.value = [100, 140, 200, 300, 380, 460, 10000]
+
+        # bullet list
+        self.particle_list = []
 
     def update(self):
         self.current_sprites += self.update_speed
@@ -68,6 +72,9 @@ class Tower:
         # It's something like you hire a "Strategist" to decide how to attack the enemy
         # You can add other ways of attack just by expanding the "attack_strategy.py"
         self.cd_count = self.attack_strategy.attack(enemy_group, self, self.cd_count)
+
+    def throw(self, x: int, y: int):
+        self.particle_list.append(Lightning(x, y))
 
     def get_upgrade_cost(self) -> int:
         return self.value[self.level+1]

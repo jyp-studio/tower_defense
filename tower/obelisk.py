@@ -1,6 +1,33 @@
 from __future__ import annotations
 from tower.towers import *
 from gif import *
+from tower.towers import Tower
+
+
+class Lightning:
+    def __init__(self, x: int, y: int):
+        self.sprites = []
+        self.current_sprites = 0
+        self.max_current_sprites = 8
+        self.update_speed = 0.8
+        self.sprites.append(LIGHT_0)
+        self.sprites.append(LIGHT_1)
+        self.sprites.append(LIGHT_2)
+        self.sprites.append(LIGHT_3)
+        self.sprites.append(LIGHT_4)
+        self.sprites.append(LIGHT_5)
+        self.sprites.append(LIGHT_6)
+        self.sprites.append(LIGHT_7)
+        self.sprites.append(LIGHT_8)
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
 
 
 class ObeliskTower(Tower):
@@ -30,11 +57,11 @@ class ObeliskTower(Tower):
         self.sprites.append(OBELISK_IMAGE_13)
 
         self._range = [120, 140, 150, 160, 170, 180, 280]  # tower attack range
-        self._damage = [20, 40, 60, 80, 120, 160, 400]
-        self.cd_max_count = 120  # tower damage
+        self._damage = [20, 40, 60, 80, 120, 160, 400] # tower damage
+        self.cd_max_count = 20
         self.value = [1000, 2000, 3000, 4000, 5000, 6000, 20000]
 
-
-
+    def throw(self, x: int, y: int):
+        self.particle_list.append(Lightning(x, y))
 
 

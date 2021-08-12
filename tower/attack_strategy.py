@@ -1,8 +1,10 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from enemy.enemies import Enemy
     from tower.towers import Tower
+    from tower.obelisk import Lightning
 import math
 from abc import ABC, abstractmethod
 
@@ -80,40 +82,28 @@ class AOESlowAttack(AttackStrategy):
     """attack an enemy once a time"""
     def attack(self, enemies: list, tower, cd_count)->int:
         for en in enemies:
-            if en.name == "goblin":
-                previous_stride = 10
-            elif en.name == "orc":
-                previous_stride = 5
-            else:
-                previous_stride = 3
+            attack_counter = 0
             if in_range(en, tower):
                 en.health -= tower.damage
-                if en.stride > 2:
-                    en.stride -= 2
-                else:
-                    en.stride = 0.5
-                cd_count = 0
+                en.stride *= 0.8
+                attack_counter += 1
             else:
-                en.stride = previous_stride
+                en.stride *= 1.25 ** attack_counter
         return cd_count
 
 
 class Snipe(AttackStrategy):
     """eliminate an enemy all in once"""
     def attack(self, enemies: list, tower, cd_count) -> int:
-        if tower.level == 6:
-            for en in enemies:
-                if in_range(en, tower):
-                    en.health -= tower.damage * 5
-                    cd_count = 0
+        for en in enemies:
+            if in_range(en, tower):
+                x, y = en.rect.center
+                tower.throw(x, y - 100)
+                en.health -= tower.damage * 5
+                cd_count = 0
             return cd_count
-        else:
-            for en in enemies:
-                if in_range(en, tower):
-                    en.health -= tower.damage * 5
-                    cd_count = 0
-                    return cd_count
-            return cd_count
+        return cd_count
+
 
 
 

@@ -137,3 +137,22 @@ FLY_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fly_3.p
 # rock
 ROCK_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "rock_0.png")), (80, 80))
 ROCK_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "rock_1.png")), (80, 80))
+
+# lightning
+LIGHT_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_0.png")), (40, 600))
+LIGHT_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_1.png")), (40, 600))
+LIGHT_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_2.png")), (40, 600))
+LIGHT_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_3.png")), (40, 600))
+LIGHT_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_4.png")), (40, 600))
+LIGHT_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_5.png")), (40, 600))
+LIGHT_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_6.png")), (40, 600))
+LIGHT_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_7.png")), (40, 600))
+LIGHT_8 = pygame.transform.scale(pygame.image.load(os.path.join("images", "lightning_8.png")), (40, 600))
+
+# red beam
+BEAM_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_0.png")), (30, 100))
+BEAM_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_1.png")), (30, 100))
+BEAM_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_2.png")), (30, 100))
+BEAM_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_3.png")), (30, 100))
+BEAM_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_4.png")), (30, 100))
+BEAM_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_5.png")), (30, 100))

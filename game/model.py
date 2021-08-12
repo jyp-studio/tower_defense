@@ -19,7 +19,6 @@ class GameModel:
         # data
         self.bg_image = pygame.transform.scale(singleton_map_controller.curMap, (WIN_WIDTH, WIN_HEIGHT))
         self.__towers = []
-
         self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()

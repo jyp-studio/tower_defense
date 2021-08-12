@@ -3,7 +3,9 @@ from tower.blue import *
 from tower.red import *
 from tower.moon import *
 from tower.obelisk import *
-from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
+from settings import singleton_vol_controller,singleton_map_controller, game_status, potion_price
+
+import random
 
 """This module is import in model.py"""
 

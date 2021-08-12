@@ -25,12 +25,12 @@ pygame.init()
 class EnemyGroup:
     def __init__(self):
         self.campaign_count = 0
-        self.campaign_max_count = 60   # (unit: frame)
+        self.campaign_max_count = 15   # (unit: frame)
         self.__reserved_members = []
         self.__expedition = []
         self.wave_counter = 0
 
-    def advance(self, model:GameModel):
+    def advance(self, model: GameModel):
         # use model.hp and model.money to access the hp and money information
         self.campaign()
         for en in self.__expedition:
