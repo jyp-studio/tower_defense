@@ -105,6 +105,9 @@ class GameControl:
         for tw in self.model.towers:
             self.view.draw_lightning(tw)
 
+        if self.model.selected_potion_info is not None:
+            self.view.draw_potion_property(self.model.selected_potion_info)
+
     @property
     def quit_game(self)->bool:
         return self.events["game quit"]

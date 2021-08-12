@@ -32,6 +32,7 @@ class GameModel:
         self.selected_plot = None
         self.selected_tower = None
         self.selected_button = None
+        self.selected_potion_info=None
         # apply observer pattern
         self.subject = RequestSubject(self)
         self.seller = TowerSeller(self.subject)
@@ -54,6 +55,7 @@ class GameModel:
         self.properties = TowerProperties(self.subject)
         self.proper = Music(self.subject)
 
+        self.mousePosTracker = MousePosTracker(self.subject)
         #
         self.wave = 0
         self.money = 1000
