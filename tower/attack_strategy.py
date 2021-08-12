@@ -4,7 +4,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from enemy.enemies import Enemy
     from tower.towers import Tower
-    from tower.obelisk import Lightning
 import math
 from abc import ABC, abstractmethod
 
@@ -34,9 +33,11 @@ class AttackStrategy(ABC):
 
 class SingleAttack(AttackStrategy):
     """attack an enemy once a time"""
-    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+    def attack(self, enemies: list, tower: Tower, cd_count: int) -> int:
         for en in enemies:
             if in_range(en, tower):
+                x, y = en.rect.center
+                tower.throw(x, y)
                 en.health -= tower.damage
                 cd_count = 0
                 return cd_count
@@ -93,18 +94,16 @@ class AOESlowAttack(AttackStrategy):
 
 
 class Snipe(AttackStrategy):
-    """eliminate an enemy all in once"""
     def attack(self, enemies: list, tower, cd_count) -> int:
         for en in enemies:
             if in_range(en, tower):
                 x, y = en.rect.center
                 tower.throw(x, y - 100)
+                print(tower.throw(x, y - 100))
                 en.health -= tower.damage * 5
                 cd_count = 0
             return cd_count
         return cd_count
-
-
 
 
 

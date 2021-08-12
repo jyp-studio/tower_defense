@@ -4,6 +4,7 @@ if TYPE_CHECKING:
     from enemy.enemies import EnemyGroup
     from tower.towers import Tower
     from tower.obelisk import Lightning
+    from tower.red import FireBall
     from game_UI.game_UI import GameUI
 import pygame
 import os
@@ -13,6 +14,7 @@ from color_settings import *
 
 TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join("images", "top_info.jpg")), (WIN_WIDTH, 85))
 POTION_LIST = pygame.transform.scale(pygame.image.load(os.path.join("images", "potion_list.png")), (85, 525))
+
 
 class GameView:
     def __init__(self):
@@ -67,6 +69,13 @@ class GameView:
             light.update()
             if light.current_sprites > light.max_current_sprites - 1:
                 towers.particle_list.remove(light)
+
+    def draw_fire_ball(self, towers):
+        for ball in towers.particle_list:
+            self.win.blit(ball.image, ball.rect)
+            ball.update()
+            if ball.current_sprites > ball.max_current_sprites - 1:
+                towers.particle_list.remove(ball)
 
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)

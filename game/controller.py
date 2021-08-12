@@ -85,6 +85,7 @@ class GameControl:
         self.view.draw_bg()
         for tw in self.model.towers:
             self.view.draw_lightning(tw)
+            self.view.draw_fire_ball(tw)
         self.view.draw_base()
         self.view.draw_top_info()
         self.view.draw_potion_list()
@@ -93,7 +94,6 @@ class GameControl:
         self.view.draw_towers(self.model.towers)
         self.view.draw_range(self.model.selected_tower)
         self.view.draw_plots(self.model.plots)
-        """(Q2) Controller request View to render something"""
         if self.model.menu is not None:
             self.view.draw_menu(self.model.menu)
             self.view.draw_btn(self.model.menu.buttons)
@@ -106,6 +106,7 @@ class GameControl:
             self.view.draw_properties(self.model.selected_tower)
         if self.model.selected_potion_info is not None:
             self.view.draw_potion_property(self.model.selected_potion_info)
+
 
 
     @property
