@@ -11,6 +11,8 @@ import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
 from color_settings import *
 
+TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join("images", "top_info.jpg")), (WIN_WIDTH, 85))
+POTION_LIST = pygame.transform.scale(pygame.image.load(os.path.join("images", "potion_list.png")), (85, 525))
 
 class GameView:
     def __init__(self):
@@ -21,6 +23,12 @@ class GameView:
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
+
+    def draw_top_info(self):
+        self.win.blit(TOP_INFO, (0, 0))
+
+    def draw_potion_list(self):
+        self.win.blit(POTION_LIST, (0, 85))
 
     def draw_enemies(self, enemies: EnemyGroup):
         for en in enemies.get():

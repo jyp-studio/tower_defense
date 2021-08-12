@@ -83,8 +83,11 @@ class GameControl:
     def update_view(self):
         # render background
         self.view.draw_bg()
+        for tw in self.model.towers:
+            self.view.draw_lightning(tw)
         self.view.draw_base()
-
+        self.view.draw_top_info()
+        self.view.draw_potion_list()
         self.view.draw_hp(self.model.hp)
         self.view.draw_enemies(self.model.enemies)
         self.view.draw_towers(self.model.towers)
@@ -94,7 +97,6 @@ class GameControl:
         if self.model.menu is not None:
             self.view.draw_menu(self.model.menu)
             self.view.draw_btn(self.model.menu.buttons)
-            
         self.view.draw_btn(self.model.main_menu.buttons)
         self.view.draw_money(self.model.money)
         self.view.draw_wave(self.model.wave)
@@ -102,11 +104,9 @@ class GameControl:
         self.view.draw_time()
         if self.model.selected_tower is not None and self.model.show_tower_info:
             self.view.draw_properties(self.model.selected_tower)
-        for tw in self.model.towers:
-            self.view.draw_lightning(tw)
-
         if self.model.selected_potion_info is not None:
             self.view.draw_potion_property(self.model.selected_potion_info)
+
 
     @property
     def quit_game(self)->bool:
