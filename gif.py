@@ -156,3 +156,12 @@ BEAM_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_be
 BEAM_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_3.png")), (30, 100))
 BEAM_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_4.png")), (30, 100))
 BEAM_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_beam_5.png")), (30, 100))
+
+# fire ball
+FIRE_BALL_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_0.png")), (50, 100))
+FIRE_BALL_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_1.png")), (50, 100))
+FIRE_BALL_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_2.png")), (50, 100))
+FIRE_BALL_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_3.png")), (50, 100))
+FIRE_BALL_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_4.png")), (50, 100))
+FIRE_BALL_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_5.png")), (50, 100))
+FIRE_BALL_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fire_ball_6.png")), (50, 100))
