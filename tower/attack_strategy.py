@@ -101,7 +101,7 @@ class Snipe(AttackStrategy):
                 tower.throw(x, y - 100)
                 en.health -= tower.damage * 5
                 cd_count = 0
-            return cd_count
+                break
         return cd_count
 
 

@@ -24,8 +24,8 @@ pause_button_image = pygame.transform.scale(pygame.image.load("images/pause.png"
 up_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 down_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
 
-BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blood_potion.png")), (60,60))
-AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "aoe_potion.png")), (60,60))
+BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blood_potion.png")), (66,61))
+AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "aoe_potion.png")), (66,60))
 
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
@@ -81,10 +81,10 @@ class MainMenu:
         self._buttons = [Button(music_button_image, "music", 815, 45),
                          Button(muse_button_image, "mute", 895, 45),
                          Button(pause_button_image, "pause", 980, 45),
-                         Button(up_button_image, "potion_up",40,120),
-                         Button(down_button_image, "potion_down",40,565),
-                         Button(BLOOD_POTION_IMAGE,'blood_potion',39,190),
-                         Button(AOE_POTION_IMAGE,'aoe_potion',39,250)
+                         Button(up_button_image, "potion_up",43,123),
+                         Button(down_button_image, "potion_down",43,566),
+                         Button(BLOOD_POTION_IMAGE,'blood_potion',43,196),
+                         Button(AOE_POTION_IMAGE,'aoe_potion',43,257)
                          ]
 
     @property
