@@ -21,7 +21,12 @@ class GameControl:
                        "Kill all": 0,
                        "Add towers": 0,
                        "pause_esc": 0,
-                       "health up": 0
+                       "health up": 0,
+
+                       "Left": 0,
+                       "Right": 0,
+                       "Up": 0,
+                       "Down": 0
                        }
         self.request = None  # response of user input
 
@@ -45,11 +50,16 @@ class GameControl:
                        "mouse position": None,
                        "keyboard key": None,
                        "Add money": None,
-                       "die":False,
+                       "die": False,
                        "Kill all": None,
                        "Add towers": None,
                        "pause_esc": None,
-                       "health up": None
+                       "health up": None,
+
+                       "Left": None,
+                       "Right": None,
+                       "Up": None,
+                       "Down": None
                        }
         # update event
         for event in pygame.event.get():
@@ -72,6 +82,15 @@ class GameControl:
                     self.events["health up"] = pygame.K_h
                 if event.key == pygame.K_ESCAPE:
                     self.events["pause_esc"] = pygame.K_ESCAPE
+
+                if event.key == pygame.K_w:
+                    self.events["Up"] = pygame.K_w
+                if event.key == pygame.K_a:
+                    self.events["Left"] = pygame.K_a
+                if event.key == pygame.K_s:
+                    self.events["Down"] = pygame.K_s
+                if event.key == pygame.K_d:
+                    self.events["Right"] = pygame.K_d
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
@@ -84,13 +103,17 @@ class GameControl:
         # render background
         self.view.draw_bg()
         for tw in self.model.towers:
-            self.view.draw_bullet(tw)
+            if tw.name == "Obelisk Tower" or tw.name == "Moon Tower":
+                self.view.draw_bullet(tw)
         self.view.draw_base()
+        self.view.draw_enemies(self.model.enemies)
+        self.view.draw_towers(self.model.towers)
+        for tw in self.model.towers:
+            if tw.name == "Fire Totem" or tw.name == "Ice Totem":
+                self.view.draw_bullet(tw)
         self.view.draw_top_info()
         self.view.draw_potion_list()
         self.view.draw_hp(self.model.hp)
-        self.view.draw_enemies(self.model.enemies)
-        self.view.draw_towers(self.model.towers)
         self.view.draw_range(self.model.selected_tower)
         self.view.draw_plots(self.model.plots)
         if self.model.menu is not None:
@@ -105,6 +128,7 @@ class GameControl:
             self.view.draw_properties(self.model.selected_tower)
         if self.model.selected_potion_info is not None:
             self.view.draw_potion_property(self.model.selected_potion_info)
+
 
 
 

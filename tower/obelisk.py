@@ -32,7 +32,7 @@ class Lightning:
 
 class ObeliskTower(Tower):
     def __init__(self, x: int, y: int):
-        super().__init__(x, y, Snipe())
+        super().__init__(x, y, ObeliskSnipe())
         self.name = "Obelisk Tower"
         self.intro = "The obelisk from the underground of ancient Egypt "
         self.intro1 = "has the awesome power of annihilating the enemy with "
@@ -62,6 +62,6 @@ class ObeliskTower(Tower):
         self.value = [1000, 2000, 3000, 4000, 5000, 6000, 20000]
 
     def throw(self, x: int, y: int):
-        self.particle_list.append(Lightning(x, y))
+        self.particle_list.append(Lightning(x, y - 100))
 
 

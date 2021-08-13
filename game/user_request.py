@@ -49,6 +49,16 @@ class EnemyGenerator:
                 model.wave += 1
 
 
+class HeroMove:
+    def __init__(self, subject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """add new enemy"""
+        if user_request == "Left":
+            pass
+
+
 class HealthUp:
     def __init__(self, subject):
         subject.register(self)

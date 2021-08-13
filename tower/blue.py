@@ -32,7 +32,7 @@ class BlueFlame:
 
 class BlueFireTower(Tower):
     def __init__(self, x: int, y: int):
-        super().__init__(x, y, AOESlowAttack())
+        super().__init__(x, y, BlueAttack())
         self.name = "Ice Totem"
         self.intro = "Black magic wizards sacrifice hundreds of thousands of "
         self.intro1 = "virus-infected mutants to summon ice totems "
@@ -53,8 +53,8 @@ class BlueFireTower(Tower):
         self._damage = [10, 15, 19, 25, 30, 37, 60]
         self.value = [150, 200, 250, 300, 400, 500, 10000]
 
-        def throw(self, x: int, y: int):
-            self.particle_list.append(BlueFlame(x, y))
+    def throw(self, x: int, y: int):
+        self.particle_list.append(BlueFlame(x, y))
 
 
 

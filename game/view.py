@@ -70,22 +70,6 @@ class GameView:
             if bullet.current_sprites > bullet.max_current_sprites - 1:
                 towers.particle_list.remove(bullet)
 
-        """
-    def draw_flame(self, towers):
-        for flame in towers.particle_list:
-            self.win.blit(flame.image, flame.rect)
-            flame.update()
-            if flame.current_sprites > flame.max_current_sprites - 1:
-                towers.particle_list.remove(flame)
-
-    def draw_magic_circle(self, towers):
-        for magic in towers.particle_list:
-            self.win.blit(magic.image, magic.rect)
-            magic.update()
-            if magic.current_sprites > magic.max_current_sprites - 1:
-                towers.particle_list.remove(magic)
-        """
-
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)
         for btn in menu.buttons:
@@ -182,7 +166,6 @@ class GameView:
         self.win.blit(text, (220, 10))
         text = self.font2.render(f"{h}:{min}:{sec}", True, WHITE)
         self.win.blit(text, (220, 40))
-
 
     def draw_base(self):
         baseRect=singleton_map_controller.curBaseRect
