@@ -31,6 +31,7 @@ class BlueFlame:
 
 
 class BlueFireTower(Tower):
+
     def __init__(self, x: int, y: int):
         super().__init__(x, y, BlueAttack())
         self.name = "Ice Totem"
