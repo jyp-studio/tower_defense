@@ -16,6 +16,7 @@ class EnemyFly(Enemy):
         self.sprites.append(FLY_3)
 
         self.stride = 6
+        self.max_stride = 6
         self.health = 20
         self.max_health = 20
         self.is_dead = 0

@@ -13,6 +13,7 @@ class EnemyROCK(Enemy):
         self.sprites.append(ROCK_1)
 
         self.stride = 1
+        self.max_stride = 1
         self.health = 99999
         self.max_health = 99999
         self.is_dead = 0

@@ -107,7 +107,7 @@ class EnemyGroup:
                         en.max_health = 2000
 
             # delete the object when it reach the base
-            if singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
+            elif singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
                 model.hp -= 1
 

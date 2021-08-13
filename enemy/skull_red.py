@@ -19,6 +19,7 @@ class EnemySKULL5(Enemy):
         self.sprites.append(RED_SKULL_7)
 
         self.stride = 1
+        self.max_stride = 1
         self.health = 500
         self.max_health = 500
         self.is_dead = 1

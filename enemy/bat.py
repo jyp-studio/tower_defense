@@ -15,6 +15,7 @@ class EnemyBat(Enemy):
         self.sprites.append(BAT_3)
 
         self.stride = 7
+        self.max_stride =7
         self.health = 100
         self.max_health = 100
         self.is_dead = 0

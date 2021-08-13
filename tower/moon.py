@@ -7,18 +7,18 @@ class Magic:
     def __init__(self, x: int, y: int):
         self.sprites = []
         self.current_sprites = 0
-        self.max_current_sprites = 10
+        self.max_current_sprites = 4
         self.update_speed = 0.5
         self.sprites.append(MAGIC_0)
         self.sprites.append(MAGIC_1)
         self.sprites.append(MAGIC_0)
         self.sprites.append(MAGIC_1)
-        self.sprites.append(MAGIC_0)
-        self.sprites.append(MAGIC_1)
-        self.sprites.append(MAGIC_0)
-        self.sprites.append(MAGIC_1)
-        self.sprites.append(MAGIC_0)
-        self.sprites.append(MAGIC_1)
+        # self.sprites.append(MAGIC_0)
+        # self.sprites.append(MAGIC_1)
+        # self.sprites.append(MAGIC_0)
+        # self.sprites.append(MAGIC_1)
+        # self.sprites.append(MAGIC_0)
+        # self.sprites.append(MAGIC_1)
 
         self.image = self.sprites[self.current_sprites]
         self.rect = self.image.get_rect()

@@ -22,6 +22,7 @@ class Enemy:
         self.path_index = 0
         self.move_count = 0
         self.stride = 3
+        self.max_stride=3
         self.health = 50
         self.max_health = 50
         self.is_dead = 0

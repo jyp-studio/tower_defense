@@ -45,10 +45,11 @@ class RedAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower):
-                        x, y = en.rect.center
-                        tower.throw(x, y - 100)
-                        exist_enemy = True
-                        break
+                        if en.name != "fly":    #非飛行敵人才有攻擊動畫
+                            x, y = en.rect.center
+                            tower.throw(x, y - 100)
+                            exist_enemy = True
+                            break
 
                 if not exist_enemy:
                     cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始攻擊動畫的時候
@@ -58,9 +59,10 @@ class RedAttack(AttackStrategy):
         else:
             for en in enemies:
                 if in_range(en, tower):
-                    en.health -= tower.damage
-                    cd_count = 0
-                    return cd_count
+                    if en.name != "fly":    #非飛行敵人才有攻擊
+                        en.health -= tower.damage
+                        break
+            cd_count = 0
             return cd_count
 
 
@@ -80,9 +82,10 @@ class BlueAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower):
-                        x, y = en.rect.center
-                        tower.throw(x, y - 100)
-                        exist_enemy = True
+                        if en.name != "fly":
+                            x, y = en.rect.center
+                            tower.throw(x, y - 100)
+                            exist_enemy = True
 
                 if not exist_enemy:
                     cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始攻擊動畫的時候
@@ -98,7 +101,7 @@ class BlueAttack(AttackStrategy):
                         en.health -= tower.damage*2
                     else:
                         en.health -= tower.damage
-                    cd_count = 0
+            cd_count = 0
             return cd_count
 
 
@@ -108,7 +111,7 @@ class MoonAttack(AttackStrategy):
     # attack_anime=Magic(0,0)
 
     def attack(self, enemies: list, tower, cd_count)->int:
-        attack_animate_time = 10 #等同各攻擊動畫的max_current_sprites+1
+        attack_animate_time = 4 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
         if cd_count < tower.cd_max_count:
@@ -135,7 +138,7 @@ class MoonAttack(AttackStrategy):
                         en.health -= tower.damage*2
                     else:
                         en.health -= tower.damage
-
+    
                     en.stride *= 0.8
                     attack_counter += 1
                 else:
@@ -151,7 +154,7 @@ class ObeliskSnipe(AttackStrategy):
 
     def attack(self, enemies: list, tower, cd_count) -> int:
         
-        attack_animate_time = 9 #等同各攻擊動畫的max_current_sprites+1
+        attack_animate_time = 14 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
         if cd_count < tower.cd_max_count:
@@ -163,7 +166,6 @@ class ObeliskSnipe(AttackStrategy):
                         x, y = en.rect.center
                         tower.throw(x, y)
                         exist_enemy = True
-                        # break
 
                 if not exist_enemy:
                     cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始打雷的時候
@@ -173,18 +175,14 @@ class ObeliskSnipe(AttackStrategy):
         else:
             for en in enemies:
                 if in_range(en, tower):
-                    cd_count = 0
                     if en.name == "boss":   #對boss傷害
-                        if en.health >= en.max_health * 0.05:
+                        if en.health >= en.max_health * 0.05:   #5%以上扣20%，以下秒殺
                             en.health -= en.max_health * 0.2
-                            # break
                         else:
                             en.health = 0
-                            # break
                     else:   #對普通怪傷害
                         en.health -= tower.damage * 3
-                        # break
-
+            cd_count = 0
             return cd_count
 
 

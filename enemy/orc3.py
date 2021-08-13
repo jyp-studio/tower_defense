@@ -17,6 +17,7 @@ class EnemyOrc3(Enemy):
         self.sprites.append(ORC3_6)
 
         self.stride = 2
+        self.max_stride = 2
         self.health = 400
         self.max_health = 400
         self.is_dead = 0
