@@ -34,5 +34,5 @@ potion_price:dict={
     "aoe_potion":2000
 }
 
-# test transparency
+# transparency of some menu btn
 test_transparency=0

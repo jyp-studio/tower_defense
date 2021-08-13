@@ -1,6 +1,6 @@
 import pygame
 import os
-from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller
+from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency
 
 class ExitWin:
     def __init__(self,win:pygame.Surface):
@@ -21,9 +21,8 @@ class ExitWin:
         self.bg_win.blit(self.menu_img, (325,175))
 
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
-        transparency = 50
         for btn in self.buttons:
-            pygame.draw.rect(surface,(255,255,255,transparency),btn)
+            pygame.draw.rect(surface,(255,255,255,test_transparency),btn)
         
         self.bg_win.blit(surface,(0,0))
         
