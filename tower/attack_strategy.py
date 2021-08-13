@@ -139,10 +139,11 @@ class MoonAttack(AttackStrategy):
                     else:
                         en.health -= tower.damage
     
-                    en.stride *= 0.8
-                    attack_counter += 1
+                    # en.stride *= 0.8
+                    # attack_counter += 1
                 else:
-                    en.stride *= 1.25 ** attack_counter
+                    pass
+                    # en.stride *= 1.25 ** attack_counter
             cd_count = 0
             return cd_count
 
