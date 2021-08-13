@@ -7,7 +7,7 @@ pygame.init()
 class EnemyBat(Enemy):
     def __init__(self):
         super().__init__(BAT_0)
-        self.name = "bat"
+        self.name = "fly"
         self.max_current_sprites = 3
         self.update_speed = 0.25
         self.sprites.append(BAT_1)

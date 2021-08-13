@@ -8,7 +8,7 @@ pygame.init()
 class EnemyFly(Enemy):
     def __init__(self):
         super().__init__(FLY_0)
-        self.name = "fly"
+        self.name = "bug"
         self.max_current_sprites = 3
         self.update_speed = 0.5
         self.sprites.append(FLY_1)

@@ -63,19 +63,28 @@ class GameView:
                 pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 19, y), tw.range)
             self.win.blit(surface, (0, 0))
 
-    def draw_lightning(self, towers):
-        for light in towers.particle_list:
-            self.win.blit(light.image, light.rect)
-            light.update()
-            if light.current_sprites > light.max_current_sprites - 1:
-                towers.particle_list.remove(light)
+    def draw_bullet(self, towers):
+        for bullet in towers.particle_list:
+            self.win.blit(bullet.image, bullet.rect)
+            bullet.update()
+            if bullet.current_sprites > bullet.max_current_sprites - 1:
+                towers.particle_list.remove(bullet)
 
-    def draw_fire_ball(self, towers):
-        for ball in towers.particle_list:
-            self.win.blit(ball.image, ball.rect)
-            ball.update()
-            if ball.current_sprites > ball.max_current_sprites - 1:
-                towers.particle_list.remove(ball)
+        """
+    def draw_flame(self, towers):
+        for flame in towers.particle_list:
+            self.win.blit(flame.image, flame.rect)
+            flame.update()
+            if flame.current_sprites > flame.max_current_sprites - 1:
+                towers.particle_list.remove(flame)
+
+    def draw_magic_circle(self, towers):
+        for magic in towers.particle_list:
+            self.win.blit(magic.image, magic.rect)
+            magic.update()
+            if magic.current_sprites > magic.max_current_sprites - 1:
+                towers.particle_list.remove(magic)
+        """
 
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)

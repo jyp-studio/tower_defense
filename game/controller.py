@@ -84,8 +84,7 @@ class GameControl:
         # render background
         self.view.draw_bg()
         for tw in self.model.towers:
-            self.view.draw_lightning(tw)
-            self.view.draw_fire_ball(tw)
+            self.view.draw_bullet(tw)
         self.view.draw_base()
         self.view.draw_top_info()
         self.view.draw_potion_list()
