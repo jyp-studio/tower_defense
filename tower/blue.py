@@ -53,8 +53,8 @@ class BlueFireTower(Tower):
         self._damage = [10, 15, 19, 25, 30, 37, 60]
         self.value = [150, 200, 250, 300, 400, 500, 10000]
 
-        def throw(self, x: int, y: int):
-            self.particle_list.append(BlueFlame(x, y))
+    def throw(self, x: int, y: int):
+        self.particle_list.append(BlueFlame(x, y))
 
 
 
