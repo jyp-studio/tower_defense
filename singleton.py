@@ -158,7 +158,7 @@ class MapController:
             self.__map_index=int(f.read())
         self.__map_index=self.__map_index if 1<=self.__map_index<=self.__max_map_index else 1
 
-        self.__preview_map_index=int(self.__map_index)
+        self.__next_map_index=int(self.__map_index+1)
         
         self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
 
@@ -184,12 +184,12 @@ class MapController:
         self.__map_index=value if 1<=value<=self.__max_map_index else self.__map_index
     
     @property
-    def preview_map_index(self)->int:
-        return self.__preview_map_index
+    def next_map_index(self)->int:
+        return self.__next_map_index
     
-    @preview_map_index.setter
-    def preview_map_index(self, value:int):
-        self.__preview_map_index=value if 1<=value<=self.__max_map_index else self.__preview_map_index
+    @next_map_index.setter
+    def next_map_index(self, value:int):
+        self.__next_map_index=value if 2<=value<=self.__max_map_index else self.__next_map_index
 
     @property
     def curMap(self)->pygame.Surface:

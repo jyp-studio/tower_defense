@@ -276,8 +276,8 @@ class MinusMapIndex:
         """minusMapIndex"""
         if user_request == "minusMapIndex":
             model.sound.play()
-            singleton_map_controller.preview_map_index-=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.preview_map_index)+".png")), (500, 300))
+            singleton_map_controller.map_index-=1
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
 
 class AddMapIndex:
@@ -288,8 +288,8 @@ class AddMapIndex:
         """AddMapIndex"""
         if user_request == "addMapIndex":
             model.sound.play()
-            singleton_map_controller.preview_map_index+=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.preview_map_index)+".png")), (500, 300))
+            singleton_map_controller.map_index+=1
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
 
 
 class GoStartMenu:
@@ -310,6 +310,14 @@ class Die:
         """deal with event: die by call GameOver.run()"""
         if user_request == "die":
             model.GameOverMenu.run()
+class Live:
+    def __init__(self, subject:RequestSubject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """deal with event: die by call GameOver.run()"""
+        if user_request == "live":
+            model.GameWinMenu.run()
 
 class Potionfunction:
     def __init__(self, subject:RequestSubject):

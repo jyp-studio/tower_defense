@@ -11,6 +11,7 @@ from settings import WIN_WIDTH, WIN_HEIGHT,singleton_vol_controller,singleton_ma
 from game_UI.game_UI import GameUI
 from opt_menu.opt_menu import OptMenu
 from game_over.game_over import GameOver
+from game_win.game_win import GameWin
 from game.user_request import *
 
 
@@ -18,6 +19,8 @@ class GameModel:
     def __init__(self):
         # data
         self.bg_image = pygame.transform.scale(singleton_map_controller.curMap, (WIN_WIDTH, WIN_HEIGHT))
+        singleton_map_controller.next_map_index=singleton_map_controller.map_index+1
+
         self.__towers = []
         self.__enemies = EnemyGroup()
         self.__menu = None
@@ -45,6 +48,7 @@ class GameModel:
         self.factory = TowerFactory(self.subject)
         self.generator = EnemyGenerator(self.subject)
         self.dieHandler = Die(self.subject)
+        self.liveHandler = Live(self.subject)
         self.potion = Potionfunction(self.subject)
 
         self.muse = Muse(self.subject)
@@ -68,6 +72,7 @@ class GameModel:
         self.UI = GameUI()
         self.opt_menu = OptMenu()
         self.GameOverMenu = GameOver()
+        self.GameWinMenu=GameWin()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -77,6 +82,11 @@ class GameModel:
         """get keyboard response or button response"""
         # initial
         self.selected_button = None
+        #game result
+        if events["die"]:
+            return "die"
+        if events["live"]:
+            return "live"
         # key event
         if events["keyboard key"] is not None:
             return "start new wave"
@@ -106,8 +116,6 @@ class GameModel:
             if self.selected_button is not None:
                 return self.selected_button.response
             return "nothing"
-        if events["die"]:
-            return "die"
         return "nothing"
 
     def select(self, mouse_x: int, mouse_y: int) -> None:
