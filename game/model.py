@@ -90,6 +90,15 @@ class GameModel:
             return "health up"
         if events["pause_esc"] is not None:
             return "pause"
+
+        if events["Left"] is not None:
+            return "left"
+        if events["Up"] is not None:
+            return "up"
+        if events["Right"] is not None:
+            return "right"
+        if events["Down"] is not None:
+            return "down"
         # mouse event
         if events["mouse position"] is not None:
             x, y = events["mouse position"]

@@ -7,12 +7,18 @@ class Magic:
     def __init__(self, x: int, y: int):
         self.sprites = []
         self.current_sprites = 0
-        self.max_current_sprites = 3
-        self.update_speed = 0.8
+        self.max_current_sprites = 10
+        self.update_speed = 0.5
         self.sprites.append(MAGIC_0)
         self.sprites.append(MAGIC_1)
-        self.sprites.append(MAGIC_2)
-        self.sprites.append(MAGIC_3)
+        self.sprites.append(MAGIC_0)
+        self.sprites.append(MAGIC_1)
+        self.sprites.append(MAGIC_0)
+        self.sprites.append(MAGIC_1)
+        self.sprites.append(MAGIC_0)
+        self.sprites.append(MAGIC_1)
+        self.sprites.append(MAGIC_0)
+        self.sprites.append(MAGIC_1)
 
         self.image = self.sprites[self.current_sprites]
         self.rect = self.image.get_rect()
@@ -27,7 +33,7 @@ class Magic:
 
 class MoonTower(Tower):
     def __init__(self, x: int, y: int):
-        super().__init__(x, y, SingleSlowAttack())
+        super().__init__(x, y, MoonAttack())
         self.name = "Moon Tower"
         self.intro = "The ruby that absorbs the essence of the sun and the "
         self.intro1 = "moon is carved into the shape of the moon and installed "
@@ -50,7 +56,7 @@ class MoonTower(Tower):
         self.value = [100, 140, 200, 280, 360, 450, 10000]
 
     def throw(self, x: int, y: int):
-        self.particle_list.append(Magic(x, y))
+        self.particle_list.append(Magic(x, y + 100))
 
 
 

@@ -33,7 +33,7 @@ class Flame:
 
 class RedFireTower(Tower):
     def __init__(self, x: int, y: int):
-        super().__init__(x, y, SingleAttack())
+        super().__init__(x, y, RedAttack())
         self.name = "Fire Totem"
         self.intro = "The shaman with white magic devoted his heart "
         self.intro1 = "to the flame totem to make it alive"
@@ -56,7 +56,7 @@ class RedFireTower(Tower):
         self.value = [120, 160, 220, 320, 400, 500, 10000]
 
     def throw(self, x: int, y: int):
-        self.particle_list.append(Flame(x, y))
+        self.particle_list.append(Flame(x, y - 90))
 
 
 

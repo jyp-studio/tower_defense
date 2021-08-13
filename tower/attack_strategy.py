@@ -31,7 +31,8 @@ class AttackStrategy(ABC):
         return "Please implement this method"
 
 
-class SingleAttack(AttackStrategy):
+# red flame: single
+class RedAttack(AttackStrategy):
     """attack an enemy once a time"""
 
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
@@ -57,61 +58,14 @@ class SingleAttack(AttackStrategy):
         else:
             for en in enemies:
                 if in_range(en, tower):
-                    x, y = en.rect.center
-                    tower.throw(x, y)
                     en.health -= tower.damage
                     cd_count = 0
                     return cd_count
             return cd_count
 
 
-class SingleSlowAttack(AttackStrategy):
-    """attack an enemy once a time"""
-
-    def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
-        attack_animate_time = 4 #等同各攻擊動畫的max_current_sprites+1
-
-        exist_enemy = False
-        if cd_count < tower.cd_max_count:
-            if cd_count - 1 == tower.cd_max_count-attack_animate_time:
-                
-                #確認有無敵人在圈內
-                for en in enemies:
-                    if in_range(en, tower):
-                        x, y = en.rect.center
-                        tower.throw(x, y - 100)
-                        exist_enemy = True
-                        break
-
-                if not exist_enemy:
-                    cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始攻擊動畫的時候
-        
-            return cd_count
-        else:
-            for en in enemies:
-                if en.name == "goblin":
-                    previous_stride = 10
-                elif en.name == "orc":
-                    previous_stride = 5
-                else:
-                    previous_stride = 3
-
-                if in_range(en, tower):
-                    if en.name != "fly":
-                        en.health -= tower.damage
-                    if en.stride > 2:
-                        en.stride -= 2
-                    else:
-                        en.stride = 0.5
-                    cd_count = 0
-                    return cd_count
-                else:
-                    en.stride = previous_stride
-
-            return cd_count
-
-
-class AOE(AttackStrategy):
+# blue flame: AOE
+class BlueAttack(AttackStrategy):
     """attack all the enemy in range once a time"""
 
     # attack_anime=BlueFlame(0,0)
@@ -148,7 +102,8 @@ class AOE(AttackStrategy):
             return cd_count
 
 
-class AOESlowAttack(AttackStrategy):
+# moon: AOE slow
+class MoonAttack(AttackStrategy):
 
     # attack_anime=Magic(0,0)
 
@@ -185,11 +140,12 @@ class AOESlowAttack(AttackStrategy):
                     attack_counter += 1
                 else:
                     en.stride *= 1.25 ** attack_counter
-            cd_count=0
+            cd_count = 0
             return cd_count
 
 
-class Snipe(AttackStrategy):
+# obelisk: snipe all
+class ObeliskSnipe(AttackStrategy):
 
     # attack_anime=Lightning(0,0)
 
@@ -205,9 +161,9 @@ class Snipe(AttackStrategy):
                 for en in enemies:
                     if in_range(en, tower):
                         x, y = en.rect.center
-                        tower.throw(x, y - 100)
+                        tower.throw(x, y)
                         exist_enemy = True
-                        break
+                        # break
 
                 if not exist_enemy:
                     cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始打雷的時候
@@ -221,13 +177,13 @@ class Snipe(AttackStrategy):
                     if en.name == "boss":   #對boss傷害
                         if en.health >= en.max_health * 0.05:
                             en.health -= en.max_health * 0.2
-                            break
+                            # break
                         else:
-                            en.health =0
-                            break
+                            en.health = 0
+                            # break
                     else:   #對普通怪傷害
                         en.health -= tower.damage * 3
-                        break
+                        # break
 
             return cd_count
 

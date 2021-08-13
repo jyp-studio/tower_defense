@@ -32,7 +32,7 @@ class BlueFlame:
 
 class BlueFireTower(Tower):
     def __init__(self, x: int, y: int):
-        super().__init__(x, y, AOESlowAttack())
+        super().__init__(x, y, BlueAttack())
         self.name = "Ice Totem"
         self.intro = "Black magic wizards sacrifice hundreds of thousands of "
         self.intro1 = "virus-infected mutants to summon ice totems "
