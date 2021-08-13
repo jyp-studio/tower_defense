@@ -18,6 +18,7 @@ class GameControl:
                        "keyboard key": 0,
                        "Add money": 0,
                        "die": False,
+                       "live":False,
                        "Kill all": 0,
                        "Add towers": 0,
                        "pause_esc": 0,
@@ -51,6 +52,7 @@ class GameControl:
                        "keyboard key": None,
                        "Add money": None,
                        "die": False,
+                       "live":False,
                        "Kill all": None,
                        "Add towers": None,
                        "pause_esc": None,
@@ -61,6 +63,10 @@ class GameControl:
                        "Up": None,
                        "Down": None
                        }
+        if self.model.hp <= 0:
+            self.events["die"] = True
+        if self.model.wave==7 and not len(self.model.enemies.get()):
+            self.events["live"] = True
         # update event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -95,9 +101,6 @@ class GameControl:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 self.events["mouse position"] = [x, y]
-        
-        if self.model.hp <= 0:
-            self.events["die"] = True
 
     def update_view(self):
         # render background
