@@ -18,11 +18,10 @@ from game.user_request import *
 class GameModel:
     def __init__(self):
         # data
+        self.level_counter = int(singleton_map_controller.map_index)
         self.bg_image = pygame.transform.scale(singleton_map_controller.curMap, (WIN_WIDTH, WIN_HEIGHT))
-        singleton_map_controller.next_map_index=singleton_map_controller.map_index+1
+        singleton_map_controller.next_map_index = singleton_map_controller.map_index + 1
 
-        self.__towers = []
-        self.__enemies = EnemyGroup()
         self.__menu = None
         self.__main_menu = MainMenu()
         self.__plots = []
@@ -60,11 +59,28 @@ class GameModel:
         self.proper = Music(self.subject)
 
         self.mousePosTracker = MousePosTracker(self.subject)
-        #
-        self.wave = 0
-        self.money = 1000
+
         self.max_hp = 10
         self.hp = self.max_hp
+        if self.level_counter == 1:
+            self.wave = 0
+            self.money = 1000
+        elif self.level_counter == 2:
+            self.wave = 3
+            self.money = 2000
+        elif self.level_counter == 3:
+            self.wave = 6
+            self.money = 3000
+        elif self.level_counter == 4:
+            self.wave = 9
+            self.money = 4000
+        else:
+            self.wave = 12
+            self.money = 5000
+
+        self.__towers = []
+        self.__enemies = EnemyGroup(self.wave)
+
         self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.mp3"))
 
         self.sound.set_volume(singleton_vol_controller.sound_volume)
@@ -72,7 +88,7 @@ class GameModel:
         self.UI = GameUI()
         self.opt_menu = OptMenu()
         self.GameOverMenu = GameOver()
-        self.GameWinMenu=GameWin()
+        self.GameWinMenu = GameWin()
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""
@@ -82,7 +98,7 @@ class GameModel:
         """get keyboard response or button response"""
         # initial
         self.selected_button = None
-        #game result
+        # game result
         if events["die"]:
             return "die"
         if events["live"]:
@@ -100,15 +116,6 @@ class GameModel:
             return "health up"
         if events["pause_esc"] is not None:
             return "pause"
-
-        if events["Left"] is not None:
-            return "left"
-        if events["Up"] is not None:
-            return "up"
-        if events["Right"] is not None:
-            return "right"
-        if events["Down"] is not None:
-            return "down"
         # mouse event
         if events["mouse position"] is not None:
             x, y = events["mouse position"]

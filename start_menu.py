@@ -7,6 +7,8 @@ from settings import WIN_WIDTH, WIN_HEIGHT, FPS,singleton_vol_controller, single
 from opt_menu.opt_menu import OptMenu
 from exit_win.exit_win import ExitWin
 
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
+
 pygame.init()
 pygame.mixer.init()
 
@@ -50,6 +52,8 @@ class StartMenu:
             self.menu_win.blit(surface, (0, 0))
 
             x, y = pygame.mouse.get_pos()
+            pygame.mouse.set_visible(False)
+            self.menu_win.blit(MOUSE, (x, y))
             for event in pygame.event.get():
                 # quit
                 if event.type == pygame.QUIT:
@@ -111,8 +115,9 @@ class Buttons:
         else:
             self.frame = None
 
-    def draw_frame(self, win:pygame.Surface):
+    def draw_frame(self, win: pygame.Surface):
         if self.frame is not None:
             pygame.draw.rect(win, WHITE, self.frame, 10)
+
 
 

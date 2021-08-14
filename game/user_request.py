@@ -39,14 +39,7 @@ class EnemyGenerator:
         """add new enemy"""
         if user_request == "start new wave":
             if model.enemies.is_empty():
-                if 0 < model.wave % 7 <= 3:
-                    model.enemies.add(10 * model.wave)
-                elif model.wave % 7 == 5:
-                    model.enemies.add(4)
-                elif model.wave % 7 == 6:
-                    model.enemies.add(1)
-                else:
-                    model.enemies.add(10 * (model.wave + 1))
+                model.enemies.add(30)
                 model.wave += 1
 
 

@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency,MOUSE
 from color_settings import *
 
 TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join("images", "top_info.jpg")), (WIN_WIDTH, 85))
@@ -21,10 +21,16 @@ class GameView:
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
         self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
-        self.font3= pygame.font.Font(os.path.join("font", "comicz.ttf"), 15)
+        self.font3 = pygame.font.Font(os.path.join("font", "comicz.ttf"), 15)
+        self.font4 = pygame.font.Font(os.path.join("font", "ARCADECLASSIC.TTF"), 20)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
+
+    def draw_mouse(self):
+        x, y = pygame.mouse.get_pos()
+        # pygame.mouse.set_visible(False)
+        self.win.blit(MOUSE, (x, y))
 
     def draw_top_info(self):
         self.win.blit(TOP_INFO, (0, 0))
@@ -41,6 +47,11 @@ class GameView:
             bar_height = 5
             pygame.draw.rect(self.win, RED, [en.rect.x, en.rect.y - 10, max_bar_width, bar_height])
             pygame.draw.rect(self.win, GREEN, [en.rect.x, en.rect.y - 10, bar_width, bar_height])
+            # draw health num
+            en_hp = f"{en.health}"
+            hp_text = self.font4.render(en_hp, True, (255, 255, 255))
+            size = len(en_hp)
+            self.win.blit(hp_text, (en.rect.x + en.rect.w - size * 11, en.rect.y - 30))
 
     def draw_towers(self, towers: list):
         # draw tower

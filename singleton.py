@@ -159,9 +159,11 @@ class VolController:
             cls.sound_volume=voice.get_volume()
         else:
             cls.music_volume=voice.get_volume()
-    
+
+
 class MapController:
-    __max_map_index=5
+    __max_map_index = 5
+
     def __init__(self,WIN_WIDTH:int, WIN_HEIGHT:int):
         self.__WIN_WIDTH=WIN_WIDTH
         self.__WIN_HEIGHT=WIN_HEIGHT

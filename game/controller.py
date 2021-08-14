@@ -22,12 +22,7 @@ class GameControl:
                        "Kill all": 0,
                        "Add towers": 0,
                        "pause_esc": 0,
-                       "health up": 0,
-
-                       "Left": 0,
-                       "Right": 0,
-                       "Up": 0,
-                       "Down": 0
+                       "health up": 0
                        }
         self.request = None  # response of user input
 
@@ -56,16 +51,20 @@ class GameControl:
                        "Kill all": None,
                        "Add towers": None,
                        "pause_esc": None,
-                       "health up": None,
-
-                       "Left": None,
-                       "Right": None,
-                       "Up": None,
-                       "Down": None
+                       "health up": None
                        }
         if self.model.hp <= 0:
             self.events["die"] = True
-        if self.model.wave==3 and not len(self.model.enemies.get()):
+
+        if self.model.wave == 3 and self.model.level_counter == 1 and not len(self.model.enemies.get()):
+            self.events["live"] = True
+        elif self.model.wave == 6 and self.model.level_counter == 2 and not len(self.model.enemies.get()):
+            self.events["live"] = True
+        elif self.model.wave == 9 and self.model.level_counter == 3 and not len(self.model.enemies.get()):
+            self.events["live"] = True
+        elif self.model.wave == 12 and self.model.level_counter == 4 and not len(self.model.enemies.get()):
+            self.events["live"] = True
+        elif self.model.wave == 13 and self.model.level_counter == 5 and not len(self.model.enemies.get()):
             self.events["live"] = True
         # update event
         for event in pygame.event.get():
@@ -88,15 +87,6 @@ class GameControl:
                     self.events["health up"] = pygame.K_h
                 if event.key == pygame.K_ESCAPE:
                     self.events["pause_esc"] = pygame.K_ESCAPE
-
-                if event.key == pygame.K_w:
-                    self.events["Up"] = pygame.K_w
-                if event.key == pygame.K_a:
-                    self.events["Left"] = pygame.K_a
-                if event.key == pygame.K_s:
-                    self.events["Down"] = pygame.K_s
-                if event.key == pygame.K_d:
-                    self.events["Right"] = pygame.K_d
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
@@ -131,6 +121,7 @@ class GameControl:
             self.view.draw_properties(self.model.selected_tower)
         if self.model.selected_potion_info is not None:
             self.view.draw_potion_property(self.model.selected_potion_info)
+        self.view.draw_mouse()
 
 
 

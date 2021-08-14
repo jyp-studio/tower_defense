@@ -1,6 +1,6 @@
 import pygame
 import os
-from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller
+from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller,MOUSE
 from exit_win.exit_win import ExitWin
 
 VIC_IMG=pygame.transform.scale(pygame.image.load("images/victory.png"), (WIN_WIDTH, WIN_HEIGHT))
@@ -25,6 +25,9 @@ class Victory:
         for btn in self.buttons:
             pygame.draw.rect(surface,(255,255,255,128),btn)
         self.win.blit(surface, (0, 0))
+
+        x, y = pygame.mouse.get_pos()
+        self.win.blit(MOUSE, (x, y))
 
         if self.has_draw_reward:
             self.draw_reward()
@@ -67,7 +70,7 @@ class Victory:
                 if event.type == pygame.QUIT:
                     exitWin=ExitWin(self.win)
                     exitWin.run()
-                    if game_status:
+                    if game_status["run"]:
                         run=True
                     else:
                         run=False

@@ -1,8 +1,11 @@
 import pygame
-from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller
+from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller,MOUSE
 from exit_win.exit_win import ExitWin
+import os
+
 
 GameOver_IMG=pygame.transform.scale(pygame.image.load("images/next_level.png"), (WIN_WIDTH, WIN_HEIGHT))
+
 
 class GameWin:
     def __init__(self):
@@ -23,6 +26,11 @@ class GameWin:
             pygame.draw.rect(surface,(255,255,255,128),btn)
         self.win.blit(surface, (0, 0))
 
+    def draw_mouse(self):
+        x, y = pygame.mouse.get_pos()
+        # pygame.mouse.set_visible(False)
+        self.win.blit(MOUSE, (x, y))
+
     def play_music(self):
         pygame.mixer.music.fadeout(int(1*1000)) 
         pygame.mixer.music.load("./sound/next_level.mp3")
@@ -38,11 +46,15 @@ class GameWin:
         while run:
             clock.tick(FPS)
             self.draw()
+            self.draw_mouse()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    run=False
                     exitWin=ExitWin(self.win)
                     exitWin.run()
+                    if game_status["run"]:
+                        run=True
+                    else:
+                        run=False
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = pygame.mouse.get_pos()
