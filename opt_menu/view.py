@@ -5,6 +5,7 @@ from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE,singleton_vo
 from color_settings import *
 
 MENU_VIEW = pygame.transform.scale(pygame.image.load(os.path.join("images", "menu_background.png")), (WIN_WIDTH, WIN_HEIGHT))
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
 
 
 class OptMenuView:
@@ -14,6 +15,11 @@ class OptMenuView:
 
     def draw_bg(self):
         self.win.blit(MENU_VIEW, (0, 0))
+
+    def draw_mouse(self):
+        x, y = pygame.mouse.get_pos()
+        pygame.mouse.set_visible(False)
+        self.win.blit(MOUSE, (x, y))
     
     def draw_btn(self,buttonList:list):
         for btn in buttonList:

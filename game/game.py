@@ -23,6 +23,6 @@ class Game:
 
     def play_music(self):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load("./sound/game.mp3")
+        pygame.mixer.music.load("./sound/level_5.mp3")
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)

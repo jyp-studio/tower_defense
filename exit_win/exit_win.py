@@ -2,11 +2,14 @@ import pygame
 import os
 from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency
 
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
+
+
 class ExitWin:
-    def __init__(self,win:pygame.Surface):
+    def __init__(self, win: pygame.Surface):
         self.bg_win = win
         
-        self.menu_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_menu.png")), (350,250))
+        self.menu_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_menu.png")), (350,250))
 
         self.yes_btn = pygame.Rect(375, 315, 100, 50)
         self.no_btn = pygame.Rect(525, 315, 100, 50)
@@ -24,16 +27,15 @@ class ExitWin:
         for btn in self.buttons:
             pygame.draw.rect(surface,(255,255,255,test_transparency),btn)
         
-        self.bg_win.blit(surface,(0,0))
-        
+        self.bg_win.blit(surface, (0, 0))
+
     def run(self):
-        is_menu_exit=False
+        is_menu_exit = False
         clock = pygame.time.Clock()
         self.draw()
         while not is_menu_exit:
             clock.tick(FPS)
             x, y = pygame.mouse.get_pos()
-
             for event in pygame.event.get():
                 # quit
                 if event.type == pygame.QUIT:

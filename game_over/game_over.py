@@ -3,6 +3,8 @@ from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_control
 from exit_win.exit_win import ExitWin
 
 GameOver_IMG=pygame.transform.scale(pygame.image.load("images/game_over.png"), (WIN_WIDTH, WIN_HEIGHT))
+MOUSE = pygame.transform.scale(pygame.image.load("images/mouse.png"), (20, 20))
+
 
 class GameOver:
     def __init__(self):
@@ -29,18 +31,23 @@ class GameOver:
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
+    def draw_mouse(self):
+        x, y = pygame.mouse.get_pos()
+        # pygame.mouse.set_visible(False)
+        self.win.blit(MOUSE, (x, y))
+
     def run(self):
         clock = pygame.time.Clock()
-        
-        run=True
+        run = True
         self.play_music()
         while run:
             clock.tick(FPS)
             self.draw()
+            self.draw_mouse()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    run=False
-                    exitWin=ExitWin(self.win)
+                    run = False
+                    exitWin = ExitWin(self.win)
                     exitWin.run()
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:

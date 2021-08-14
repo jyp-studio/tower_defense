@@ -11,24 +11,22 @@ from settings import singleton_map_controller
 from gif import *
 from color_settings import *
 
-from enemy.fly import *
-from enemy.bat import *
-from enemy.rock import *
-from enemy.skull_yellow import *
-from enemy.orc1 import *
-from enemy.orc2 import *
-from enemy.orc3 import *
+from enemy.lv_1 import *
+from enemy.lv_2 import *
+from enemy.lv_3 import *
+from enemy.lv_4 import *
+from enemy.lv_5 import *
 
 pygame.init()
 
 
 class EnemyGroup:
-    def __init__(self):
+    def __init__(self, level: int):
         self.campaign_count = 0
         self.campaign_max_count = 15   # (unit: frame)
         self.__reserved_members = []
         self.__expedition = []
-        self.wave_counter = 0
+        self.wave_counter = level
 
     def advance(self, model: GameModel):
         # use model.hp and model.money to access the hp and money information
@@ -119,29 +117,54 @@ class EnemyGroup:
         else:
             self.campaign_count += 1
 
-    def add(self, num:int):
+    def add(self, num: int):
         """Generate the enemies for next wave"""
         if self.is_empty():
-            if self.wave_counter % 7 == 0:
-                self.__reserved_members = [EnemyFly() for _ in range(num)]
+            if self.wave_counter % 13 == 0:
+                self.__reserved_members = [EnemyFly() for _ in range(num - 20)]
                 self.wave_counter += 1
-            elif self.wave_counter % 7 == 1:
-                self.__reserved_members = [EnemyOrc1() for _ in range(num)]
+            elif self.wave_counter % 13 == 1:
+                self.__reserved_members = [EnemyWorm() for _ in range(num - 10)]
                 self.wave_counter += 1
-            elif self.wave_counter % 7 == 2:
-                self.__reserved_members = [EnemyOrc2() for _ in range(num)]
+            elif self.wave_counter % 13 == 2:
+                self.__reserved_members = [EnemyBlackBat() for _ in range(num - 5)]
                 self.wave_counter += 1
-            elif self.wave_counter % 7 == 3:
-                self.__reserved_members = [EnemyOrc3() for _ in range(num)]
+            elif self.wave_counter % 13 == 3:
+                self.__reserved_members = [EnemyOrc1() for _ in range(num - 10)]
                 self.wave_counter += 1
-            elif self.wave_counter % 7 == 4:
-                self.__reserved_members = [EnemyBat() for _ in range(num)]
+            elif self.wave_counter % 13 == 4:
+                self.__reserved_members = [EnemyOrc2() for _ in range(num - 20)]
                 self.wave_counter += 1
-            elif self.wave_counter % 7 == 5:
+            elif self.wave_counter % 13 == 5:
+                self.__reserved_members = [EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1(),
+                                           EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(),
+                                           EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3()
+                                           ]
+                self.wave_counter += 1
+            elif self.wave_counter % 13 == 6:
+                self.__reserved_members = [EnemyBat() for _ in range(num - 10)]
+                self.wave_counter += 1
+            elif self.wave_counter % 13 == 7:
+                self.__reserved_members = [EnemyRedBat() for _ in range(num)]
+                self.wave_counter += 1
+            elif self.wave_counter % 13 == 8:
+                self.__reserved_members = [EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(),
+                                           EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(),
+                                           EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(),
+                                           EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost()
+                                           ]
+                self.wave_counter += 1
+            elif self.wave_counter % 13 == 9:
                 self.__reserved_members = [EnemySKULL1() for _ in range(num)]
                 self.wave_counter += 1
+            elif self.wave_counter % 13 == 10:
+                self.__reserved_members = [EnemySKULL3() for _ in range(num - 10)]
+                self.wave_counter += 1
+            elif self.wave_counter % 13 == 11:
+                self.__reserved_members = [EnemySKULL6() for _ in range(num - 27)]
+                self.wave_counter += 1
             else:
-                self.__reserved_members = [EnemyROCK() for _ in range(num)]
+                self.__reserved_members = [EnemyMage()]
                 self.wave_counter = 0
 
     def get(self) -> list:

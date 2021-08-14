@@ -7,6 +7,7 @@ import pygame
 from settings import game_status
 from exit_win.exit_win import ExitWin
 
+
 class OptMenuController:
     def __init__(self, menu_model:OptMenuModel, menu_view:OptMenuView):
         self.model = menu_model
@@ -47,6 +48,7 @@ class OptMenuController:
         self.view.draw_sound_volume()
         self.view.draw_music_volume()
         self.view.draw_map_preview(self.model.map_preview_img)
+        self.view.draw_mouse()
     
     @property
     def quit_game(self)->dict:
