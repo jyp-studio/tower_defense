@@ -65,13 +65,15 @@ class StartMenu:
                     if self.start_btn.clicked(x, y):       
                         self.sound.play()
 
-                        for i in range(0,2):
-                            i=1
+                        i=True
+                        while i:
                             game = Game()
                             game.run()
                             if game_status["restart"]:
                                 game_status["restart"]= False
-                                i=0
+                                i=True
+                            else:
+                                i=False
 
                         singleton_map_controller.change_map()
 

@@ -2,7 +2,7 @@ import pygame
 from game.controller import GameControl
 from game.model import GameModel
 from game.view import GameView
-from settings import FPS,game_status,singleton_vol_controller
+from settings import FPS,game_status,singleton_vol_controller,singleton_map_controller
 
 
 class Game:
@@ -23,6 +23,6 @@ class Game:
 
     def play_music(self):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load("./sound/level_5.mp3")
+        pygame.mixer.music.load("./sound/level_"+str(singleton_map_controller.map_index)+".mp3")
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
