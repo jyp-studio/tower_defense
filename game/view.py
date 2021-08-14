@@ -65,7 +65,7 @@ class GameView:
         for tw in towers:
             self.win.blit(tw.image, tw.rect)
 
-    def draw_range(self, selected_tower:Tower):
+    def draw_range(self, selected_tower: Tower):
         # draw tower range
         if selected_tower is not None:
             tw = selected_tower

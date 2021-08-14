@@ -47,7 +47,8 @@ class OptMenuController:
         self.view.draw_btn(self.model.buttons)
         self.view.draw_sound_volume()
         self.view.draw_music_volume()
-        self.view.draw_map_preview(self.model.map_preview_img)
+        self.view.draw_map_preview(self.model.map_preview_img, self.model.map_counter)
+        self.view.draw_map_hint(self.model.map_preview_img, self.model.map_counter)
         self.view.draw_mouse()
     
     @property

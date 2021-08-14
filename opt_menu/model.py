@@ -20,6 +20,7 @@ class OptMenuModel:
         self.right_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "right.png")), (50, 50))
 
         self.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+        self.map_counter = int(singleton_map_controller.map_index)
 
         self.minusSoundVol_btn=Button(self.minus_img,"minusSound",329, 390)  # image, name: str, x: int, y: int
         self.addSoundVol_btn=Button(self.add_img,"addSound",399, 390)  

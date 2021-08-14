@@ -123,9 +123,6 @@ class GameControl:
             self.view.draw_potion_property(self.model.selected_potion_info)
         self.view.draw_mouse()
 
-
-
-
     @property
     def quit_game(self)->bool:
         return self.events["game quit"]
