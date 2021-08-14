@@ -38,4 +38,4 @@ class OptMenuView:
         self.win.blit(text, (455,450))
 
     def draw_map_preview(self, map_img:pygame.Surface):
-        self.win.blit(map_img, (262,40))
+        self.win.blit(map_img, (262,110))
