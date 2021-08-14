@@ -8,6 +8,7 @@ from tower.moon import *
 from tower.obelisk import *
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 from potion.potionInfo import PotionInfo
+from victory.victory import Victory
 
 """This module is import in model.py"""
 
@@ -317,7 +318,12 @@ class Live:
     def update(self, user_request: str, model):
         """deal with event: die by call GameOver.run()"""
         if user_request == "live":
-            model.GameWinMenu.run()
+            if singleton_map_controller.next_map_index<=singleton_map_controller.max_map_index:
+                model.GameWinMenu.run()
+            else:
+                victory_menu=Victory()
+                victory_menu.run()
+
 
 class Potionfunction:
     def __init__(self, subject:RequestSubject):
