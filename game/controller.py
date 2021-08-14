@@ -65,7 +65,7 @@ class GameControl:
                        }
         if self.model.hp <= 0:
             self.events["die"] = True
-        if self.model.wave==7 and not len(self.model.enemies.get()):
+        if self.model.wave==3 and not len(self.model.enemies.get()):
             self.events["live"] = True
         # update event
         for event in pygame.event.get():
