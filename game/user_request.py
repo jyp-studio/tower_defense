@@ -8,7 +8,11 @@ from tower.moon import *
 from tower.obelisk import *
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 from potion.potionInfo import PotionInfo
+
 from gif import *
+
+from victory.victory import Victory
+
 
 """This module is import in model.py"""
 
@@ -262,7 +266,7 @@ class MinusMapIndex:
         if user_request == "minusMapIndex":
             model.sound.play()
             singleton_map_controller.map_index-=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
 
 class AddMapIndex:
@@ -274,7 +278,7 @@ class AddMapIndex:
         if user_request == "addMapIndex":
             model.sound.play()
             singleton_map_controller.map_index+=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(singleton_map_controller.map_index)+".png")), (500, 300))
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
 
 class GoStartMenu:
@@ -303,7 +307,11 @@ class Live:
     def update(self, user_request: str, model):
         """deal with event: die by call GameOver.run()"""
         if user_request == "live":
-            model.GameWinMenu.run()
+            if singleton_map_controller.next_map_index<=singleton_map_controller.max_map_index:
+                model.GameWinMenu.run()
+            else:
+                victory_menu=Victory()
+                victory_menu.run()
 
 
 class Potionfunction:

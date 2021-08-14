@@ -55,13 +55,16 @@ class GameControl:
                        }
         if self.model.hp <= 0:
             self.events["die"] = True
-        if self.model.wave == 3 and self.model.level_counter == 1 and not len(self.model.enemies.get()):
+
+        if self.model.wave == 3 and self.model.level_counter == 1 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 6 and self.model.level_counter == 2 and not len(self.model.enemies.get()):
+        elif self.model.wave == 6 and self.model.level_counter == 2 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 9 and self.model.level_counter == 3 and not len(self.model.enemies.get()):
+        elif self.model.wave == 9 and self.model.level_counter == 3 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 12 and self.model.level_counter == 4 and not len(self.model.enemies.get()):
+        elif self.model.wave == 12 and self.model.level_counter == 4 and self.model.enemies.is_empty():
+            self.events["live"] = True
+        elif self.model.wave == 13 and self.model.level_counter == 5 and self.model.enemies.is_empty():
             self.events["live"] = True
         # update event
         for event in pygame.event.get():

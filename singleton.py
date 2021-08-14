@@ -191,6 +191,9 @@ class MapController:
         self.__curBaseRect=BASE_RECT_DICT[self.__map_index]
         self.__curVacancyList=VACANCY_DICT[self.__map_index]
     @property
+    def max_map_index(self)->int:
+        return self.__max_map_index
+    @property
     def map_index(self)->int:
         return self.__map_index
     
@@ -204,7 +207,7 @@ class MapController:
     
     @next_map_index.setter
     def next_map_index(self, value:int):
-        self.__next_map_index=value if 2<=value<=self.__max_map_index else self.__next_map_index
+        self.__next_map_index=value if 2<=value<=self.__max_map_index else self.__next_map_index+1
 
     @property
     def curMap(self)->pygame.Surface:

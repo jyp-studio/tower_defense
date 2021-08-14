@@ -17,6 +17,7 @@ PURPLE = (147, 0, 147)
 # image
 HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (35, 33))
 HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (35, 33))
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
 
 # singleton
 singleton_vol_controller=VolController()
@@ -35,4 +36,4 @@ potion_price:dict={
 }
 
 # transparency of some menu btn
-test_transparency=0
+test_transparency=128

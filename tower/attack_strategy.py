@@ -1,12 +1,15 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-
 if TYPE_CHECKING:
     from enemy.enemies import Enemy
     from tower.towers import Tower
-import math
-from abc import ABC, abstractmethod
 
+import math
+import pygame
+from abc import ABC, abstractmethod
+from settings import singleton_vol_controller
+
+pygame.mixer.init()
 
 def in_range(enemy:Enemy, tower:Tower)->bool:
     x1, y1 = enemy.rect.center
@@ -34,8 +37,10 @@ class AttackStrategy(ABC):
 # red flame: single
 class RedAttack(AttackStrategy):
     """attack an enemy once a time"""
+    attack_sound =pygame.mixer.Sound("./sound/flame.mp3")
 
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+        self.attack_sound.set_volume(singleton_vol_controller.sound_volume)
         attack_animate_time = 10 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
@@ -57,6 +62,7 @@ class RedAttack(AttackStrategy):
             return cd_count
 
         else:
+            self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
                     if en.name != "fly":    #非飛行敵人才有攻擊
@@ -70,7 +76,7 @@ class RedAttack(AttackStrategy):
 class BlueAttack(AttackStrategy):
     """attack all the enemy in range once a time"""
 
-    # attack_anime=BlueFlame(0,0)
+    attack_sound =pygame.mixer.Sound("./sound/blue_flame.mp3")
 
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
         attack_animate_time = 10 #等同各攻擊動畫的max_current_sprites+1
@@ -93,14 +99,17 @@ class BlueAttack(AttackStrategy):
             return cd_count
 
         else:
+            self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
                     if en.name == "fly":
                         pass
                     elif en.name == "skull":
                         en.health -= tower.damage*2
+                    
                     else:
                         en.health -= tower.damage
+                        
             cd_count = 0
             return cd_count
 
@@ -108,7 +117,7 @@ class BlueAttack(AttackStrategy):
 # moon: AOE slow
 class MoonAttack(AttackStrategy):
 
-    # attack_anime=Magic(0,0)
+    attack_sound =pygame.mixer.Sound("./sound/magic.mp3")
 
     def attack(self, enemies: list, tower, cd_count)->int:
         attack_animate_time = 4 #等同各攻擊動畫的max_current_sprites+1
@@ -130,6 +139,7 @@ class MoonAttack(AttackStrategy):
             return cd_count
 
         else:
+            self.attack_sound.play()
             for en in enemies:
                 attack_counter = 0
                 if in_range(en, tower):
@@ -151,7 +161,7 @@ class MoonAttack(AttackStrategy):
 # obelisk: snipe all
 class ObeliskSnipe(AttackStrategy):
 
-    # attack_anime=Lightning(0,0)
+    attack_sound =pygame.mixer.Sound("./sound/lightning.mp3")
 
     def attack(self, enemies: list, tower, cd_count) -> int:
         
@@ -174,12 +184,14 @@ class ObeliskSnipe(AttackStrategy):
             return cd_count
 
         else:
+            self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
                     if en.name == "boss" or en.name == "ultra boss":   #對boss傷害
                         en.health -= tower.damage * 10
                     else:   #對普通怪傷害
                         en.health -= tower.damage * 3
+    
             cd_count = 0
             return cd_count
 

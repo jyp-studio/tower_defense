@@ -1,9 +1,8 @@
 import pygame
-from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency
+from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,MOUSE
 from exit_win.exit_win import ExitWin
 
 GameOver_IMG=pygame.transform.scale(pygame.image.load("images/game_over.png"), (WIN_WIDTH, WIN_HEIGHT))
-MOUSE = pygame.transform.scale(pygame.image.load("images/mouse.png"), (20, 20))
 
 
 class GameOver:
@@ -46,9 +45,12 @@ class GameOver:
             self.draw_mouse()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    run = False
                     exitWin = ExitWin(self.win)
                     exitWin.run()
+                    if game_status["run"]:
+                        run=True
+                    else:
+                        run=False
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x, y = pygame.mouse.get_pos()

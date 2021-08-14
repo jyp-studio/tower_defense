@@ -1,11 +1,11 @@
 import pygame
 import math
 import os
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE,singleton_vol_controller
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE,singleton_vol_controller,MOUSE
 from color_settings import *
 
 MENU_VIEW = pygame.transform.scale(pygame.image.load(os.path.join("images", "menu_background.png")), (WIN_WIDTH, WIN_HEIGHT))
-MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
+
 
 
 class OptMenuView:
@@ -37,10 +37,11 @@ class OptMenuView:
         text = self.font.render(f"Music volume: {volume}%", True, (255, 255, 255))
         self.win.blit(text, (455,450))
 
-    def draw_map_preview(self, map_img: pygame.Surface):
-        self.win.blit(map_img, (262, 40))
+    def draw_map_hint(self):
+        pass
+
+    def draw_map_preview(self, map_img:pygame.Surface):
+        self.win.blit(map_img, (262,110))
         pygame.draw.rect(MENU_VIEW, BLACK, [0, 40, map_img.get_rect().w, 40])
         text = self.font.render(f"", True, (255, 255, 255))
 
-    def draw_map_hint(self):
-        pass

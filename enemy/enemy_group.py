@@ -7,7 +7,7 @@ import pygame
 import math
 import random
 import os
-from settings import singleton_map_controller
+from settings import singleton_map_controller,singleton_vol_controller
 from gif import *
 from color_settings import *
 
@@ -18,7 +18,7 @@ from enemy.lv_4 import *
 from enemy.lv_5 import *
 
 pygame.init()
-
+hit_base_sound =pygame.mixer.Sound("./sound/enemy_hit_base.mp3")
 
 class EnemyGroup:
     def __init__(self, level: int):
@@ -125,6 +125,8 @@ class EnemyGroup:
                     model.hp -= 5
                 else:
                     model.hp -= 1
+                hit_base_sound.set_volume(0.5)
+                hit_base_sound.play()
 
     def campaign(self):
         """Enemy go on an expedition."""

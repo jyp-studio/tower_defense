@@ -9,12 +9,11 @@ if TYPE_CHECKING:
 import pygame
 import os
 import time
-from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency
+from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency,MOUSE
 from color_settings import *
 
 TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join("images", "top_info.jpg")), (WIN_WIDTH, 85))
 POTION_LIST = pygame.transform.scale(pygame.image.load(os.path.join("images", "potion_list.png")), (85, 525))
-MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
 
 
 class GameView:
