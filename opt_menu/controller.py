@@ -51,7 +51,7 @@ class OptMenuController:
         self.view.draw_mouse()
     
     @property
-    def quit_game(self)->dict:
+    def quit_game(self)-> Union[bool, List[int]]:
         return self.events["game quit"]
     
     @property

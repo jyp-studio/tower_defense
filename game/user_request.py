@@ -8,6 +8,7 @@ from tower.moon import *
 from tower.obelisk import *
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 from potion.potionInfo import PotionInfo
+from gif import *
 
 """This module is import in model.py"""
 
@@ -40,16 +41,6 @@ class EnemyGenerator:
             if model.enemies.is_empty():
                 model.enemies.add(30)
                 model.wave += 1
-
-
-class HeroMove:
-    def __init__(self, subject):
-        subject.register(self)
-
-    def update(self, user_request: str, model):
-        """add new enemy"""
-        if user_request == "Left":
-            pass
 
 
 class HealthUp:
@@ -108,6 +99,7 @@ class AddTowers:
                 ran_tower = random.choice(["moon", "red fire", "blue fire", "obelisk"])
                 new_tower = tower_dict[ran_tower]
                 model.towers.append(new_tower)
+                new_tower.level = 6
             model.plots.clear()
 
 
@@ -303,6 +295,7 @@ class Die:
         """deal with event: die by call GameOver.run()"""
         if user_request == "die":
             model.GameOverMenu.run()
+
 class Live:
     def __init__(self, subject:RequestSubject):
         subject.register(self)
@@ -312,10 +305,29 @@ class Live:
         if user_request == "live":
             model.GameWinMenu.run()
 
+
 class Potionfunction:
     def __init__(self, subject:RequestSubject):
-       subject.register(self)
-    
+        subject.register(self)
+        self.sprites = [METEOR_0]
+        self.current_sprites = 0
+        self.max_current_sprites = 10
+        self.update_speed = 1
+        self.image = self.sprites[self.current_sprites]  # image of the tower
+        self.rect = self.image.get_rect()
+
+    def potion_animation(self, user_request: str, model):
+        if user_request == "aoe_potion":
+            self.sprites = [METEOR_0, METEOR_1, METEOR_2, METEOR_3, METEOR_4]
+            
+            self.animation_update()
+
+    def animation_update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
     def update(self, user_request: str, model):
 
         if user_request == "blood_potion":
@@ -326,7 +338,9 @@ class Potionfunction:
         if user_request == "aoe_potion":
             if model.money >= potion_price["aoe_potion"]:
                 for en in model.enemies.get():
-                    en.health -= en.max_health/10
+                    temp = int(en.health / 10)
+                    en.health -= temp
+
                 model.money -= potion_price["aoe_potion"]
                 model.sound.play()
 

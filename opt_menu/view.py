@@ -21,7 +21,7 @@ class OptMenuView:
         pygame.mouse.set_visible(False)
         self.win.blit(MOUSE, (x, y))
     
-    def draw_btn(self,buttonList:list):
+    def draw_btn(self, buttonList: list):
         for btn in buttonList:
             self.win.blit(btn.image, btn.rect)
 
@@ -37,5 +37,10 @@ class OptMenuView:
         text = self.font.render(f"Music volume: {volume}%", True, (255, 255, 255))
         self.win.blit(text, (455,450))
 
-    def draw_map_preview(self, map_img:pygame.Surface):
-        self.win.blit(map_img, (262,40))
+    def draw_map_preview(self, map_img: pygame.Surface):
+        self.win.blit(map_img, (262, 40))
+        pygame.draw.rect(MENU_VIEW, BLACK, [0, 40, map_img.get_rect().w, 40])
+        text = self.font.render(f"", True, (255, 255, 255))
+
+    def draw_map_hint(self):
+        pass

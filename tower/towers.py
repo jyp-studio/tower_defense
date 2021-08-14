@@ -48,7 +48,7 @@ class Tower:
         self._range = [100, 110, 120, 130, 140, 150, 300]  # tower attack range
         self._damage = [10, 20, 30, 40, 50, 60, 100]   # tower damage
         self.cd_count = 0  # used in self.is_cool_down()
-        self.cd_max_count = 60  # used in self.is_cool_down()
+        self.cd_max_count = 60
         self.animate_count = 0
         self.attack_strategy = attack_strategy  # chose an attack strategy (AOE, single attack ....)
         self.attack_strategy_name = ""
@@ -65,7 +65,8 @@ class Tower:
 
     def attack(self, enemy_group: list):
         # cd
-        if self.cd_count < self.cd_max_count:
+        current_max_cd = self.cd_max_count
+        if self.cd_count < current_max_cd:
             self.cd_count += 1
         
         # syntax: attack_strategy().attack(tower, enemy_group, cd_count)
@@ -77,10 +78,10 @@ class Tower:
         pass
 
     def get_upgrade_cost(self) -> int:
-        return self.value[self.level+1]
+        return self.value[self.level+1] - self.value[self.level]
 
     def get_ultra_cost(self) -> int:
-        return self.value[6]
+        return self.value[6] - self.value[self.level]
 
     def get_cost(self) -> int:
         return self.value[self.level]

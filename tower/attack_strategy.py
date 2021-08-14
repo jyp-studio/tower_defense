@@ -176,11 +176,8 @@ class ObeliskSnipe(AttackStrategy):
         else:
             for en in enemies:
                 if in_range(en, tower):
-                    if en.name == "boss":   #對boss傷害
-                        if en.health >= en.max_health * 0.05:   #5%以上扣20%，以下秒殺
-                            en.health -= en.health * 0.05
-                        else:
-                            en.health = 0
+                    if en.name == "boss" or en.name == "ultra boss":   #對boss傷害
+                        en.health -= tower.damage * 10
                     else:   #對普通怪傷害
                         en.health -= tower.damage * 3
             cd_count = 0

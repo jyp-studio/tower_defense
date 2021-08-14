@@ -33,10 +33,22 @@ class EnemyGroup:
         self.campaign()
         for en in self.__expedition:
             en.move()
+            if en.name == "ultra boss":
+                if en.summon():
+                    ran_en = random.choice([EnemyROCK(), EnemyKnight()])
+                    self.__expedition.append(ran_en)
+                    en.buff()
             if en.health <= 0:
                 if en.is_dead == 0:
                     self.retreat(en)
-                    model.money += 15
+                    if en.name == "boss":
+                        model.money += 1000
+                    elif en.name == "skull":
+                        model.money += 500
+                    elif en.name == "orc" or en.name == "fly":
+                        model.money += 200
+                    else:
+                        model.money += 30
                 else:
                     if en.is_dead == 5:
                         en.is_dead = 4
@@ -107,7 +119,12 @@ class EnemyGroup:
             # delete the object when it reach the base
             elif singleton_map_controller.curBaseRect.collidepoint(en.rect.centerx, en.rect.centery):
                 self.retreat(en)
-                model.hp -= 1
+                if en.name == "ultra boss":
+                    model.hp -= 10
+                elif en.name == "boss":
+                    model.hp -= 5
+                else:
+                    model.hp -= 1
 
     def campaign(self):
         """Enemy go on an expedition."""
@@ -127,7 +144,12 @@ class EnemyGroup:
                 self.__reserved_members = [EnemyWorm() for _ in range(num - 10)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 2:
-                self.__reserved_members = [EnemyBlackBat() for _ in range(num - 5)]
+                self.__reserved_members = [EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(),
+                                           EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(),
+                                           EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(),
+                                           EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(),
+                                           EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly()
+                                           ]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 3:
                 self.__reserved_members = [EnemyOrc1() for _ in range(num - 10)]
@@ -136,9 +158,10 @@ class EnemyGroup:
                 self.__reserved_members = [EnemyOrc2() for _ in range(num - 20)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 5:
-                self.__reserved_members = [EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1(),
+                self.__reserved_members = [EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3(),
                                            EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(),
-                                           EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3(), EnemyOrc3()
+                                           EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(), EnemyOrc2(),
+                                           EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1(), EnemyOrc1()
                                            ]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 6:
@@ -148,10 +171,10 @@ class EnemyGroup:
                 self.__reserved_members = [EnemyRedBat() for _ in range(num)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 8:
-                self.__reserved_members = [EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(),
-                                           EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(),
+                self.__reserved_members = [EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost(),
                                            EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(),
-                                           EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost(), EnemyGhost()
+                                           EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(), EnemyRedBat(),
+                                           EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(), EnemyBat(),
                                            ]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 9:
@@ -161,7 +184,8 @@ class EnemyGroup:
                 self.__reserved_members = [EnemySKULL3() for _ in range(num - 10)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 11:
-                self.__reserved_members = [EnemySKULL6() for _ in range(num - 27)]
+                self.__reserved_members = [EnemyEvil(), EnemyEvil(), EnemyEvil(), EnemySKULL6(), EnemySKULL6(),
+                                           EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6()]
                 self.wave_counter += 1
             else:
                 self.__reserved_members = [EnemyMage()]

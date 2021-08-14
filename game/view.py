@@ -39,6 +39,13 @@ class GameView:
     def draw_potion_list(self):
         self.win.blit(POTION_LIST, (0, 85))
 
+    def draw_potion_animation(self, enemies: EnemyGroup, potion: POTION_LIST):
+        for en in enemies.get():
+            self.win.blit(bullet.image, bullet.rect)
+            bullet.update()
+            if bullet.current_sprites > bullet.max_current_sprites - 1:
+                towers.particle_list.remove(bullet)
+
     def draw_enemies(self, enemies: EnemyGroup):
         for en in enemies.get():
             self.win.blit(en.image, en.rect)
@@ -65,14 +72,63 @@ class GameView:
             tw = selected_tower
             # create a special surface that is able to render semi-transparent image
             surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
-            transparency = 120
             x, y = tw.rect.center
-            if selected_tower.name == "Moon Tower":
-                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 21, y), tw.range)
-            elif selected_tower.name == "Obelisk Tower":
-                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 3, y + 40), tw.range)
-            else:
-                pygame.draw.circle(surface, (255, 0, 0, transparency), (x - 19, y), tw.range)
+            LV0 = (255, 199, 208, 120)
+            LV1 = (255, 173, 187, 120)
+            LV2 = (255, 148, 166, 110)
+            LV3 = (255, 107, 132, 110)
+            LV4 = (255, 61, 94, 110)
+            LV5 = (255, 36, 72, 115)
+            LV6 = (255, 0, 0, 80)
+            if selected_tower.level == 0:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV0, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV0, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV0, (x - 19, y), tw.range)
+            elif selected_tower.level == 1:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV1, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV1, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV1, (x - 19, y), tw.range)
+            elif selected_tower.level == 2:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV2, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV2, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV2, (x - 19, y), tw.range)
+            elif selected_tower.level == 3:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV3, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV3, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV3, (x - 19, y), tw.range)
+            elif selected_tower.level == 4:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV4, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV4, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV4, (x - 19, y), tw.range)
+            elif selected_tower.level == 5:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV5, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV5, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV5, (x - 19, y), tw.range)
+            elif selected_tower.level == 6:
+                if selected_tower.name == "Moon Tower":
+                    pygame.draw.circle(surface, LV6, (x - 21, y), tw.range)
+                elif selected_tower.name == "Obelisk Tower":
+                    pygame.draw.circle(surface, LV6, (x - 3, y + 40), tw.range)
+                else:
+                    pygame.draw.circle(surface, LV6, (x - 19, y), tw.range)
             self.win.blit(surface, (0, 0))
 
     def draw_bullet(self, towers):
