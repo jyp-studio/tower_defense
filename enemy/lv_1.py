@@ -51,8 +51,6 @@ class EnemyBlackBat(Enemy):
         self.sprites.append(BLACK_BAT_1)
         self.sprites.append(BLACK_BAT_2)
         self.sprites.append(BLACK_BAT_3)
-        self.sprites.append(BLACK_BAT_4)
-        self.sprites.append(BLACK_BAT_5)
 
         self.stride = 6
         self.max_stride = 6

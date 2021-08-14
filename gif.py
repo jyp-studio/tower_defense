@@ -123,10 +123,10 @@ ORC3_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "2D-Fan
 ORC3_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "2D-Fantasy-Orcs-Free-Sprite-Sheets", "_PNG", "3_ORK", "WALK", "WALK_006.png")), (80, 80))
 
 # bat
-BAT_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_0.png")), (80, 80))
-BAT_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_1.png")), (80, 80))
-BAT_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_2.png")), (80, 80))
-BAT_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_3.png")), (80, 80))
+BAT_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_0.png")), (40, 40))
+BAT_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_1.png")), (40, 40))
+BAT_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_2.png")), (40, 40))
+BAT_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "bat_3.png")), (40, 40))
 
 # fly
 FLY_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "fly_0.png")), (80, 80))
@@ -212,17 +212,15 @@ BLACK_BAT_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "b
 BLACK_BAT_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "black_bat_1.png")), (80, 80))
 BLACK_BAT_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "black_bat_2.png")), (80, 80))
 BLACK_BAT_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "black_bat_3.png")), (80, 80))
-BLACK_BAT_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "black_bat_4.png")), (80, 80))
-BLACK_BAT_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "black_bat_5.png")), (80, 80))
 
 # mage
-MAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_0.png")), (80, 80))
-MAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_1.png")), (80, 80))
-MAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_2.png")), (80, 80))
-MAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_3.png")), (80, 80))
-MAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_4.png")), (80, 80))
-MAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_5.png")), (80, 80))
-MAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_6.png")), (80, 80))
+MAGE_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_0.png")), (100, 100))
+MAGE_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_1.png")), (100, 100))
+MAGE_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_2.png")), (100, 100))
+MAGE_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_3.png")), (100, 100))
+MAGE_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_4.png")), (100, 100))
+MAGE_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_5.png")), (100, 100))
+MAGE_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "mage_6.png")), (100, 100))
 
 # knight
 KNIGHT_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "knight_0.png")), (80, 80))
@@ -235,12 +233,12 @@ KNIGHT_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "knig
 KNIGHT_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "knight_7.png")), (80, 80))
 
 # ghost
-GHOST_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_0.png")), (80, 80))
-GHOST_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_1.png")), (80, 80))
-GHOST_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_2.png")), (80, 80))
-GHOST_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_3.png")), (80, 80))
-GHOST_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_4.png")), (80, 80))
-GHOST_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_5.png")), (80, 80))
+GHOST_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_0.png")), (100, 120))
+GHOST_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_1.png")), (100, 120))
+GHOST_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_2.png")), (100, 120))
+GHOST_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_3.png")), (100, 120))
+GHOST_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_4.png")), (100, 120))
+GHOST_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "ghost_5.png")), (100, 120))
 
 # evil skull
 EVIL_SKULL_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "Walk", "Bringer-of-Death_Walk_1.png")), (80, 80))
@@ -252,5 +250,9 @@ EVIL_SKULL_5 = pygame.transform.scale(pygame.image.load(os.path.join("images", "
 EVIL_SKULL_6 = pygame.transform.scale(pygame.image.load(os.path.join("images", "Walk", "Bringer-of-Death_Walk_7.png")), (80, 80))
 EVIL_SKULL_7 = pygame.transform.scale(pygame.image.load(os.path.join("images", "Walk", "Bringer-of-Death_Walk_8.png")), (80, 80))
 
-
-
+# meteor
+METEOR_0 = pygame.transform.scale(pygame.image.load(os.path.join("images", "meteor_0.png")), (200, 200))
+METEOR_1 = pygame.transform.scale(pygame.image.load(os.path.join("images", "meteor_1.png")), (200, 200))
+METEOR_2 = pygame.transform.scale(pygame.image.load(os.path.join("images", "meteor_2.png")), (200, 200))
+METEOR_3 = pygame.transform.scale(pygame.image.load(os.path.join("images", "meteor_3.png")), (200, 200))
+METEOR_4 = pygame.transform.scale(pygame.image.load(os.path.join("images", "meteor_4.png")), (200, 200))

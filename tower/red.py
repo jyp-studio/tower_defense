@@ -50,9 +50,9 @@ class RedFireTower(Tower):
         self.sprites.append(RED_IMAGE_5)
         self.sprites.append(RED_IMAGE_6)
 
-        self.cd_max_count = 120
+        self.cd_max_count = 15
         self._range = [120, 125, 130, 135, 140, 145, 250]
-        self._damage = [8, 14, 18, 22, 25, 35, 50]
+        self._damage = [10, 20, 30, 40, 50, 60, 100]
         self.value = [120, 160, 220, 320, 400, 500, 10000]
 
     def throw(self, x: int, y: int):

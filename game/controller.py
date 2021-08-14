@@ -56,15 +56,15 @@ class GameControl:
         if self.model.hp <= 0:
             self.events["die"] = True
 
-        if self.model.wave == 3 and self.model.level_counter == 1 and not len(self.model.enemies.get()):
+        if self.model.wave == 3 and self.model.level_counter == 1 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 6 and self.model.level_counter == 2 and not len(self.model.enemies.get()):
+        elif self.model.wave == 6 and self.model.level_counter == 2 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 9 and self.model.level_counter == 3 and not len(self.model.enemies.get()):
+        elif self.model.wave == 9 and self.model.level_counter == 3 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 12 and self.model.level_counter == 4 and not len(self.model.enemies.get()):
+        elif self.model.wave == 12 and self.model.level_counter == 4 and self.model.enemies.is_empty():
             self.events["live"] = True
-        elif self.model.wave == 13 and self.model.level_counter == 5 and not len(self.model.enemies.get()):
+        elif self.model.wave == 13 and self.model.level_counter == 5 and self.model.enemies.is_empty():
             self.events["live"] = True
         # update event
         for event in pygame.event.get():
@@ -99,16 +99,16 @@ class GameControl:
             if tw.name == "Obelisk Tower" or tw.name == "Moon Tower":
                 self.view.draw_bullet(tw)
         self.view.draw_base()
-        self.view.draw_enemies(self.model.enemies)
+        self.view.draw_plots(self.model.plots)
         self.view.draw_towers(self.model.towers)
+        self.view.draw_enemies(self.model.enemies)
         for tw in self.model.towers:
             if tw.name == "Fire Totem" or tw.name == "Ice Totem":
                 self.view.draw_bullet(tw)
+        self.view.draw_range(self.model.selected_tower)
         self.view.draw_top_info()
         self.view.draw_potion_list()
         self.view.draw_hp(self.model.hp)
-        self.view.draw_range(self.model.selected_tower)
-        self.view.draw_plots(self.model.plots)
         if self.model.menu is not None:
             self.view.draw_menu(self.model.menu)
             self.view.draw_btn(self.model.menu.buttons)
@@ -122,9 +122,6 @@ class GameControl:
         if self.model.selected_potion_info is not None:
             self.view.draw_potion_property(self.model.selected_potion_info)
         self.view.draw_mouse()
-
-
-
 
     @property
     def quit_game(self)->bool:
