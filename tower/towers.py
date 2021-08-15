@@ -20,6 +20,26 @@ class Vacancy:
         return True if self.rect.collidepoint(x, y) else False
 
 
+class Miss:
+    def __init__(self, x: int, y: int):
+        self.sprites = []
+        self.current_sprites = 0
+        self.max_current_sprites = 3
+        self.update_speed = 0.5
+        self.sprites.append(MISS)
+        self.sprites.append(MISS)
+        self.sprites.append(MISS)
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
+
 # tower (product)
 class Tower:
     """ super class of towers """
@@ -77,6 +97,9 @@ class Tower:
     def throw(self, x: int, y: int):
         pass
 
+    def miss_throw(self, x: int, y: int):
+        self.particle_list.append(Miss(x + 30, y - 50))
+
     def get_upgrade_cost(self) -> int:
         return self.value[self.level+1] - self.value[self.level]
 
@@ -104,8 +127,3 @@ class Tower:
         :return: bool
         """
         return True if self.rect.collidepoint(x, y) else False
-
-
-
-
-

@@ -38,8 +38,7 @@ class OptMenuController:
 
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = pygame.mouse.get_pos()
-                self.events["mouse position"] = [x, y]
+                self.model.is_show_hint = False
 
     def update_view(self):
         # render background
@@ -48,7 +47,8 @@ class OptMenuController:
         self.view.draw_sound_volume()
         self.view.draw_music_volume()
         self.view.draw_map_preview(self.model.map_preview_img, singleton_map_controller.map_index)
-        self.view.draw_map_hint(self.model.map_preview_img, singleton_map_controller.map_index)
+        if self.model.is_show_hint:
+            self.view.draw_map_hint(self.model.map_preview_img, singleton_map_controller.map_index)
         self.view.draw_mouse()
     
     @property

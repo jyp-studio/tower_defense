@@ -28,6 +28,7 @@ down_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DI
 BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "blood_potion.png")), (66,61))
 AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "aoe_potion.png")), (66,60))
 
+
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
         self.image = image

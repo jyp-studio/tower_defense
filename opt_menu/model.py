@@ -2,7 +2,8 @@ import pygame
 import os
 from menu.menus import Button
 from settings import singleton_vol_controller,singleton_map_controller
-from game.user_request import RequestSubject,MinusVolume,AddVolume,Back,MinusMapIndex,AddMapIndex,GoStartMenu
+from game.user_request import RequestSubject, MinusVolume, AddVolume, Back, MinusMapIndex, AddMapIndex, GoStartMenu, \
+    ShowHint
 from dir_path import *
 
 class OptMenuModel:
@@ -21,6 +22,8 @@ class OptMenuModel:
         self.right_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "right.png")), (50, 50))
 
         self.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+        self.hint = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "transparent.png")), (500, 230))
+        self.hint_btn = Button(self.hint, "hint", 512, 225)
 
         self.minusSoundVol_btn=Button(self.minus_img,"minusSound",329, 390)  # image, name: str, x: int, y: int
         self.addSoundVol_btn=Button(self.add_img,"addSound",399, 390)  
@@ -41,8 +44,9 @@ class OptMenuModel:
                         self.back_btn,
                         self.menu_btn,
                         self.left_btn,
-                        self.right_btn]
-
+                        self.right_btn,
+                        self.hint_btn
+                        ]
         self.selected_button = None
 
         self.subject = RequestSubject(self)
@@ -52,6 +56,8 @@ class OptMenuModel:
         self.minusMapIndex = MinusMapIndex(self.subject)
         self.addMapIndex = AddMapIndex(self.subject)
         self.goStartMenu = GoStartMenu(self.subject)
+        self.showHint = ShowHint(self.subject)
+        self.is_show_hint = False
 
     def user_request(self, user_request: str):
         """ add tower, sell tower, upgrade tower"""

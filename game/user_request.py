@@ -282,6 +282,17 @@ class AddMapIndex:
             model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
 
+class ShowHint:
+    def __init__(self, subject:RequestSubject):
+        subject.register(self)
+
+    def update(self, user_request: str, model):
+        """AddMapIndex"""
+        if user_request == "hint":
+            model.sound.play()
+            model.is_show_hint = True
+
+
 class GoStartMenu:
     def __init__(self, subject:RequestSubject):
         subject.register(self)

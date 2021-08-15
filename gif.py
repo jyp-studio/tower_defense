@@ -257,3 +257,6 @@ METEOR_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteo
 METEOR_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_2.png")), (200, 200))
 METEOR_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_3.png")), (200, 200))
 METEOR_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_4.png")), (200, 200))
+
+# miss
+MISS = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "miss.png")), (100, 50))

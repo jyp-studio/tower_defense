@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import random
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from enemy.enemies import Enemy
@@ -52,7 +54,7 @@ class RedAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower):
-                        if en.name != "fly":    #非飛行敵人才有攻擊動畫
+                        if en.name != "fly" or en.name != "ghost":    #非飛行敵人才有攻擊動畫
                             x, y = en.rect.center
                             tower.throw(x, y - 100)
                             exist_enemy = True
@@ -67,7 +69,7 @@ class RedAttack(AttackStrategy):
             self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
-                    if en.name != "fly":    #非飛行敵人才有攻擊
+                    if en.name != "fly" or en.name != "ghost":    #非飛行敵人才有攻擊
                         en.health -= tower.damage
                         break
             cd_count = 0
@@ -91,7 +93,7 @@ class BlueAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower):
-                        if en.name != "fly":
+                        if en.name != "fly" or en.name != "ghost":
                             x, y = en.rect.center
                             tower.throw(x, y - 100)
                             exist_enemy = True
@@ -105,11 +107,10 @@ class BlueAttack(AttackStrategy):
             self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
-                    if en.name == "fly":
+                    if en.name == "fly" or en.name == "ghost":
                         pass
                     elif en.name == "skull":
                         en.health -= tower.damage*2
-                    
                     else:
                         en.health -= tower.damage
                         
@@ -150,6 +151,12 @@ class MoonAttack(AttackStrategy):
 
                     if en.name == "orc":    #對orc加傷
                         en.health -= tower.damage*2
+                    elif en.name == "ghost":
+                        damage = random.choice([tower.damage * 3, 0])
+                        en.health -= damage
+                        if damage == 0:
+                            x, y = en.rect.center
+                            tower.miss_throw(x, y)
                     else:
                         en.health -= tower.damage
     
@@ -191,8 +198,14 @@ class ObeliskSnipe(AttackStrategy):
             self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
-                    if en.name == "boss" or en.name == "ultra boss":   #對boss傷害
-                        en.health -= tower.damage * 10
+                    if en.name == "boss":   #對boss傷害
+                        en.health -= tower.damage * 5
+                    elif en.name == "ghost" or en.name == "ultra boss":
+                        damage = random.choice([tower.damage * 3, 0])
+                        en.health -= damage
+                        if damage == 0:
+                            x, y = en.rect.center
+                            tower.miss_throw(x, y)
                     else:   #對普通怪傷害
                         en.health -= tower.damage * 3
     

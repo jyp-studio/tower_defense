@@ -41,7 +41,7 @@ class EnemyRedBat(Enemy):
 class EnemyGhost(Enemy):
     def __init__(self):
         super().__init__(GHOST_0)
-        self.name = "fly"
+        self.name = "ghost"
         self.max_current_sprites = 6
         self.update_speed = 0.25
         self.sprites.append(GHOST_1)
