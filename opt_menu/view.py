@@ -59,11 +59,11 @@ class OptMenuView:
             text = self.font1.render(f"Evil witches will summon knights and ", True, (255, 255, 255))
             text1 = self.font1.render(f"dwarfs as shields and restore blood.", True, (255, 255, 255))
             text2 = self.font1.render(f"Obelisk is indeed effective for the boss", True, (255, 255, 255))
-        self.win.blit(text, (268, 80 + 300))
+        self.win.blit(text, (268, 150 ))
         self.win.blit(text1, (268, 120+ 300))
         self.win.blit(text2, (268, 160+ 300))
 
-    def draw_map_preview(self, map_img:pygame.Surface, counter: int):
+    def draw_map_preview(self, map_img: pygame.Surface, counter: int):
         self.win.blit(map_img, (262, 109))
         pygame.draw.rect(MENU_VIEW, BLACK, [262, 70, map_img.get_rect().w, 40])
         if counter == 1:

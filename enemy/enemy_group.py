@@ -34,10 +34,11 @@ class EnemyGroup:
         for en in self.__expedition:
             en.move()
             if en.name == "ultra boss":
-                if en.summon():
+                if en.skill():
                     ran_en = random.choice([EnemyROCK(), EnemyKnight()])
                     self.__expedition.append(ran_en)
-                    en.buff()
+            elif en.name == "ghost":
+                en.skill()
             if en.health <= 0:
                 if en.is_dead == 0:
                     self.retreat(en)

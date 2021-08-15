@@ -9,7 +9,7 @@ class EnemyFly(Enemy):
     def __init__(self):
         super().__init__(FLY_0)
         self.name = "bug"
-        self.max_current_sprites = 3
+        self.max_current_sprites = 4
         self.update_speed = 0.5
         self.sprites.append(FLY_1)
         self.sprites.append(FLY_2)
@@ -27,7 +27,7 @@ class EnemyWorm(Enemy):
     def __init__(self):
         super().__init__(WORM_0)
         self.name = "bug"
-        self.max_current_sprites = 4
+        self.max_current_sprites = 5
         self.update_speed = 0.5
         self.sprites.append(WORM_1)
         self.sprites.append(WORM_2)
@@ -46,7 +46,7 @@ class EnemyBlackBat(Enemy):
     def __init__(self):
         super().__init__(BLACK_BAT_0)
         self.name = "boss"
-        self.max_current_sprites = 3
+        self.max_current_sprites = 4
         self.update_speed = 0.5
         self.sprites.append(BLACK_BAT_1)
         self.sprites.append(BLACK_BAT_2)

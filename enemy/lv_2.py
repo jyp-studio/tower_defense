@@ -7,7 +7,7 @@ class EnemyOrc1(Enemy):
     def __init__(self):
         super().__init__(ORC1_0)
         self.name = "orc"
-        self.max_current_sprites = 6
+        self.max_current_sprites = 7
         self.update_speed = 0.25
         self.sprites.append(ORC1_1)
         self.sprites.append(ORC1_2)
@@ -27,7 +27,7 @@ class EnemyOrc2(Enemy):
     def __init__(self):
         super().__init__(ORC2_0)
         self.name = "orc"
-        self.max_current_sprites = 6
+        self.max_current_sprites = 7
         self.update_speed = 0.25
         self.sprites.append(ORC2_1)
         self.sprites.append(ORC2_2)
@@ -47,7 +47,7 @@ class EnemyOrc3(Enemy):
     def __init__(self):
         super().__init__(ORC3_0)
         self.name = "boss"
-        self.max_current_sprites = 6
+        self.max_current_sprites = 7
         self.update_speed = 0.25
         self.sprites.append(ORC3_1)
         self.sprites.append(ORC3_2)

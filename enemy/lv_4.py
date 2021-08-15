@@ -8,7 +8,7 @@ class EnemySKULL1(Enemy):
     def __init__(self):
         super().__init__(YELLOW_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(YELLOW_SKULL_1)
         self.sprites.append(YELLOW_SKULL_2)
@@ -29,7 +29,7 @@ class EnemySKULL2(Enemy):
     def __init__(self):
         super().__init__(GREEN_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(GREEN_SKULL_0)
         self.sprites.append(GREEN_SKULL_1)
@@ -51,7 +51,7 @@ class EnemySKULL3(Enemy):
     def __init__(self):
         super().__init__(BLUE_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(BLUE_SKULL_1)
         self.sprites.append(BLUE_SKULL_2)
@@ -72,7 +72,7 @@ class EnemySKULL4(Enemy):
     def __init__(self):
         super().__init__(PURPLE_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(PURPLE_SKULL_1)
         self.sprites.append(PURPLE_SKULL_2)
@@ -93,7 +93,7 @@ class EnemySKULL5(Enemy):
     def __init__(self):
         super().__init__(RED_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(RED_SKULL_1)
         self.sprites.append(RED_SKULL_2)
@@ -114,7 +114,7 @@ class EnemySKULL6(Enemy):
     def __init__(self):
         super().__init__(YELLOW_SKULL_0)
         self.name = "skull"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(GREEN_SKULL_1)
         self.sprites.append(BLUE_SKULL_2)
@@ -135,7 +135,7 @@ class EnemyEvil(Enemy):
     def __init__(self):
         super().__init__(EVIL_SKULL_0)
         self.name = "boss"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(EVIL_SKULL_1)
         self.sprites.append(EVIL_SKULL_2)

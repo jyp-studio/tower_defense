@@ -8,7 +8,7 @@ class EnemyBat(Enemy):
     def __init__(self):
         super().__init__(BAT_0)
         self.name = "fly"
-        self.max_current_sprites = 3
+        self.max_current_sprites = 4
         self.update_speed = 0.25
         self.sprites.append(BAT_1)
         self.sprites.append(BAT_2)
@@ -25,7 +25,7 @@ class EnemyRedBat(Enemy):
     def __init__(self):
         super().__init__(RED_BAT_0)
         self.name = "fly"
-        self.max_current_sprites = 3
+        self.max_current_sprites = 4
         self.update_speed = 0.25
         self.sprites.append(RED_BAT_1)
         self.sprites.append(RED_BAT_2)
@@ -42,7 +42,7 @@ class EnemyGhost(Enemy):
     def __init__(self):
         super().__init__(GHOST_0)
         self.name = "fly"
-        self.max_current_sprites = 5
+        self.max_current_sprites = 6
         self.update_speed = 0.25
         self.sprites.append(GHOST_1)
         self.sprites.append(GHOST_2)
@@ -55,6 +55,8 @@ class EnemyGhost(Enemy):
         self.health = 8000
         self.max_health = 8000
         self.is_dead = 0
+
+        #def
 
 
 

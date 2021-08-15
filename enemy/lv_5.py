@@ -23,7 +23,7 @@ class EnemyKnight(Enemy):
     def __init__(self):
         super().__init__(KNIGHT_0)
         self.name = "boss"
-        self.max_current_sprites = 7
+        self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(KNIGHT_1)
         self.sprites.append(KNIGHT_2)
@@ -44,7 +44,7 @@ class EnemyMage(Enemy):
     def __init__(self):
         super().__init__(MAGE_0)
         self.name = "ultra boss"
-        self.max_current_sprites = 6
+        self.max_current_sprites = 7
         self.update_speed = 0.1
         self.sprites.append(MAGE_1)
         self.sprites.append(MAGE_2)
@@ -62,11 +62,12 @@ class EnemyMage(Enemy):
         self.summon_counter = 0
         self.summon_max_counter = 60
 
-    def summon(self):
+    def skill(self):
         if self.summon_counter < self.summon_max_counter:
             self.summon_counter += 1
             return False
         else:
+            self.buff()
             self.summon_counter = 0
             return True
 
