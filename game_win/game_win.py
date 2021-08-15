@@ -49,7 +49,7 @@ class GameWin:
             self.draw_mouse()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    exitWin=ExitWin(self.win)
+                    exitWin=ExitWin()
                     exitWin.run()
                     if game_status["run"]:
                         run=True

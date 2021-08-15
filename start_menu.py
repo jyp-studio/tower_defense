@@ -57,7 +57,7 @@ class StartMenu:
             for event in pygame.event.get():
                 # quit
                 if event.type == pygame.QUIT:
-                    exitWin=ExitWin(self.menu_win)
+                    exitWin=ExitWin()
                     exitWin.run()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:

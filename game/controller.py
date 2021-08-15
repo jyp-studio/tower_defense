@@ -70,7 +70,7 @@ class GameControl:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.events["game quit"] = True
-                exitWin = ExitWin(self.view.win)
+                exitWin = ExitWin()
                 exitWin.run()
 
             # player press action

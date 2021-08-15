@@ -4,7 +4,7 @@ from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controll
 
 
 class ExitWin:
-    def __init__(self, win: pygame.Surface):
+    def __init__(self):
         self.bg_win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         
         self.bg_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_bg.jpg")), (WIN_WIDTH, WIN_HEIGHT))
