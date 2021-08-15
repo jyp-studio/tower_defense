@@ -18,7 +18,7 @@ class Victory:
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
         self.has_draw_reward=False
-        self.font = pygame.font.Font(os.path.join(FONT_DIR, "CESCOBold.ttf"), 30)
+        self.font = pygame.font.Font(os.path.join(FONT_DIR, "comicz.ttf"), 30)
     
     def draw(self):
         self.win.blit(VIC_IMG,(0,0))
@@ -27,16 +27,16 @@ class Victory:
             pygame.draw.rect(surface,(255,255,255,128),btn)
         self.win.blit(surface, (0, 0))
 
+        if self.has_draw_reward:
+            self.draw_reward()
+            
         x, y = pygame.mouse.get_pos()
         self.win.blit(MOUSE, (x, y))
 
-        if self.has_draw_reward:
-            self.draw_reward()
-
     def draw_reward(self):
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
-        sheet= pygame.Rect(160, 100, 700, 400)
-        pygame.draw.rect(surface,(128,128,128,128),sheet)
+        sheet= pygame.Rect(160, 100, 720, 400)
+        pygame.draw.rect(surface,(0,0,0,255),sheet)
 
         text = self.font.render("There are some hotkey we used in development.", True, (255, 255, 255))
         surface.blit(text, (170,150))
