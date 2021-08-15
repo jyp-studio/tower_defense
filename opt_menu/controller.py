@@ -4,7 +4,7 @@ if TYPE_CHECKING:
     from opt_menu.model import OptMenuModel
     from opt_menu.view import OptMenuView
 import pygame
-from settings import game_status
+from settings import game_status,singleton_map_controller
 from exit_win.exit_win import ExitWin
 
 
@@ -33,7 +33,7 @@ class OptMenuController:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.events["game quit"] = True
-                exitWin=ExitWin(self.view.win)
+                exitWin=ExitWin()
                 exitWin.run()
 
             # player click action
@@ -47,8 +47,8 @@ class OptMenuController:
         self.view.draw_btn(self.model.buttons)
         self.view.draw_sound_volume()
         self.view.draw_music_volume()
-        self.view.draw_map_preview(self.model.map_preview_img, self.model.map_counter)
-        self.view.draw_map_hint(self.model.map_preview_img, self.model.map_counter)
+        self.view.draw_map_preview(self.model.map_preview_img, singleton_map_controller.map_index)
+        self.view.draw_map_hint(self.model.map_preview_img, singleton_map_controller.map_index)
         self.view.draw_mouse()
     
     @property

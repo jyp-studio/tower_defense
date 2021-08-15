@@ -6,8 +6,9 @@ from color_settings import *
 from settings import WIN_WIDTH, WIN_HEIGHT, FPS,singleton_vol_controller, singleton_map_controller,game_status,test_transparency
 from opt_menu.opt_menu import OptMenu
 from exit_win.exit_win import ExitWin
+from dir_path import *
 
-MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "mouse.png")), (20, 20))
 
 pygame.init()
 pygame.mixer.init()
@@ -18,7 +19,7 @@ class StartMenu:
         # win
         self.menu_win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         # background
-        self.bg = pygame.transform.scale(pygame.image.load(os.path.join("images", "start_menu3.png")), (WIN_WIDTH, WIN_HEIGHT))
+        self.bg = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "start_menu3.png")), (WIN_WIDTH, WIN_HEIGHT))
         # button
         self.start_btn = Buttons(430, 355, 170, 50)  # x, y, width, height
         self.opt_btn=Buttons(430, 425, 170, 50)
@@ -28,11 +29,11 @@ class StartMenu:
         # self.opt_btn_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "options.png")), (338,100))
 
         # music and sound
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
 
     def play_music(self):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load("./sound/menu.mp3")
+        pygame.mixer.music.load(os.path.join(SOUND_DIR,"menu.mp3"))
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)
@@ -57,7 +58,7 @@ class StartMenu:
             for event in pygame.event.get():
                 # quit
                 if event.type == pygame.QUIT:
-                    exitWin=ExitWin(self.menu_win)
+                    exitWin=ExitWin()
                     exitWin.run()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:

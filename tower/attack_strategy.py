@@ -6,8 +6,10 @@ if TYPE_CHECKING:
 
 import math
 import pygame
+import os
 from abc import ABC, abstractmethod
 from settings import singleton_vol_controller
+from dir_path import *
 
 pygame.mixer.init()
 
@@ -37,7 +39,7 @@ class AttackStrategy(ABC):
 # red flame: single
 class RedAttack(AttackStrategy):
     """attack an enemy once a time"""
-    attack_sound =pygame.mixer.Sound("./sound/flame.mp3")
+    attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"flame.mp3"))
 
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
         self.attack_sound.set_volume(singleton_vol_controller.sound_volume)
@@ -76,9 +78,10 @@ class RedAttack(AttackStrategy):
 class BlueAttack(AttackStrategy):
     """attack all the enemy in range once a time"""
 
-    attack_sound =pygame.mixer.Sound("./sound/blue_flame.mp3")
+    attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"blue_flame.mp3"))
 
     def attack(self, enemies: list, tower:Tower, cd_count:int)->int:
+        self.attack_sound.set_volume(singleton_vol_controller.sound_volume)
         attack_animate_time = 10 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
@@ -117,9 +120,10 @@ class BlueAttack(AttackStrategy):
 # moon: AOE slow
 class MoonAttack(AttackStrategy):
 
-    attack_sound =pygame.mixer.Sound("./sound/magic.mp3")
+    attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"magic.mp3"))
 
     def attack(self, enemies: list, tower, cd_count)->int:
+        self.attack_sound.set_volume(singleton_vol_controller.sound_volume)
         attack_animate_time = 4 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
@@ -161,10 +165,10 @@ class MoonAttack(AttackStrategy):
 # obelisk: snipe all
 class ObeliskSnipe(AttackStrategy):
 
-    attack_sound =pygame.mixer.Sound("./sound/lightning.mp3")
+    attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"lightning.mp3"))
 
     def attack(self, enemies: list, tower, cd_count) -> int:
-        
+        self.attack_sound.set_volume(singleton_vol_controller.sound_volume)
         attack_animate_time = 14 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False

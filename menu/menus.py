@@ -1,31 +1,32 @@
 import pygame
 import os
+from dir_path import *
 
 pygame.init()
 
 # menu
-BUILD_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "build_menu.png")), (200, 200))
-UPGRADE_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "upgrade_menu.png")), (180, 180))
+BUILD_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "build_menu.png")), (200, 200))
+UPGRADE_MENU_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "upgrade_menu.png")), (180, 180))
 # buttons in upgrade menu
-UPGRADE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "upgrade_button.png")), (110, 22))
-SELL_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "sell_button.png")), (110, 22))
-PROPERTIES_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "properties_button.png")), (110, 22))
-ULTRA_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "ultra_button.png")), (132, 45))
+UPGRADE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "upgrade_button.png")), (110, 22))
+SELL_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "sell_button.png")), (110, 22))
+PROPERTIES_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "properties_button.png")), (110, 22))
+ULTRA_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "ultra_button.png")), (132, 45))
 # buttons in build menu
-MOON_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "moon_build.png")), (50, 50))
-RED_FIRE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "red_build.png")), (50, 50))
-BLUE_FIRE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blue_build.png")), (48, 48))
-OBELISK_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "obelisk_build.png")), (50, 50))
+MOON_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "moon_build.png")), (50, 50))
+RED_FIRE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_build.png")), (50, 50))
+BLUE_FIRE_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "blue_build.png")), (48, 48))
+OBELISK_BTN_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "obelisk_build.png")), (50, 50))
 # control buttons
-muse_button_image = pygame.transform.scale(pygame.image.load("images/muse.png"), (80, 80))
-music_button_image = pygame.transform.scale(pygame.image.load("images/sound.png"), (80, 80))
-pause_button_image = pygame.transform.scale(pygame.image.load("images/pause.png"), (80, 80))
+muse_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"muse.png")), (80, 80))
+music_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"sound.png")), (80, 80))
+pause_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"pause.png")), (80, 80))
 
-up_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
-down_button_image = pygame.transform.scale(pygame.image.load(os.path.join("images", "transparent.png")),(60,55))
+up_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "transparent.png")),(60,55))
+down_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "transparent.png")),(60,55))
 
-BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "blood_potion.png")), (66,61))
-AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join("images", "aoe_potion.png")), (66,60))
+BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "blood_potion.png")), (66,61))
+AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "aoe_potion.png")), (66,60))
 
 class Button:
     def __init__(self, image, name: str, x: int, y: int):
