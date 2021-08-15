@@ -1,14 +1,15 @@
 import pygame
 import os
 from settings import WIN_WIDTH,WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,MOUSE
+from dir_path import *
 
 
 class ExitWin:
     def __init__(self):
         self.bg_win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         
-        self.bg_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_bg.jpg")), (WIN_WIDTH, WIN_HEIGHT))
-        self.menu_img = pygame.transform.scale(pygame.image.load(os.path.join("images", "exit_menu.png")), (350,250))
+        self.bg_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "exit_bg.jpg")), (WIN_WIDTH, WIN_HEIGHT))
+        self.menu_img = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "exit_menu.png")), (350,250))
 
         self.yes_btn = pygame.Rect(375, 315, 100, 50)
         self.no_btn = pygame.Rect(525, 315, 100, 50)
@@ -16,7 +17,7 @@ class ExitWin:
         self.buttons = [self.yes_btn,
                         self.no_btn]
 
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
     def draw(self):

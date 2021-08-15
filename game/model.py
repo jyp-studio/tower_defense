@@ -13,6 +13,7 @@ from opt_menu.opt_menu import OptMenu
 from game_over.game_over import GameOver
 from game_win.game_win import GameWin
 from game.user_request import *
+from dir_path import *
 
 
 class GameModel:
@@ -81,7 +82,7 @@ class GameModel:
         self.__towers = []
         self.__enemies = EnemyGroup(self.wave)
 
-        self.sound = pygame.mixer.Sound(os.path.join("sound", "sound.mp3"))
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "sound.mp3"))
 
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 

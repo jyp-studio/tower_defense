@@ -1,10 +1,11 @@
 import pygame
 from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller,MOUSE
 from exit_win.exit_win import ExitWin
+from dir_path import *
 import os
 
 
-GameOver_IMG=pygame.transform.scale(pygame.image.load("images/next_level.png"), (WIN_WIDTH, WIN_HEIGHT))
+GameOver_IMG=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"next_level.png")), (WIN_WIDTH, WIN_HEIGHT))
 
 
 class GameWin:
@@ -15,7 +16,7 @@ class GameWin:
         self.buttons=[self.next_btn,
                       self.exit_btn]
 
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
     
     def draw(self):
@@ -33,7 +34,7 @@ class GameWin:
 
     def play_music(self):
         pygame.mixer.music.fadeout(int(1*1000)) 
-        pygame.mixer.music.load("./sound/next_level.mp3")
+        pygame.mixer.music.load(os.path.join(SOUND_DIR,"next_level.mp3"))
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)

@@ -10,7 +10,7 @@ import os
 from settings import singleton_map_controller,singleton_vol_controller
 from gif import *
 from color_settings import *
-
+from dir_path import *
 from enemy.lv_1 import *
 from enemy.lv_2 import *
 from enemy.lv_3 import *
@@ -18,7 +18,7 @@ from enemy.lv_4 import *
 from enemy.lv_5 import *
 
 pygame.init()
-hit_base_sound =pygame.mixer.Sound("./sound/enemy_hit_base.mp3")
+hit_base_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"enemy_hit_base.mp3"))
 
 class EnemyGroup:
     def __init__(self, level: int):

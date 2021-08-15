@@ -1,8 +1,10 @@
 import pygame
+import os
 from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,MOUSE
 from exit_win.exit_win import ExitWin
+from dir_path import *
 
-GameOver_IMG=pygame.transform.scale(pygame.image.load("images/game_over.png"), (WIN_WIDTH, WIN_HEIGHT))
+GameOver_IMG=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"game_over.png")), (WIN_WIDTH, WIN_HEIGHT))
 
 
 class GameOver:
@@ -13,7 +15,7 @@ class GameOver:
         self.buttons=[self.restart_btn,
                       self.exit_btn]
 
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
     
     def draw(self):
@@ -25,7 +27,7 @@ class GameOver:
 
     def play_music(self):
         pygame.mixer.music.fadeout(int(1*1000)) 
-        pygame.mixer.music.load("./sound/gameover.mp3")
+        pygame.mixer.music.load(os.path.join(SOUND_DIR,"gameover.mp3"))
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)

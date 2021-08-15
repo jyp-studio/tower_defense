@@ -2,8 +2,9 @@ import pygame
 import os
 from settings import WIN_WIDTH, WIN_HEIGHT,FPS,game_status,singleton_vol_controller,test_transparency,singleton_map_controller,MOUSE
 from exit_win.exit_win import ExitWin
+from dir_path import *
 
-VIC_IMG=pygame.transform.scale(pygame.image.load("images/victory.png"), (WIN_WIDTH, WIN_HEIGHT))
+VIC_IMG=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"victory.png")), (WIN_WIDTH, WIN_HEIGHT))
 
 class Victory:
     def __init__(self):
@@ -13,11 +14,11 @@ class Victory:
         self.buttons=[self.reward_btn,
                       self.exit_btn]
 
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
         self.has_draw_reward=False
-        self.font = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 30)
+        self.font = pygame.font.Font(os.path.join(FONT_DIR, "CESCOBold.ttf"), 30)
     
     def draw(self):
         self.win.blit(VIC_IMG,(0,0))
@@ -53,7 +54,7 @@ class Victory:
 
     def play_music(self):
         pygame.mixer.music.fadeout(int(1*1000)) 
-        pygame.mixer.music.load("./sound/victory.mp3")
+        pygame.mixer.music.load(os.path.join(SOUND_DIR,"victory.mp3"))
         pygame.mixer.music.set_volume(singleton_vol_controller.music_volume)
         pygame.mixer.music.play(-1)
         self.sound.set_volume(singleton_vol_controller.sound_volume)

@@ -1,6 +1,7 @@
 import pygame
 import os
 from singleton import VolController,MapController
+from dir_path import *
 
 # screen size
 WIN_WIDTH = 1024
@@ -15,9 +16,9 @@ GREEN = (0, 255, 0)
 PURPLE = (147, 0, 147)
 
 # image
-HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load("images/hp_gray.png"), (35, 33))
-HP_IMAGE = pygame.transform.scale(pygame.image.load("images/hp.png"), (35, 33))
-MOUSE = pygame.transform.scale(pygame.image.load(os.path.join("images", "mouse.png")), (20, 20))
+HP_GRAY_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"hp_gray.png")), (35, 33))
+HP_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"hp.png")), (35, 33))
+MOUSE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "mouse.png")), (20, 20))
 
 # singleton
 singleton_vol_controller=VolController()

@@ -8,6 +8,7 @@ from tower.moon import *
 from tower.obelisk import *
 from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
 from potion.potionInfo import PotionInfo
+from dir_path import *
 
 from gif import *
 
@@ -266,7 +267,7 @@ class MinusMapIndex:
         if user_request == "minusMapIndex":
             model.sound.play()
             singleton_map_controller.map_index-=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
 
 class AddMapIndex:
@@ -278,7 +279,7 @@ class AddMapIndex:
         if user_request == "addMapIndex":
             model.sound.play()
             singleton_map_controller.map_index+=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
 
 class GoStartMenu:

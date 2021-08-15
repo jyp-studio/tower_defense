@@ -1,6 +1,6 @@
 import pygame
 import os
-
+from dir_path import *
 # enemy path
 PATH1_1=[(267, 545), (257, 537), (246, 528), (236, 522), (226, 515), (219, 514), (208, 509), (200, 504), 
         (193, 497), (186, 489), (182, 480), (179, 472), (179, 463), (181, 454), (185, 444), (188, 435), 
@@ -187,13 +187,13 @@ class MapController:
         self.__WIN_HEIGHT=WIN_HEIGHT
 
         self.__map_index=1
-        with open('map.txt', 'r') as f:
+        with open(os.path.join(ROOT_DIR,'map.txt'), 'r') as f:
             self.__map_index=int(f.read())
         self.__map_index=self.__map_index if 1<=self.__map_index<=self.__max_map_index else 1
 
         self.__next_map_index=int(self.__map_index+1)
         
-        self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
+        self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
 
         self.__curPathPage=PATH_DICT[self.__map_index]
 
@@ -202,9 +202,9 @@ class MapController:
         self.__curVacancyList=VACANCY_DICT[self.__map_index]
 
     def change_map(self):
-        with open('map.txt', 'w') as f:
+        with open(os.path.join(ROOT_DIR,'map.txt'), 'w') as f:
             f.write(str(self.__map_index))
-        self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join("images", "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
+        self.__curMap= pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Map"+str(self.__map_index)+".png")),(self.__WIN_WIDTH,self.__WIN_HEIGHT))
         self.__curPathPage=PATH_DICT[self.__map_index]
         self.__curBaseRect=BASE_RECT_DICT[self.__map_index]
         self.__curVacancyList=VACANCY_DICT[self.__map_index]

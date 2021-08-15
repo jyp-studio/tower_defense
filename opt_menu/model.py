@@ -3,23 +3,24 @@ import os
 from menu.menus import Button
 from settings import singleton_vol_controller,singleton_map_controller
 from game.user_request import RequestSubject,MinusVolume,AddVolume,Back,MinusMapIndex,AddMapIndex,GoStartMenu
+from dir_path import *
 
 class OptMenuModel:
     def __init__(self):
         self.back_game=False
         self.back_start_menu=False
 
-        self.sound = pygame.mixer.Sound("./sound/sound.mp3")
+        self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR,"sound.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
-        self.minus_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "minus.png")), (50, 50))
-        self.add_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "add.png")), (50, 50))
-        self.back_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "back.png")), (150, 50))
-        self.menu_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "menu.png")), (150, 50))
-        self.left_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "left.png")), (50, 50))
-        self.right_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "right.png")), (50, 50))
+        self.minus_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "minus.png")), (50, 50))
+        self.add_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "add.png")), (50, 50))
+        self.back_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "back.png")), (150, 50))
+        self.menu_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "menu.png")), (150, 50))
+        self.left_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "left.png")), (50, 50))
+        self.right_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "right.png")), (50, 50))
 
-        self.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join("images", "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+        self.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
 
         self.minusSoundVol_btn=Button(self.minus_img,"minusSound",329, 390)  # image, name: str, x: int, y: int
         self.addSoundVol_btn=Button(self.add_img,"addSound",399, 390)  

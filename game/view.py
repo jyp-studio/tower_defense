@@ -11,18 +11,19 @@ import os
 import time
 from settings import WIN_WIDTH, WIN_HEIGHT, HP_IMAGE, HP_GRAY_IMAGE, singleton_map_controller,potion_price,test_transparency,MOUSE
 from color_settings import *
+from dir_path import *
 
-TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join("images", "top_info.jpg")), (WIN_WIDTH, 85))
-POTION_LIST = pygame.transform.scale(pygame.image.load(os.path.join("images", "potion_list.png")), (85, 525))
+TOP_INFO = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "top_info.jpg")), (WIN_WIDTH, 85))
+POTION_LIST = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "potion_list.png")), (85, 525))
 
 
 class GameView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-        self.font = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
-        self.font2 = pygame.font.Font(os.path.join("font", "BNMachine.ttf"), 25)
-        self.font3 = pygame.font.Font(os.path.join("font", "comicz.ttf"), 15)
-        self.font4 = pygame.font.Font(os.path.join("font", "ARCADECLASSIC.TTF"), 20)
+        self.font = pygame.font.Font(os.path.join(FONT_DIR, "BNMachine.ttf"), 25)
+        self.font2 = pygame.font.Font(os.path.join(FONT_DIR, "BNMachine.ttf"), 25)
+        self.font3 = pygame.font.Font(os.path.join(FONT_DIR, "comicz.ttf"), 15)
+        self.font4 = pygame.font.Font(os.path.join(FONT_DIR, "ARCADECLASSIC.TTF"), 20)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -148,8 +149,8 @@ class GameView:
             transparency = 150
             pygame.draw.rect(surface, (0, 0, 0, transparency), [162, 150, 700, 400])
             self.win.blit(surface, (0, 0))
-            font = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 50)
-            font1 = pygame.font.Font(os.path.join("font", "CESCOBold.ttf"), 25)
+            font = pygame.font.Font(os.path.join(FONT_DIR, "CESCOBold.ttf"), 50)
+            font1 = pygame.font.Font(os.path.join(FONT_DIR, "CESCOBold.ttf"), 25)
             name = f"{selected_tower.name}"
             intro = f"{selected_tower.intro}"
             intro1 = f"{selected_tower.intro1}"
@@ -236,7 +237,7 @@ class GameView:
 
     def draw_base(self):
         baseRect=singleton_map_controller.curBaseRect
-        self.win.blit(pygame.transform.scale(pygame.image.load("images/base.png"), (baseRect.width, baseRect.height)),baseRect.topleft)
+        self.win.blit(pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,"base.png")), (baseRect.width, baseRect.height)),baseRect.topleft)
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
         pygame.draw.rect(surface,[255,255,255,test_transparency],baseRect)
         self.win.blit(surface,(0,0))
