@@ -75,8 +75,8 @@ class GameControl:
 
             # player press action
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_n:
-                    self.events["keyboard key"] = pygame.K_n
+                if event.key == pygame.K_SPACE:
+                    self.events["keyboard key"] = pygame.K_SPACE
                 if event.key == pygame.K_TAB:
                     self.events["Add money"] = pygame.K_TAB
                 if event.key == pygame.K_k:

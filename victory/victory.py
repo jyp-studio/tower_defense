@@ -18,7 +18,7 @@ class Victory:
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
         self.has_draw_reward=False
-        self.font = pygame.font.Font(os.path.join(FONT_DIR, "comicz.ttf"), 30)
+        self.font = pygame.font.Font(os.path.join(FONT_DIR, "orange juice 2.0.ttf"), 40)
     
     def draw(self):
         self.win.blit(VIC_IMG,(0,0))
@@ -38,16 +38,20 @@ class Victory:
         sheet= pygame.Rect(160, 100, 720, 400)
         pygame.draw.rect(surface,(0,0,0,255),sheet)
 
-        text = self.font.render("There are some hotkey we used in development.", True, (255, 255, 255))
-        surface.blit(text, (170,150))
-        text=self.font.render("Button tab is used to get lots of money.",True, (255, 255, 255))
-        surface.blit(text, (170,200))
-        text=self.font.render("Button k is used to kill all enemies in a wave.",True, (255, 255, 255))
-        surface.blit(text, (170,250))
-        text=self.font.render("Button t is used to build towers randomly.",True, (255, 255, 255))
-        surface.blit(text, (170,300))
-        text=self.font.render("Button h is used to recover 1 HP once.",True, (255, 255, 255))
-        surface.blit(text, (170,350))
+        text = self.font.render("Thank You!.", True, (255, 255, 255))
+        surface.blit(text, (415, 110))
+        text = self.font.render("There are some hotkey used in development", True, (255, 255, 255))
+        surface.blit(text, (163,160))
+        text = self.font.render("and now they are yours.", True, (255, 255, 255))
+        surface.blit(text, (315, 210))
+        text=self.font.render("\"Tab\" is used to get lots of money.",True, (255, 255, 255))
+        surface.blit(text, (175,290))
+        text=self.font.render("\"k\" is used to kill all enemies in a wave.",True, (255, 255, 255))
+        surface.blit(text, (175,340))
+        text=self.font.render("\"t\" is used to build towers randomly.",True, (255, 255, 255))
+        surface.blit(text, (175,390))
+        text=self.font.render("\"h\" is used to recover 1 HP once.",True, (255, 255, 255))
+        surface.blit(text, (175,440))
 
         self.win.blit(surface, (0,0))
 

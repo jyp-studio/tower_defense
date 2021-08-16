@@ -24,6 +24,8 @@ class GameView:
         self.font2 = pygame.font.Font(os.path.join(FONT_DIR, "BNMachine.ttf"), 25)
         self.font3 = pygame.font.Font(os.path.join(FONT_DIR, "comicz.ttf"), 15)
         self.font4 = pygame.font.Font(os.path.join(FONT_DIR, "ARCADECLASSIC.TTF"), 20)
+        self.font5 = pygame.font.Font(os.path.join(FONT_DIR, "ARCADECLASSIC.TTF"), 20)
+        pygame.font.Font.set_bold(self.font5, True)
 
     def draw_bg(self):
         self.win.blit(singleton_map_controller.curMap, (0, 0))
@@ -39,13 +41,6 @@ class GameView:
     def draw_potion_list(self):
         self.win.blit(POTION_LIST, (0, 85))
 
-    def draw_potion_animation(self, enemies: EnemyGroup, potion: POTION_LIST):
-        for en in enemies.get():
-            self.win.blit(bullet.image, bullet.rect)
-            bullet.update()
-            if bullet.current_sprites > bullet.max_current_sprites - 1:
-                towers.particle_list.remove(bullet)
-
     def draw_enemies(self, enemies: EnemyGroup):
         for en in enemies.get():
             self.win.blit(en.image, en.rect)
@@ -55,6 +50,11 @@ class GameView:
             bar_height = 5
             pygame.draw.rect(self.win, RED, [en.rect.x, en.rect.y - 10, max_bar_width, bar_height])
             pygame.draw.rect(self.win, GREEN, [en.rect.x, en.rect.y - 10, bar_width, bar_height])
+            # draw boss name
+            if en.name == "boss" or en.name == "ultra boss":
+                en_name = "Boss"
+                name_text = self.font5.render(en_name, True, (255, 0, 0))
+                self.win.blit(name_text, (en.rect.x, en.rect.y - 30))
             # draw health num
             en_hp = f"{en.health}"
             hp_text = self.font4.render(en_hp, True, (255, 255, 255))
@@ -207,6 +207,14 @@ class GameView:
         self.win.blit(text,(15,200))
         text = self.font3.render(f"${potion_price['aoe_potion']}", True, (255, 255, 255))
         self.win.blit(text,(15,260))
+        text = self.font3.render(f"${potion_price['kill_potion']}", True, (255, 255, 255))
+        self.win.blit(text, (15, 260 + 61))
+        text = self.font3.render(f"${potion_price['slow_potion']}", True, (255, 255, 255))
+        self.win.blit(text, (15, 260 + 61*2))
+        text = self.font3.render(f"${potion_price['boss_potion']}", True, (255, 255, 255))
+        self.win.blit(text, (15, 260 + 61*3))
+        text = self.font3.render(f"${potion_price['tower_potion']}", True, (255, 255, 255))
+        self.win.blit(text, (15, 260 + 61*4 + 2))
 
     def draw_wave(self, wave: int):
         """(Q2.2)render the wave"""

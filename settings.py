@@ -33,7 +33,11 @@ game_status:dict={
 
 potion_price:dict={
     "blood_potion":2000,
-    "aoe_potion":2000
+    "aoe_potion":2000,
+    "kill_potion":8000,
+    "slow_potion":2000,
+    "boss_potion":5000,
+    "tower_potion":5000
 }
 
 # transparency of some menu btn

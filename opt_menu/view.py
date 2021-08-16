@@ -12,7 +12,7 @@ class OptMenuView:
     def __init__(self):
         self.win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         self.font = pygame.font.Font(os.path.join(FONT_DIR, "CESCOBold.ttf"), 30)
-        self.font1 = pygame.font.Font(os.path.join(FONT_DIR, "28 Days Later.ttf"), 30)
+        self.font1 = pygame.font.Font(os.path.join(FONT_DIR, "Thempo New St.ttf"), 30)
 
     def draw_bg(self):
         self.win.blit(MENU_VIEW, (0, 0))
@@ -41,25 +41,25 @@ class OptMenuView:
     def draw_map_hint(self, map_img: pygame.Surface, counter: int):
         pygame.draw.rect(self.win, (0, 0, 0, 110), [262, 109, map_img.get_rect().w, map_img.get_rect().h])
         if counter == 1:
-            text = self.font1.render(f"There are several variants of bugs", True, (255, 255, 255))
-            text1 = self.font1.render(f"remember that only Moon Tower and", True, (255, 255, 255))
-            text2 = self.font1.render(f"Obelisk can attack flying species", True, (255, 255, 255))
+            text = self.font1.render(f"There are several variants of bugs", True, LGRAY)
+            text1 = self.font1.render(f"remember that only Moon Tower and", True, LGRAY)
+            text2 = self.font1.render(f"Obelisk can attack flying species", True, LGRAY)
         elif counter == 2:
-            text = self.font1.render(f"The cursed orcs have strong defenses", True, (255, 255, 255))
-            text1 = self.font1.render(f"remember that Moon Tower can do twice", True, (255, 255, 255))
-            text2 = self.font1.render(f"as much damage to the terrifying orcs", True, (255, 255, 255))
+            text = self.font1.render(f"The cursed orcs have strong defenses", True, LGRAY)
+            text1 = self.font1.render(f"remember that Moon Tower do twice", True, LGRAY)
+            text2 = self.font1.render(f"as much damage to the terrifying orcs", True, LGRAY)
         elif counter == 3:
-            text = self.font1.render(f"Flying monsters are raging remember ", True, (255, 255, 255))
-            text1 = self.font1.render(f"that ghosts have a chance to dodge ", True, (255, 255, 255))
-            text2 = self.font1.render(f"attacks", True, (255, 255, 255))
+            text = self.font1.render(f"Flying monsters are raging remember ", True, LGRAY)
+            text1 = self.font1.render(f"that ghosts have a chance to dodge ", True, LGRAY)
+            text2 = self.font1.render(f"attacks", True, LGRAY)
         elif counter == 4:
-            text = self.font1.render(f"The skulls are resurrect constantly", True, (255, 255, 255))
-            text1 = self.font1.render(f"Remember that Blue Totem can", True, (255, 255, 255))
-            text2 = self.font1.render(f"cause fatal damage to them", True, (255, 255, 255))
+            text = self.font1.render(f"The skulls are resurrect constantly", True, LGRAY)
+            text1 = self.font1.render(f"Remember that Blue Totem can", True, LGRAY)
+            text2 = self.font1.render(f"cause fatal damage to them", True, LGRAY)
         else:
-            text = self.font1.render(f"Evil witches will summon knights and ", True, (255, 255, 255))
-            text1 = self.font1.render(f"dwarfs as shields and restore blood", True, (255, 255, 255))
-            text2 = self.font1.render(f"Obelisk is indeed effective for the boss", True, (255, 255, 255))
+            text = self.font1.render(f"Evil witches will summon knights and ", True, LGRAY)
+            text1 = self.font1.render(f"dwarfs as shields and restore blood", True, LGRAY)
+            text2 = self.font1.render(f"Obelisk is indeed effective for the boss", True, LGRAY)
         self.win.blit(text, (268, 150))
         self.win.blit(text1, (268, 200))
         self.win.blit(text2, (268, 250))

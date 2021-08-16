@@ -57,10 +57,10 @@ class EnemyMage(Enemy):
         self.max_stride = 1
         self.health = 9999
         self.max_health = 9999
-        self.is_dead = 0
+        self.is_dead = 8
 
         self.summon_counter = 0
-        self.summon_max_counter = 60
+        self.summon_max_counter = 66
 
     def skill(self):
         if self.summon_counter < self.summon_max_counter:
@@ -72,8 +72,8 @@ class EnemyMage(Enemy):
             return True
 
     def buff(self):
-        if self.health < self.max_health - 1000:
-            self.health += 1000
+        if self.health < self.max_health - 3000:
+            self.health += 3000
         else:
             self.health = self.max_health
 

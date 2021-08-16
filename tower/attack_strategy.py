@@ -78,6 +78,9 @@ class RedAttack(AttackStrategy):
 
 # blue flame: AOE
 class BlueAttack(AttackStrategy):
+    def __init__(self):
+        self.count = 0
+        self.count_max = 9
     """attack all the enemy in range once a time"""
 
     attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"blue_flame.mp3"))
@@ -89,13 +92,15 @@ class BlueAttack(AttackStrategy):
         exist_enemy = False
         if cd_count < tower.cd_max_count:
             if cd_count - 1 == tower.cd_max_count-attack_animate_time:
-                
+
+                self.count = 0
                 #確認有無敵人在圈內
                 for en in enemies:
-                    if in_range(en, tower):
+                    if in_range(en, tower) and self.count <= self.count_max:
                         if en.name != "fly" or en.name != "ghost":
                             x, y = en.rect.center
                             tower.throw(x, y - 100)
+                            self.count += 1
                             exist_enemy = True
 
                 if not exist_enemy:
@@ -105,8 +110,9 @@ class BlueAttack(AttackStrategy):
 
         else:
             self.attack_sound.play()
+            self.count = 0
             for en in enemies:
-                if in_range(en, tower):
+                if in_range(en, tower) and self.count <= self.count_max:
                     if en.name == "fly" or en.name == "ghost":
                         pass
                     elif en.name == "skull":
@@ -128,6 +134,7 @@ class MoonAttack(AttackStrategy):
         attack_animate_time = 4 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
+        self.count = 0
         if cd_count < tower.cd_max_count:
             if cd_count - 1 == tower.cd_max_count-attack_animate_time:
                 
@@ -171,7 +178,9 @@ class MoonAttack(AttackStrategy):
 
 # obelisk: snipe all
 class ObeliskSnipe(AttackStrategy):
-
+    def __init__(self):
+        self.count = 0
+        self.count_max = 3
     attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"lightning.mp3"))
 
     def attack(self, enemies: list, tower, cd_count) -> int:
@@ -179,15 +188,17 @@ class ObeliskSnipe(AttackStrategy):
         attack_animate_time = 14 #等同各攻擊動畫的max_current_sprites+1
 
         exist_enemy = False
+        self.count = 0
         if cd_count < tower.cd_max_count:
             if cd_count - 1 == tower.cd_max_count-attack_animate_time:
                 
                 #確認有無敵人在圈內
                 for en in enemies:
-                    if in_range(en, tower):
+                    if in_range(en, tower) and self.count <= self.count_max:
                         x, y = en.rect.center
                         tower.throw(x, y)
                         exist_enemy = True
+                        self.count += 1
 
                 if not exist_enemy:
                     cd_count = tower.cd_max_count-attack_animate_time    #讓塔的cd維持在判斷可以開始打雷的時候
@@ -196,6 +207,7 @@ class ObeliskSnipe(AttackStrategy):
 
         else:
             self.attack_sound.play()
+            self.count = 0
             for en in enemies:
                 if in_range(en, tower):
                     if en.name == "boss":   #對boss傷害

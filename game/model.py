@@ -83,7 +83,12 @@ class GameModel:
         self.__enemies = EnemyGroup(self.wave)
 
         self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "sound.mp3"))
-
+        self.buff_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "buff.mp3"))
+        self.debuff_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "debuff.mp3"))
+        self.hp_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "hp.mp3"))
+        self.meteor_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "meteor.mp3"))
+        self.beam_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "beam.mp3"))
+        self.evil_sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "evil.mp3"))
         self.sound.set_volume(singleton_vol_controller.sound_volume)
 
         self.UI = GameUI()

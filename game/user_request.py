@@ -326,11 +326,81 @@ class Live:
                 victory_menu.run()
 
 
-class PotionBullet:
+class PotionAoe:
     def __init__(self, x: int, y: int):
         self.sprites = [METEOR_0, METEOR_1, METEOR_2, METEOR_3, METEOR_4]
         self.current_sprites = 0
         self.max_current_sprites = 5
+        self.update_speed = 0.5
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
+
+class PotionKill:
+    def __init__(self, x: int, y: int):
+        self.sprites = [KILL_1, KILL_2, KILL_3, KILL_4, KILL_5, KILL_6, KILL_7, KILL_8,
+                        KILL_9, KILL_10, KILL_11, KILL_12, KILL_13, KILL_14, KILL_15
+                        ]
+        self.current_sprites = 0
+        self.max_current_sprites = 15
+        self.update_speed = 0.5
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
+
+class PotionSlow:
+    def __init__(self, x: int, y: int):
+        self.sprites = [SLOW, SLOW, SLOW, SLOW]
+        self.current_sprites = 0
+        self.max_current_sprites = 4
+        self.update_speed = 0.5
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
+
+class PotionBoss:
+    def __init__(self, x: int, y: int):
+        self.sprites = [BEAM_0, BEAM_1, BEAM_2, BEAM_3, BEAM_4, BEAM_5, BEAM_5, BEAM_5]
+        self.current_sprites = 0
+        self.max_current_sprites = 8
+        self.update_speed = 0.5
+        self.image = self.sprites[self.current_sprites]
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+
+    def update(self):
+        self.current_sprites += self.update_speed
+        if self.current_sprites >= self.max_current_sprites:
+            self.current_sprites = 0
+        self.image = self.sprites[int(self.current_sprites)]
+
+
+class PotionTower:
+    def __init__(self, x: int, y: int):
+        self.sprites = [CD, CD, CD, CD]
+        self.current_sprites = 0
+        self.max_current_sprites = 4
         self.update_speed = 0.5
         self.image = self.sprites[self.current_sprites]
         self.rect = self.image.get_rect()
@@ -348,6 +418,7 @@ class Potionfunction:
         subject.register(self)
 
         self.particle_list = []
+        self.cd = True
 
     def update(self, user_request: str, model):
 
@@ -355,20 +426,101 @@ class Potionfunction:
             if model.hp < model.max_hp and model.money >= potion_price["blood_potion"]:
                 model.hp += 1
                 model.money -= potion_price["blood_potion"]
+                potion_price["blood_potion"] += 2000
                 model.sound.play()
+                model.hp_sound.play()
         if user_request == "aoe_potion":
             if model.money >= potion_price["aoe_potion"]:
-                for en in model.enemies.get():
-                    x, y = en.rect.center
-                    self.throw(x, y)
-                    temp = int(en.health / 10)
-                    en.health -= temp
+                if len(model.enemies.get()) != 0:
+                    for en in model.enemies.get():
+                        if en.name == "ultra boss" or en.name == "boss":
+                            pass
+                        else:
+                            x, y = en.rect.center
+                            self.aoe_throw(x, y)
+                            temp = int(en.health / 10)
+                            en.health -= temp
+                            model.meteor_sound.play()
 
-                model.money -= potion_price["aoe_potion"]
-                model.sound.play()
+                    model.money -= potion_price["aoe_potion"]
+                    potion_price["aoe_potion"] += 2000
+                    model.sound.play()
 
-    def throw(self, x: int, y: int):
-        self.particle_list.append(PotionBullet(x, y))
+        if user_request == "kill_potion":
+            if model.money >= potion_price["kill_potion"] and model.hp > 3:
+                if len(model.enemies.get()) != 0:
+                    for en in model.enemies.get():
+                        if en.name == "ultra boss" or en.name == "boss":
+                            break
+                        else:
+                            x, y = en.rect.center
+                            self.kill_throw(x, y + 40)
+                            en.health = 0
+                            model.evil_sound.play()
+
+                    model.money -= potion_price["kill_potion"]
+                    model.hp -= 3
+                    potion_price["kill_potion"] += 5000
+                    model.sound.play()
+
+        if user_request == "slow_potion":
+            if model.money >= potion_price["slow_potion"]:
+                if len(model.enemies.get()) != 0:
+                    for en in model.enemies.get():
+                        x, y = en.rect.center
+                        self.slow_throw(x + 10, y + 40)
+                        if en.stride > 0.5:
+                            en.stride -= 0.5
+                        else:
+                            en.stride = 0.3
+
+                    model.money -= potion_price["slow_potion"]
+                    potion_price["slow_potion"] += 3000
+                    model.sound.play()
+                    model.debuff_sound.play()
+        if user_request == "boss_potion":
+            if model.money >= potion_price["boss_potion"]:
+                if len(model.enemies.get()) != 0:
+                    for en in model.enemies.get():
+                        if en.name == "ultra boss" or en.name == "boss":
+                            x, y = en.rect.center
+                            self.boss_throw(x, y - 200)
+                            en.health -= int(en.health / 10)
+                            model.beam_sound.play()
+                        else:
+                            break
+                    model.money -= potion_price["boss_potion"]
+                    potion_price["boss_potion"] += 3000
+                    model.sound.play()
+
+        if user_request == "tower_potion":
+            if model.money >= potion_price["tower_potion"] and self.cd:
+                if len(model.towers) != 0:
+                    for tw in model.towers:
+                        x, y = tw.rect.center
+                        self.tower_throw(x + 10, y + 50)
+                        tw.cd_max_count -= 5
+                        self.cd = False
+
+                    model.money -= potion_price["tower_potion"]
+                    potion_price["tower_potion"] = 999999
+                    model.sound.play()
+                    model.buff_sound.play()
+
+    def aoe_throw(self, x: int, y: int):
+        self.particle_list.append(PotionAoe(x - 190, y - 200))
+
+    def kill_throw(self, x: int, y: int):
+        self.particle_list.append(PotionKill(x, y - 100))
+
+    def slow_throw(self, x: int, y: int):
+        self.particle_list.append(PotionSlow(x, y - 100))
+
+    def boss_throw(self, x: int, y: int):
+        self.particle_list.append(PotionBoss(x, y - 100))
+
+    def tower_throw(self, x: int, y: int):
+        self.particle_list.append(PotionTower(x, y - 100))
 
 
 class MousePosTracker:

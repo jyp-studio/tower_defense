@@ -151,12 +151,12 @@ LIGHT_7 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "lightn
 LIGHT_8 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "lightning_8.png")), (50, 600))
 
 # red beam
-BEAM_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_0.png")), (30, 100))
-BEAM_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_1.png")), (30, 100))
-BEAM_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_2.png")), (30, 100))
-BEAM_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_3.png")), (30, 100))
-BEAM_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_4.png")), (30, 100))
-BEAM_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_5.png")), (30, 100))
+BEAM_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_0.png")), (50, 600))
+BEAM_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_1.png")), (50, 600))
+BEAM_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_2.png")), (50, 600))
+BEAM_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_3.png")), (50, 600))
+BEAM_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_4.png")), (50, 600))
+BEAM_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "red_beam_5.png")), (50, 600))
 
 # fire ball
 FIRE_BALL_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "fire_ball_0.png")), (50, 100))
@@ -242,21 +242,46 @@ GHOST_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "ghost_
 GHOST_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "ghost_5.png")), (100, 120))
 
 # evil skull
-EVIL_SKULL_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_1.png")), (80, 80))
-EVIL_SKULL_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_2.png")), (80, 80))
-EVIL_SKULL_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_3.png")), (80, 80))
-EVIL_SKULL_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_4.png")), (80, 80))
-EVIL_SKULL_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_5.png")), (80, 80))
-EVIL_SKULL_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_6.png")), (80, 80))
-EVIL_SKULL_6 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_7.png")), (80, 80))
-EVIL_SKULL_7 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_8.png")), (80, 80))
+EVIL_SKULL_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_1.png")), (90, 100))
+EVIL_SKULL_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_2.png")), (90, 100))
+EVIL_SKULL_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_3.png")), (90, 100))
+EVIL_SKULL_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_4.png")), (90, 100))
+EVIL_SKULL_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_5.png")), (90, 100))
+EVIL_SKULL_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_6.png")), (90, 100))
+EVIL_SKULL_6 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_7.png")), (90, 100))
+EVIL_SKULL_7 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Walk", "Bringer-of-Death_Walk_8.png")), (90, 100))
 
 # meteor
-METEOR_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_0.png")), (200, 200))
-METEOR_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_1.png")), (200, 200))
-METEOR_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_2.png")), (200, 200))
-METEOR_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_3.png")), (200, 200))
-METEOR_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_4.png")), (200, 200))
+METEOR_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_0.png")), (500, 500))
+METEOR_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_1.png")), (500, 500))
+METEOR_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_2.png")), (500, 500))
+METEOR_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_3.png")), (500, 500))
+METEOR_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "meteor_4.png")), (500, 500))
 
 # miss
 MISS = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "miss.png")), (100, 50))
+
+# slow
+SLOW = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "speed_lower.png")), (150, 50))
+
+# tower buff
+CD = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "buff.png")), (150, 50))
+
+# kill
+KILL_0 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_1.png")), (200, 180))
+KILL_1 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_2.png")), (200, 180))
+KILL_2 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_3.png")), (200, 180))
+KILL_3 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_4.png")), (200, 180))
+KILL_4 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_5.png")), (200, 180))
+KILL_5 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_6.png")), (200, 180))
+KILL_6 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_7.png")), (200, 180))
+KILL_7 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_8.png")), (200, 180))
+KILL_8 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_9.png")), (200, 180))
+KILL_9 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_10.png")), (200, 180))
+KILL_10 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_11.png")), (200, 180))
+KILL_11 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_12.png")), (200, 180))
+KILL_12 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_13.png")), (200, 180))
+KILL_13 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_14.png")), (200, 180))
+KILL_14 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_15.png")), (200, 180))
+KILL_15 = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "Spell", "Bringer-of-Death_Spell_16.png")), (200, 180))
+

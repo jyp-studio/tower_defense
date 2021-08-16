@@ -49,7 +49,10 @@ class EnemyGroup:
                     else:
                         model.money += 30
                 else:
-                    if en.is_dead == 5:
+                    if en.is_dead == 8:
+                        self.__reserved_members.append(EnemyMage())
+                        en.is_dead = 0
+                    elif en.is_dead == 5:
                         en.is_dead = 4
                         en.sprites.clear()
                         en.sprites.append(GREEN_SKULL_0)

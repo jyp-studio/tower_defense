@@ -26,7 +26,11 @@ up_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR,
 down_button_image = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "transparent.png")),(60,55))
 
 BLOOD_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "blood_potion.png")), (66,61))
-AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "aoe_potion.png")), (66,60))
+AOE_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "aoe_potion.png")), (66, 61))
+KILL_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "kill_potion.png")), (66, 61))
+SLOW_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "slow_potion.png")), (66, 61))
+BOSS_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "boss_potion.png")), (66, 61))
+TOWER_POTION_IMAGE = pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "tower_potion.png")), (66, 61))
 
 
 class Button:
@@ -86,7 +90,11 @@ class MainMenu:
                          Button(up_button_image, "potion_up",43,123),
                          Button(down_button_image, "potion_down",43,566),
                          Button(BLOOD_POTION_IMAGE,'blood_potion',43,196),
-                         Button(AOE_POTION_IMAGE,'aoe_potion',43,257)
+                         Button(AOE_POTION_IMAGE,'aoe_potion',43,257),
+                         Button(KILL_POTION_IMAGE, 'kill_potion', 43, 257 + 61),
+                         Button(SLOW_POTION_IMAGE, 'slow_potion', 43, 257 + 61 * 2),
+                         Button(BOSS_POTION_IMAGE, 'boss_potion', 43, 257 + 61 * 3),
+                         Button(TOWER_POTION_IMAGE, 'tower_potion', 43, 257 + 61 * 4)
                          ]
 
     @property
