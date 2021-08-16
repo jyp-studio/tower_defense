@@ -50,7 +50,9 @@ class EnemyGroup:
                         model.money += 30
                 else:
                     if en.is_dead == 8:
-                        self.__reserved_members.append(EnemyMage())
+                        witch=EnemyMage()
+                        witch.is_dead =0
+                        self.__reserved_members.append(witch)
                         en.is_dead = 0
                     elif en.is_dead == 5:
                         en.is_dead = 4

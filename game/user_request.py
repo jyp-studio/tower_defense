@@ -532,7 +532,7 @@ class MousePosTracker:
             x,y=pygame.mouse.get_pos()
 
             btn_list=model.main_menu.buttons
-            potion_set={"blood_potion","aoe_potion"}
+            potion_set={"blood_potion","aoe_potion","kill_potion","slow_potion","boss_potion","tower_potion"}
             for btn in btn_list:
                 if btn.name in potion_set:  #this btn is a potion button
                     if btn.clicked(x,y):
