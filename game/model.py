@@ -49,7 +49,6 @@ class GameModel:
         self.generator = EnemyGenerator(self.subject)
         self.dieHandler = Die(self.subject)
         self.liveHandler = Live(self.subject)
-        self.potion = Potionfunction(self.subject)
 
         self.muse = Muse(self.subject)
         self.music = Music(self.subject)
@@ -80,6 +79,7 @@ class GameModel:
             self.money = 5000
 
         self.__towers = []
+        self.potions = Potionfunction(self.subject)
         self.__enemies = EnemyGroup(self.wave)
 
         self.sound = pygame.mixer.Sound(os.path.join(SOUND_DIR, "sound.mp3"))

@@ -326,27 +326,28 @@ class Live:
                 victory_menu.run()
 
 
-class Potionfunction:
-    def __init__(self, subject:RequestSubject):
-        subject.register(self)
-        self.sprites = [METEOR_0]
+class PotionBullet:
+    def __init__(self, x: int, y: int):
+        self.sprites = [METEOR_0, METEOR_1, METEOR_2, METEOR_3, METEOR_4]
         self.current_sprites = 0
-        self.max_current_sprites = 10
-        self.update_speed = 1
-        self.image = self.sprites[self.current_sprites]  # image of the tower
+        self.max_current_sprites = 5
+        self.update_speed = 0.5
+        self.image = self.sprites[self.current_sprites]
         self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
 
-    def potion_animation(self, user_request: str, model):
-        if user_request == "aoe_potion":
-            self.sprites = [METEOR_0, METEOR_1, METEOR_2, METEOR_3, METEOR_4]
-            
-            self.animation_update()
-
-    def animation_update(self):
+    def update(self):
         self.current_sprites += self.update_speed
         if self.current_sprites >= self.max_current_sprites:
             self.current_sprites = 0
         self.image = self.sprites[int(self.current_sprites)]
+
+
+class Potionfunction:
+    def __init__(self, subject: RequestSubject):
+        subject.register(self)
+
+        self.particle_list = []
 
     def update(self, user_request: str, model):
 
@@ -358,11 +359,17 @@ class Potionfunction:
         if user_request == "aoe_potion":
             if model.money >= potion_price["aoe_potion"]:
                 for en in model.enemies.get():
+                    x, y = en.rect.center
+                    self.throw(x, y)
                     temp = int(en.health / 10)
                     en.health -= temp
 
                 model.money -= potion_price["aoe_potion"]
                 model.sound.play()
+
+    def throw(self, x: int, y: int):
+        self.particle_list.append(PotionBullet(x, y))
+
 
 class MousePosTracker:
     def __init__(self, subject:RequestSubject):

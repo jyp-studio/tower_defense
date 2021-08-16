@@ -105,6 +105,7 @@ class GameControl:
         for tw in self.model.towers:
             if tw.name == "Fire Totem" or tw.name == "Ice Totem":
                 self.view.draw_bullet(tw)
+        self.view.draw_potion_bullet(self.model.potions)
         self.view.draw_range(self.model.selected_tower)
         self.view.draw_top_info()
         self.view.draw_potion_list()

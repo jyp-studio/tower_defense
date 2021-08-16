@@ -138,6 +138,13 @@ class GameView:
             if bullet.current_sprites > bullet.max_current_sprites - 1:
                 towers.particle_list.remove(bullet)
 
+    def draw_potion_bullet(self, potions):
+        for bullet in potions.particle_list:
+            self.win.blit(bullet.image, bullet.rect)
+            bullet.update()
+            if bullet.current_sprites > bullet.max_current_sprites - 1:
+                potions.particle_list.remove(bullet)
+
     def draw_menu(self, menu):
         self.win.blit(menu.image, menu.rect)
         for btn in menu.buttons:
