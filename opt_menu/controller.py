@@ -39,6 +39,8 @@ class OptMenuController:
             # player click action
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.model.is_show_hint = False
+                x, y = pygame.mouse.get_pos()
+                self.events["mouse position"] = [x, y]
 
     def update_view(self):
         # render background
