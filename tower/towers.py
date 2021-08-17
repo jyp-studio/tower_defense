@@ -110,7 +110,7 @@ class Tower:
         return self.value[self.level]
 
     def get_sell_price(self) -> int:
-        return int(self.value[self.level] / 2)
+        return int(self.value[self.level] * 0.8)
 
     @property
     def range(self) -> int:

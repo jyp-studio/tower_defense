@@ -38,7 +38,7 @@ class RedFireTower(Tower):
         self.intro = "The shaman with white magic devoted his heart "
         self.intro1 = "to the flame totem to make it alive"
         self.intro2 = "and defend the survival of mankind"
-        self.attack_strategy_name = "AOE"
+        self.attack_strategy_name = "Single Fast"
         self.sprites = []
         self.update_speed = 0.2
         self.max_current_sprites = 6
@@ -52,7 +52,7 @@ class RedFireTower(Tower):
 
         self.cd_max_count = 15
         self._range = [120, 125, 130, 135, 140, 145, 250]
-        self._damage = [10, 20, 30, 40, 50, 60, 100]
+        self._damage = [10, 20, 40, 80, 300, 700, 3000]
         self.value = [250, 300, 350, 410, 480, 560, 2500]
 
     def throw(self, x: int, y: int):

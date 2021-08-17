@@ -170,7 +170,7 @@ class GameView:
             damage = f"Damage:  {selected_tower.damage}"
             cd = f"Cool Down Time:  {selected_tower.cd_max_count}"
             attack_strategy = f"Attack Strategy:  {selected_tower.attack_strategy_name}"
-            sell_price = f"Sell Price:  {selected_tower.value[selected_tower.level]}"
+            sell_price = f"Sell Price:  {selected_tower.get_cost()}"
             if selected_tower.level < 5:
                 upgrade_price = f"Upgrade Price: {selected_tower.value[selected_tower.level + 1]}"
             else:

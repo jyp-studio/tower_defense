@@ -165,7 +165,7 @@ class MoonAttack(AttackStrategy):
                     if en.name == "orc":    #對orc加傷
                         en.health -= tower.damage*2
                     elif en.name == "shield":
-                        en.health -= tower.damage * 0.8
+                        en.health -= tower.damage * 0.9
                     elif en.name == "ghost":
                         damage = random.choice([tower.damage * 3, 0])
                         en.health -= damage
@@ -221,7 +221,7 @@ class ObeliskSnipe(AttackStrategy):
                     if en.name == "boss":   #對boss傷害
                         en.health -= tower.damage * 5
                     elif en.name == "shield":
-                        en.health -= tower.damage * 0.8 * 3
+                        en.health -= tower.damage * 0.9 * 3
                     elif en.name == "ultra boss":
                         damage = random.choice([0, 5, 6, 7, 7, 7, 8, 8, 9, 10])
                         en.health -= damage * tower.damage

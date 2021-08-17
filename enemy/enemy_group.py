@@ -20,6 +20,7 @@ from enemy.lv_5 import *
 pygame.init()
 hit_base_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"enemy_hit_base.mp3"))
 
+
 class EnemyGroup:
     def __init__(self, level: int):
         self.campaign_count = 0
@@ -54,6 +55,7 @@ class EnemyGroup:
                         witch = EnemyMage()
                         self.__expedition.append(witch)
                         witch.is_dead = 0
+                        model.hp -= 3
                     elif en.is_dead == 5:
                         en.is_dead = 4
                         en.sprites.clear()
@@ -131,6 +133,8 @@ class EnemyGroup:
                     model.hp -= 3
                 else:
                     model.hp -= 1
+                if en.name == "shield":
+                    model.money += 500
                 hit_base_sound.set_volume(0.5)
                 hit_base_sound.play()
 

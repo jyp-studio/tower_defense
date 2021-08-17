@@ -38,7 +38,7 @@ class BlueFireTower(Tower):
         self.intro = "Black magic wizards sacrifice hundreds of thousands of "
         self.intro1 = "virus-infected mutants to summon ice totems "
         self.intro2 = "in the endless abyss"
-        self.attack_strategy_name = "AOE Slow Attack"
+        self.attack_strategy_name = "AOE"
         self.sprites = []
         self.update_speed = 0.2
         self.max_current_sprites = 6

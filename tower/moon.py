@@ -32,7 +32,7 @@ class MoonTower(Tower):
         self.intro = "The ruby that absorbs the essence of the sun and the "
         self.intro1 = "moon is carved into the shape of the moon and installed "
         self.intro2 = "on the tower to form an indestructible moon tower."
-        self.attack_strategy_name = "Single Slow Attack"
+        self.attack_strategy_name = "AOE"
         self.sprites = []
         self.update_speed = 0.2
         self.max_current_sprites = 9
