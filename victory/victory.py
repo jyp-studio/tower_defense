@@ -24,7 +24,7 @@ class Victory:
         self.win.blit(VIC_IMG,(0,0))
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
         for btn in self.buttons:
-            pygame.draw.rect(surface,(255,255,255,128),btn)
+            pygame.draw.rect(surface,(255,255,255,test_transparency),btn)
         self.win.blit(surface, (0, 0))
 
         if self.has_draw_reward:
