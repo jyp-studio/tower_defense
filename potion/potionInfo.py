@@ -13,7 +13,7 @@ def str_divide(sentense):   #divide a string into lots of lines
 blood_pot_info = "Recover 1 HP"
 aoe_pot_info = "Attack all enemy without boss and cause 10% current HP damage"
 kill_pot_info = "Pay 3 HP, kill all enemies without boss"
-slow_pot_info = "slow down all enemies"
+slow_pot_info = "Slow down all enemies"
 boss_pot_info = "Attack bosses and cause 10% current HP damage"
 tower_pot_info = "Increase the attack speed of all towers by 10"
 POTION_INFO_DICT={

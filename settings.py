@@ -41,4 +41,4 @@ potion_price:dict={
 }
 
 # transparency of some menu btn
-test_transparency=128
+test_transparency=0
