@@ -38,7 +38,7 @@ class EnemyGroup:
                 if en.skill():
                     ran_en = random.choice([EnemyROCK(), EnemyKnight()])
                     self.__expedition.append(ran_en)
-            if en.health <= 0:
+            if en.health <= 0 and en.name != "immortal":
                 if en.is_dead == 0:
                     self.retreat(en)
                     if en.name == "boss":
@@ -67,8 +67,8 @@ class EnemyGroup:
                         en.sprites.append(GREEN_SKULL_5)
                         en.sprites.append(GREEN_SKULL_6)
                         en.sprites.append(GREEN_SKULL_7)
-                        en.health = 500
-                        en.max_health = 500
+                        en.health = 1000
+                        en.max_health = 1000
                     elif en.is_dead == 4:
                         en.is_dead = 3
                         en.sprites.clear()
@@ -80,8 +80,8 @@ class EnemyGroup:
                         en.sprites.append(BLUE_SKULL_5)
                         en.sprites.append(BLUE_SKULL_6)
                         en.sprites.append(BLUE_SKULL_7)
-                        en.health = 500
-                        en.max_health = 500
+                        en.health = 1000
+                        en.max_health = 1000
                     elif en.is_dead == 3:
                         en.is_dead = 2
                         en.sprites.clear()
@@ -93,8 +93,8 @@ class EnemyGroup:
                         en.sprites.append(PURPLE_SKULL_5)
                         en.sprites.append(PURPLE_SKULL_6)
                         en.sprites.append(PURPLE_SKULL_7)
-                        en.health = 500
-                        en.max_health = 500
+                        en.health = 1000
+                        en.max_health = 1000
                     elif en.is_dead == 2:
                         en.is_dead = 1
                         en.sprites.clear()
@@ -106,8 +106,8 @@ class EnemyGroup:
                         en.sprites.append(RED_SKULL_5)
                         en.sprites.append(RED_SKULL_6)
                         en.sprites.append(RED_SKULL_7)
-                        en.health = 500
-                        en.max_health = 500
+                        en.health = 1000
+                        en.max_health = 1000
                     else:
                         en.is_dead = 0
                         en.sprites.clear()
@@ -190,7 +190,7 @@ class EnemyGroup:
                                            ]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 9:
-                self.__reserved_members = [EnemySKULL1() for _ in range(num)]
+                self.__reserved_members = [EnemySKULL1() for _ in range(num - 10)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 10:
                 self.__reserved_members = [EnemySKULL3() for _ in range(num - 10)]

@@ -6,14 +6,13 @@ from tower.blue import *
 from tower.red import *
 from tower.moon import *
 from tower.obelisk import *
-from settings import singleton_vol_controller,singleton_map_controller,game_status,potion_price
+from settings import singleton_vol_controller, singleton_map_controller, game_status, potion_price
 from potion.potionInfo import PotionInfo
 from dir_path import *
 
 from gif import *
 
 from victory.victory import Victory
-
 
 """This module is import in model.py"""
 
@@ -31,13 +30,13 @@ class RequestSubject:
     def register(self, observer):
         self.__observers.append(observer)
 
-    def notify(self, user_request:str):
+    def notify(self, user_request: str):
         for o in self.__observers:
             o.update(user_request, self.model)
 
 
 class EnemyGenerator:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -59,7 +58,7 @@ class HealthUp:
 
 
 class AddMoney:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -69,7 +68,7 @@ class AddMoney:
 
 
 class KillAll:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -79,7 +78,7 @@ class KillAll:
 
 
 class AddTowers:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -109,7 +108,7 @@ class AddTowers:
 
 
 class TowerSeller:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -129,7 +128,7 @@ class TowerSeller:
 
 
 class TowerDeveloper:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -143,7 +142,7 @@ class TowerDeveloper:
 
 
 class TowerEvolution:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -154,7 +153,7 @@ class TowerEvolution:
 
 
 class TowerProperties:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -163,7 +162,7 @@ class TowerProperties:
 
 
 class TowerFactory:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
         self.tower_name = ["moon", "red fire", "blue fire", "obelisk"]
 
@@ -186,7 +185,7 @@ class TowerFactory:
 
 
 class Music:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -197,7 +196,7 @@ class Music:
 
 
 class Muse:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -208,46 +207,46 @@ class Muse:
 
 
 class MinusVolume:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """minusSound"""
         if user_request == "minusSound":
-            singleton_vol_controller.minusVol(model.sound,0.05)
+            singleton_vol_controller.minusVol(model.sound, 0.05)
             model.sound.play()
         elif user_request == "minusMusic":
-            singleton_vol_controller.minusVol(pygame.mixer.music,0.05)
+            singleton_vol_controller.minusVol(pygame.mixer.music, 0.05)
             model.sound.play()
 
 
 class AddVolume:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """addSound"""
         if user_request == "addSound":
-            singleton_vol_controller.addVol(model.sound,0.05)
+            singleton_vol_controller.addVol(model.sound, 0.05)
             model.sound.play()
         elif user_request == "addMusic":
-            singleton_vol_controller.addVol(pygame.mixer.music,0.05)
+            singleton_vol_controller.addVol(pygame.mixer.music, 0.05)
             model.sound.play()
 
 
 class Back:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """back"""
         if user_request == "back":
-            model.back_game=True
+            model.back_game = True
             model.sound.play()
 
 
 class Pause:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -259,31 +258,33 @@ class Pause:
 
 
 class MinusMapIndex:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """minusMapIndex"""
         if user_request == "minusMapIndex":
             model.sound.play()
-            singleton_map_controller.map_index-=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+            singleton_map_controller.map_index -= 1
+            model.map_preview_img = pygame.transform.scale(pygame.image.load(
+                os.path.join(IMG_DIR, "preview_map_" + str(singleton_map_controller.map_index) + ".png")), (500, 230))
 
 
 class AddMapIndex:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """AddMapIndex"""
         if user_request == "addMapIndex":
             model.sound.play()
-            singleton_map_controller.map_index+=1
-            model.map_preview_img=pygame.transform.scale(pygame.image.load(os.path.join(IMG_DIR, "preview_map_"+str(singleton_map_controller.map_index)+".png")), (500, 230))
+            singleton_map_controller.map_index += 1
+            model.map_preview_img = pygame.transform.scale(pygame.image.load(
+                os.path.join(IMG_DIR, "preview_map_" + str(singleton_map_controller.map_index) + ".png")), (500, 230))
 
 
 class ShowHint:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -294,7 +295,7 @@ class ShowHint:
 
 
 class GoStartMenu:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -303,8 +304,9 @@ class GoStartMenu:
             model.sound.play()
             game_status["go_start_menu"] = True
 
+
 class Die:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
@@ -312,17 +314,18 @@ class Die:
         if user_request == "die":
             model.GameOverMenu.run()
 
+
 class Live:
-    def __init__(self, subject:RequestSubject):
+    def __init__(self, subject: RequestSubject):
         subject.register(self)
 
     def update(self, user_request: str, model):
         """deal with event: die by call GameOver.run()"""
         if user_request == "live":
-            if singleton_map_controller.next_map_index<=singleton_map_controller.max_map_index:
+            if singleton_map_controller.next_map_index <= singleton_map_controller.max_map_index:
                 model.GameWinMenu.run()
             else:
-                victory_menu=Victory()
+                victory_menu = Victory()
                 victory_menu.run()
 
 
@@ -450,9 +453,9 @@ class Potionfunction:
             if model.money >= potion_price["kill_potion"] and model.hp > 5:
                 if len(model.enemies.get()) != 0:
                     for en in model.enemies.get():
-                        if en.name == "ultra boss" or en.name == "boss":
-                            break
-                        else:
+                        if en.name == "bug" or en.name == "fly" or en.name == "skull" or en.name == "ghost" \
+                                or en.name == "skull" or en.name == "orc" or en.name == "immortal" \
+                                or en.name == "shield" or en.name == "immortal":
                             x, y = en.rect.center
                             self.kill_throw(x, y + 40)
                             en.health = 0
@@ -523,19 +526,19 @@ class Potionfunction:
 
 
 class MousePosTracker:
-    def __init__(self, subject:RequestSubject):
-       subject.register(self)
-    
+    def __init__(self, subject: RequestSubject):
+        subject.register(self)
+
     def update(self, user_request: str, model):
         if user_request == "nothing":
-            x,y=pygame.mouse.get_pos()
+            x, y = pygame.mouse.get_pos()
 
-            btn_list=model.main_menu.buttons
-            potion_set={"blood_potion","aoe_potion","kill_potion","slow_potion","boss_potion","tower_potion"}
+            btn_list = model.main_menu.buttons
+            potion_set = {"blood_potion", "aoe_potion", "kill_potion", "slow_potion", "boss_potion", "tower_potion"}
             for btn in btn_list:
-                if btn.name in potion_set:  #this btn is a potion button
-                    if btn.clicked(x,y):
-                        model.selected_potion_info=PotionInfo(btn)
+                if btn.name in potion_set:  # this btn is a potion button
+                    if btn.clicked(x, y):
+                        model.selected_potion_info = PotionInfo(btn)
                         break
                     else:
-                        model.selected_potion_info=None
+                        model.selected_potion_info = None

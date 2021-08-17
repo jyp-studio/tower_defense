@@ -134,7 +134,7 @@ class EnemySKULL6(Enemy):
 class EnemyEvil(Enemy):
     def __init__(self):
         super().__init__(EVIL_SKULL_0)
-        self.name = "boss"
+        self.name = "immortal"
         self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(EVIL_SKULL_1)
@@ -147,9 +147,10 @@ class EnemyEvil(Enemy):
 
         self.stride = 2
         self.max_stride = 2
-        self.health = 2000
-        self.max_health = 2000
+        self.health = 3000
+        self.max_health = 3000
         self.is_dead = 0
+
 
 
 

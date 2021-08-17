@@ -56,7 +56,5 @@ class EnemyGhost(Enemy):
         self.max_health = 8000
         self.is_dead = 0
 
-        #def
-
 
 

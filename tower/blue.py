@@ -51,8 +51,8 @@ class BlueFireTower(Tower):
         self.sprites.append(BLUE_IMAGE_6)
 
         self.cd_max_count = 40
-        self._range = [120, 125, 130, 135, 140, 145, 280]
-        self._damage = [8, 12, 18, 26, 45, 70, 100]
+        self._range = [120, 125, 130, 135, 140, 145, 250]
+        self._damage = [8, 18, 35, 80, 120, 150, 300]
         self.value = [200, 250, 400, 600, 800, 1000, 1500]
 
     def throw(self, x: int, y: int):

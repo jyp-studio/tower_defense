@@ -47,8 +47,8 @@ class MoonTower(Tower):
         self.sprites.append(MOON_IMAGE_8)
         self.sprites.append(MOON_IMAGE_9)
         self.cd_max_count = 45
-        self._damage = [10, 20, 50, 100, 120, 150, 200]
-        self._range = [140, 150, 160, 170, 180, 200, 250]
+        self._damage = [10, 20, 50, 90, 110, 140, 180]
+        self._range = [140, 150, 160, 170, 180, 190, 220]
         self.value = [250, 300, 350, 410, 480, 560, 2500]
 
     def throw(self, x: int, y: int):
