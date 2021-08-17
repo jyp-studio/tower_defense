@@ -14,8 +14,8 @@ class EnemyROCK(Enemy):
 
         self.stride = 2
         self.max_stride = 2
-        self.health = 2000
-        self.max_health = 2000
+        self.health = 3000
+        self.max_health = 3000
         self.is_dead = 0
 
 
@@ -35,8 +35,8 @@ class EnemyKnight(Enemy):
 
         self.stride = 5
         self.max_stride = 5
-        self.health = 1000
-        self.max_health = 1000
+        self.health = 2000
+        self.max_health = 2000
         self.is_dead = 0
 
 

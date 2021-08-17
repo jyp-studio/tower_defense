@@ -236,9 +236,12 @@ class GameView:
         self.win.blit(text, (15, 260 + 61*4 + 2))
 
     def draw_wave(self, wave: int):
-        """(Q2.2)render the wave"""
-        text = self.font2.render(f"Wave: {wave}", True, (255, 255, 255))
-        self.win.blit(text, (5, 10))
+        if wave < 13:
+            text = self.font2.render(f"Wave: {wave}", True, (255, 255, 255))
+            self.win.blit(text, (5, 10))
+        else:
+            text = self.font2.render("Final Wave", True, RED)
+            self.win.blit(text, (5, 10))
 
     def draw_hp(self, lives:int):
         # draw_lives
