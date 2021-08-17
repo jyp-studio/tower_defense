@@ -157,10 +157,9 @@ class EnemyGroup:
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 2:
                 self.__reserved_members = [EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(),
+                                           EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(),
+                                           EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(), EnemyBlackBat(),
                                            EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(),
-                                           EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(), EnemyWorm(),
-                                           EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(),
-                                           EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly(), EnemyFly()
                                            ]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 3:
