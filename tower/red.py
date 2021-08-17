@@ -52,8 +52,8 @@ class RedFireTower(Tower):
 
         self.cd_max_count = 15
         self._range = [120, 125, 130, 135, 140, 145, 250]
-        self._damage = [10, 20, 40, 80, 300, 700, 1500]
-        self.value = [250, 300, 350, 410, 480, 560, 2500]
+        self._damage = [10, 20, 40, 80, 150, 300, 500]
+        self.value = [250, 300, 350, 410, 480, 600, 3500]
 
     def throw(self, x: int, y: int):
         self.particle_list.append(Flame(x, y - 90))

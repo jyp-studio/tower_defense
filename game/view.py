@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import random
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from enemy.enemies import EnemyGroup
@@ -69,10 +71,9 @@ class GameView:
                     self.win.blit(hp_text, (en.rect.x + en.rect.w - size * 11, en.rect.y - 30))
                 else:
                     en_hp = "Immortal"
-                    hp_text = self.font4.render(en_hp, True, (255, 0, 0))
-                    size = len(en_hp)
+                    color = random.choice([RED, GREEN, SKY_BLUE, MAGENTA, LGRAY, YELLOW, NAVY, BLUE, PURPLE])
+                    hp_text = self.font4.render(en_hp, True, color)
                     self.win.blit(hp_text, (en.rect.x + 2, en.rect.y - 30))
-
 
     def draw_towers(self, towers: list):
         # draw tower

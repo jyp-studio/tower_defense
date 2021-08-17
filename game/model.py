@@ -76,7 +76,7 @@ class GameModel:
             self.money = 4000
         else:
             self.wave = 12
-            self.money = 10000
+            self.money = 5000
 
         self.__towers = []
         self.potions = Potionfunction(self.subject)

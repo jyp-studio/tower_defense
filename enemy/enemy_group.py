@@ -196,7 +196,8 @@ class EnemyGroup:
                 self.__reserved_members = [EnemySKULL3() for _ in range(num - 10)]
                 self.wave_counter += 1
             elif self.wave_counter % 13 == 11:
-                self.__reserved_members = [EnemyEvil(), EnemyEvil(), EnemyEvil(), EnemySKULL6(), EnemySKULL6(),
+                self.__reserved_members = [EnemyEvil(), EnemyEvil(), EnemyEvil(), EnemyEvil(), EnemyEvil(),
+                                           EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6(),
                                            EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6(), EnemySKULL6()]
                 self.wave_counter += 1
             else:
