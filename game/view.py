@@ -56,7 +56,7 @@ class GameView:
                 name_text = self.font5.render(en_name, True, (255, 0, 0))
                 self.win.blit(name_text, (en.rect.x, en.rect.y - 30))
             # draw health num
-            en_hp = f"{en.health}"
+            en_hp = f"{int(en.health)}"
             hp_text = self.font4.render(en_hp, True, (255, 255, 255))
             size = len(en_hp)
             self.win.blit(hp_text, (en.rect.x + en.rect.w - size * 11, en.rect.y - 30))

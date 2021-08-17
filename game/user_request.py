@@ -438,7 +438,7 @@ class Potionfunction:
                         else:
                             x, y = en.rect.center
                             self.aoe_throw(x, y)
-                            temp = int(en.max_health / 30)
+                            temp = int(en.max_health * 0.3)
                             en.health -= temp
                             model.meteor_sound.play()
 
@@ -485,7 +485,7 @@ class Potionfunction:
                         if en.name == "ultra boss" or en.name == "boss":
                             x, y = en.rect.center
                             self.boss_throw(x, y - 200)
-                            en.health -= int(en.max_health / 50)
+                            en.health -= int(en.max_health * 0.5)
                             model.beam_sound.play()
                         else:
                             break
@@ -503,7 +503,6 @@ class Potionfunction:
                         self.cd = False
 
                     model.money -= potion_price["tower_potion"]
-                    potion_price["tower_potion"] = 999999
                     model.sound.play()
                     model.buff_sound.play()
 

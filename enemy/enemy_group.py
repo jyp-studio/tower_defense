@@ -52,7 +52,7 @@ class EnemyGroup:
                     if en.is_dead == 8:
                         self.retreat(en)
                         witch = EnemyMage()
-                        self.__reserved_members.append(witch)
+                        self.__expedition.append(witch)
                         witch.is_dead = 0
                     elif en.is_dead == 5:
                         en.is_dead = 4

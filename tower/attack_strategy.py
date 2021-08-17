@@ -54,7 +54,9 @@ class RedAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower):
-                        if en.name != "fly" or en.name != "ghost":    #非飛行敵人才有攻擊動畫
+                        if en.name == "fly" or en.name == "ghost":#非飛行敵人才有攻擊動畫
+                            break
+                        else:
                             x, y = en.rect.center
                             tower.throw(x, y - 100)
                             exist_enemy = True
@@ -69,7 +71,9 @@ class RedAttack(AttackStrategy):
             self.attack_sound.play()
             for en in enemies:
                 if in_range(en, tower):
-                    if en.name != "fly" or en.name != "ghost":    #非飛行敵人才有攻擊
+                    if en.name == "fly" or en.name == "ghost":    #非飛行敵人才有攻擊
+                        break
+                    else:
                         en.health -= tower.damage
                         break
             cd_count = 0
@@ -97,7 +101,9 @@ class BlueAttack(AttackStrategy):
                 #確認有無敵人在圈內
                 for en in enemies:
                     if in_range(en, tower) and self.count <= self.count_max:
-                        if en.name != "fly" or en.name != "ghost":
+                        if en.name == "fly" or en.name == "ghost":
+                            break
+                        else:
                             x, y = en.rect.center
                             tower.throw(x, y - 100)
                             self.count += 1

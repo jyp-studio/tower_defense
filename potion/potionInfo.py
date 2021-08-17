@@ -15,7 +15,7 @@ aoe_pot_info = "Attack all enemy without boss and cause 30% max HP damage"
 kill_pot_info = "Pay 5 HP, kill all enemies except boss"
 slow_pot_info = "Slow down all enemies"
 boss_pot_info = "Attack bosses and cause 50% max HP damage"
-tower_pot_info = "Increase the attack speed of all towers by 5"
+tower_pot_info = "Increase the attack speed of all towers by 5 (one time only)"
 POTION_INFO_DICT={
     "blood_potion":str_divide(blood_pot_info),
     "aoe_potion":str_divide(aoe_pot_info),
