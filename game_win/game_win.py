@@ -24,7 +24,7 @@ class GameWin:
         # self.win.fill((128,128,128))
         surface = pygame.Surface((WIN_WIDTH, WIN_HEIGHT), pygame.SRCALPHA)
         for btn in self.buttons:
-            pygame.draw.rect(surface,(255,255,255,128),btn)
+            pygame.draw.rect(surface,(255,255,255,test_transparency),btn)
         self.win.blit(surface, (0, 0))
 
     def draw_mouse(self):
