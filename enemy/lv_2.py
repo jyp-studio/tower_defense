@@ -38,8 +38,8 @@ class EnemyOrc2(Enemy):
 
         self.stride = 4
         self.max_stride = 4
-        self.health = 200
-        self.max_health = 200
+        self.health = 800
+        self.max_health = 800
         self.is_dead = 0
 
 
@@ -58,7 +58,7 @@ class EnemyOrc3(Enemy):
 
         self.stride = 2
         self.max_stride = 2
-        self.health = 1000
-        self.max_health = 1000
+        self.health = 5000
+        self.max_health = 5000
         self.is_dead = 0
 

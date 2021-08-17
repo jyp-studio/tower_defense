@@ -7,7 +7,7 @@ pygame.init()
 class EnemyROCK(Enemy):
     def __init__(self):
         super().__init__(ROCK_0)
-        self.name = "boss"
+        self.name = "shield"
         self.max_current_sprites = 2
         self.update_speed = 0.25
         self.sprites.append(ROCK_1)
@@ -22,7 +22,7 @@ class EnemyROCK(Enemy):
 class EnemyKnight(Enemy):
     def __init__(self):
         super().__init__(KNIGHT_0)
-        self.name = "boss"
+        self.name = "shield"
         self.max_current_sprites = 8
         self.update_speed = 0.5
         self.sprites.append(KNIGHT_1)
@@ -72,8 +72,8 @@ class EnemyMage(Enemy):
             return True
 
     def buff(self):
-        if self.health < self.max_health - 3000:
-            self.health += 3000
+        if self.health < self.max_health - 1500:
+            self.health += 1500
         else:
             self.health = self.max_health
 

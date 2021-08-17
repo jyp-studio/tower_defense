@@ -32,7 +32,7 @@ game_status:dict={
 }
 
 potion_price:dict={
-    "blood_potion":2000,
+    "blood_potion":500,
     "aoe_potion":2000,
     "kill_potion":8000,
     "slow_potion":2000,

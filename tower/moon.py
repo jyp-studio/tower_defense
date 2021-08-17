@@ -47,7 +47,7 @@ class MoonTower(Tower):
         self.sprites.append(MOON_IMAGE_8)
         self.sprites.append(MOON_IMAGE_9)
         self.cd_max_count = 45
-        self._damage = [10, 20, 50, 100, 150, 200, 300]
+        self._damage = [10, 20, 50, 100, 120, 150, 200]
         self._range = [140, 160, 180, 200, 220, 250, 350]
         self.value = [100, 140, 200, 280, 360, 450, 10000]
 

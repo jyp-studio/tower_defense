@@ -33,8 +33,8 @@ class EnemyRedBat(Enemy):
 
         self.stride = 8
         self.max_stride = 8
-        self.health = 900
-        self.max_health = 900
+        self.health = 980
+        self.max_health = 980
         self.is_dead = 0
 
 

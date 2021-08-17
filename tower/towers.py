@@ -101,10 +101,10 @@ class Tower:
         self.particle_list.append(Miss(x + 30, y - 50))
 
     def get_upgrade_cost(self) -> int:
-        return self.value[self.level+1] - self.value[self.level]
+        return self.value[self.level+1]
 
     def get_ultra_cost(self) -> int:
-        return self.value[6] - self.value[self.level]
+        return self.value[6]
 
     def get_cost(self) -> int:
         return self.value[self.level]

@@ -158,6 +158,8 @@ class MoonAttack(AttackStrategy):
 
                     if en.name == "orc":    #對orc加傷
                         en.health -= tower.damage*2
+                    elif en.name == "shield":
+                        en.health -= tower.damage * 0.8
                     elif en.name == "ghost":
                         damage = random.choice([tower.damage * 3, 0])
                         en.health -= damage
@@ -180,7 +182,7 @@ class MoonAttack(AttackStrategy):
 class ObeliskSnipe(AttackStrategy):
     def __init__(self):
         self.count = 0
-        self.count_max = 3
+        self.count_max = 4
     attack_sound =pygame.mixer.Sound(os.path.join(SOUND_DIR,"lightning.mp3"))
 
     def attack(self, enemies: list, tower, cd_count) -> int:
@@ -212,7 +214,15 @@ class ObeliskSnipe(AttackStrategy):
                 if in_range(en, tower):
                     if en.name == "boss":   #對boss傷害
                         en.health -= tower.damage * 5
-                    elif en.name == "ghost" or en.name == "ultra boss":
+                    elif en.name == "shield":
+                        en.health -= tower.damage * 0.8 * 3
+                    elif en.name == "ultra boss":
+                        damage = random.choice([0, 5, 6, 7, 7, 7, 8, 8, 9, 10])
+                        en.health -= damage * tower.damage
+                        if damage == 0:
+                            x, y = en.rect.center
+                            tower.miss_throw(x, y)
+                    elif en.name == "ghost":
                         damage = random.choice([tower.damage * 3, 0])
                         en.health -= damage
                         if damage == 0:

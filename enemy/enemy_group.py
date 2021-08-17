@@ -109,13 +109,13 @@ class EnemyGroup:
                     else:
                         en.is_dead = 0
                         en.sprites.clear()
-                        en.sprites.append(PURPLE_SKULL_0)
-                        en.sprites.append(RED_SKULL_1)
+                        en.sprites.append(YELLOW_SKULL_0)
+                        en.sprites.append(YELLOW_SKULL_1)
                         en.sprites.append(YELLOW_SKULL_2)
-                        en.sprites.append(GREEN_SKULL_3)
-                        en.sprites.append(BLUE_SKULL_4)
-                        en.sprites.append(PURPLE_SKULL_5)
-                        en.sprites.append(RED_SKULL_6)
+                        en.sprites.append(YELLOW_SKULL_3)
+                        en.sprites.append(YELLOW_SKULL_4)
+                        en.sprites.append(YELLOW_SKULL_5)
+                        en.sprites.append(YELLOW_SKULL_6)
                         en.sprites.append(YELLOW_SKULL_7)
                         en.health = 2000
                         en.max_health = 2000
@@ -127,6 +127,8 @@ class EnemyGroup:
                     model.hp -= 10
                 elif en.name == "boss":
                     model.hp -= 5
+                elif en.name == "ghost":
+                    model.hp -= 3
                 else:
                     model.hp -= 1
                 hit_base_sound.set_volume(0.5)

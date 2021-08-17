@@ -426,7 +426,7 @@ class Potionfunction:
             if model.hp < model.max_hp and model.money >= potion_price["blood_potion"]:
                 model.hp += 1
                 model.money -= potion_price["blood_potion"]
-                potion_price["blood_potion"] += 2000
+                potion_price["blood_potion"] += 1000
                 model.sound.play()
                 model.hp_sound.play()
         if user_request == "aoe_potion":
@@ -438,7 +438,7 @@ class Potionfunction:
                         else:
                             x, y = en.rect.center
                             self.aoe_throw(x, y)
-                            temp = int(en.health / 10)
+                            temp = int(en.max_health / 30)
                             en.health -= temp
                             model.meteor_sound.play()
 
@@ -447,7 +447,7 @@ class Potionfunction:
                     model.sound.play()
 
         if user_request == "kill_potion":
-            if model.money >= potion_price["kill_potion"] and model.hp > 3:
+            if model.money >= potion_price["kill_potion"] and model.hp > 5:
                 if len(model.enemies.get()) != 0:
                     for en in model.enemies.get():
                         if en.name == "ultra boss" or en.name == "boss":
@@ -459,7 +459,7 @@ class Potionfunction:
                             model.evil_sound.play()
 
                     model.money -= potion_price["kill_potion"]
-                    model.hp -= 3
+                    model.hp -= 5
                     potion_price["kill_potion"] += 5000
                     model.sound.play()
 
@@ -485,7 +485,7 @@ class Potionfunction:
                         if en.name == "ultra boss" or en.name == "boss":
                             x, y = en.rect.center
                             self.boss_throw(x, y - 200)
-                            en.health -= int(en.health / 10)
+                            en.health -= int(en.max_health / 50)
                             model.beam_sound.play()
                         else:
                             break

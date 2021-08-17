@@ -45,7 +45,7 @@ class EnemyWorm(Enemy):
 class EnemyBlackBat(Enemy):
     def __init__(self):
         super().__init__(BLACK_BAT_0)
-        self.name = "boss"
+        self.name = "fly"
         self.max_current_sprites = 4
         self.update_speed = 0.5
         self.sprites.append(BLACK_BAT_1)
@@ -54,8 +54,8 @@ class EnemyBlackBat(Enemy):
 
         self.stride = 6
         self.max_stride = 6
-        self.health = 150
-        self.max_health = 150
+        self.health = 500
+        self.max_health = 500
         self.is_dead = 0
         self.right_direction = True
 

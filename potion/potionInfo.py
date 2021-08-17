@@ -11,11 +11,11 @@ def str_divide(sentense):   #divide a string into lots of lines
 
 
 blood_pot_info = "Recover 1 HP"
-aoe_pot_info = "Attack all enemy without boss and cause 10% current HP damage"
-kill_pot_info = "Pay 3 HP, kill all enemies without boss"
+aoe_pot_info = "Attack all enemy without boss and cause 30% max HP damage"
+kill_pot_info = "Pay 5 HP, kill all enemies except boss"
 slow_pot_info = "Slow down all enemies"
-boss_pot_info = "Attack bosses and cause 10% current HP damage"
-tower_pot_info = "Increase the attack speed of all towers by 10"
+boss_pot_info = "Attack bosses and cause 50% max HP damage"
+tower_pot_info = "Increase the attack speed of all towers by 5"
 POTION_INFO_DICT={
     "blood_potion":str_divide(blood_pot_info),
     "aoe_potion":str_divide(aoe_pot_info),
