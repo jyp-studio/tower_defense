@@ -59,7 +59,7 @@ class ObeliskTower(Tower):
         self._range = [130, 140, 150, 160, 170, 180, 280]  # tower attack range
         self._damage = [50, 70, 90, 110, 200, 350, 500] # tower damage
         # self.cd_max_count = 120
-        self.value = [800, 1500, 2000, 3000, 4000, 5000, 20000]
+        self.value = [800, 1100, 1500, 2000, 2500, 3300, 5000]
 
     def throw(self, x: int, y: int):
         self.particle_list.append(Lightning(x, y - 100))

@@ -48,8 +48,8 @@ class MoonTower(Tower):
         self.sprites.append(MOON_IMAGE_9)
         self.cd_max_count = 45
         self._damage = [10, 20, 50, 100, 120, 150, 200]
-        self._range = [140, 160, 180, 200, 220, 250, 350]
-        self.value = [100, 140, 200, 280, 360, 450, 10000]
+        self._range = [140, 150, 160, 170, 180, 200, 250]
+        self.value = [250, 300, 350, 410, 480, 560, 2500]
 
     def throw(self, x: int, y: int):
         self.particle_list.append(Magic(x, y + 100))

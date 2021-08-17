@@ -52,8 +52,8 @@ class BlueFireTower(Tower):
 
         self.cd_max_count = 40
         self._range = [120, 125, 130, 135, 140, 145, 280]
-        self._damage = [8, 12, 14, 20, 50, 80, 120]
-        self.value = [150, 200, 250, 300, 400, 500, 10000]
+        self._damage = [8, 12, 18, 26, 45, 70, 100]
+        self.value = [200, 250, 400, 600, 800, 1000, 1500]
 
     def throw(self, x: int, y: int):
         self.particle_list.append(BlueFlame(x, y))

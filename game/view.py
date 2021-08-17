@@ -171,7 +171,10 @@ class GameView:
             cd = f"Cool Down Time:  {selected_tower.cd_max_count}"
             attack_strategy = f"Attack Strategy:  {selected_tower.attack_strategy_name}"
             sell_price = f"Sell Price:  {selected_tower.value[selected_tower.level]}"
-
+            if selected_tower.level < 5:
+                upgrade_price = f"Upgrade Price: {selected_tower.value[selected_tower.level + 1]}"
+            else:
+                upgrade_price = f"Evolution Price: {selected_tower.value[6]}"
             name_text = font.render(name, True, (255, 255, 255))
             self.win.blit(name_text, (180, 170))
             intro_text = font1.render(intro, True, (255, 255, 255))
@@ -192,6 +195,8 @@ class GameView:
             self.win.blit(attack_strategy_text, (180, 170 + 250))
             sell_price_text = font1.render(sell_price, True, (255, 255, 255))
             self.win.blit(sell_price_text, (180, 170 + 280))
+            upgrade_price_text = font1.render(upgrade_price, True, (255, 255, 255))
+            self.win.blit(upgrade_price_text, (180, 170 + 310))
 
     def draw_plots(self, plots:list):
         for pt in plots:
